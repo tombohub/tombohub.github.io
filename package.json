@@ -10,10 +10,14 @@
     "type": "git",
     "url": "git+https://github.com/tombohub/tombohub.github.io.git"
   },
+  "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/tombohub/tombohub.github.io/issues"
   },
-  "homepage": "https://github.com/tombohub/tombohub.github.io#readme"
+  "homepage": "https://github.com/tombohub/tombohub.github.io#readme",
+  "dependencies": {
+    "@11ty/eleventy": "^0.11.1"
+  }
 }

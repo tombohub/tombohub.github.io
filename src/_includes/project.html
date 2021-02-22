@@ -1,0 +1,12 @@
+<article>
+    <h2>{{ project.data.title }}</h2>
+        {{ project.data.content | safe }}
+        <br>
+        <small>
+            {% if project.data.link_href %}
+            link: <a href="{{ project.data.link_href }}" target="_blank">{{ project.data.title }}</a><br>
+            {% endif %}
+            source: <a href="{{ project.data.source_href }}" target="_blank">github</a> <br>
+            tech: {{ project.data.tech }}<br>
+        </small>
+</article>
