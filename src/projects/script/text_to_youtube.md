@@ -5,4 +5,4 @@ tags: [scrape, script]
 tech: PHP, ffmpeg, ImageMagick, Youtube API, SQlite
 ---
 Scraping public domain books, creating images from text, creating video from images and uploading to Youtube.
-All nice with background image and music. Auto update title, description, tags and thumbnail via Youtube API.
+All nice with background image and music. Auto update title, description, tags and thumbnail via Youtube API. 
