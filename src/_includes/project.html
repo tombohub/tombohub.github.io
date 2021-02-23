@@ -1,12 +1,15 @@
 <article>
     <h2>{{ project.data.title }}</h2>
-        {{ project.data.content }}
-        <br>
-        <small>
-            {% if project.data.link_href %}
-            link: <a href="{{ project.data.link_href }}" target="_blank">{{ project.data.title }}</a><br>
-            {% endif %}
-            source: <a href="{{ project.data.source_href }}" target="_blank">github</a> <br>
-            tech: {{ project.data.tech }}<br>
-        </small>
+    {{ project.templateContent }}
+    <small>
+        {% if project.data.link_href %}
+        link: <a href="{{ project.data.link_href }}" target="_blank">{{ project.data.title }}</a><br>
+        {% endif %}
+        
+        {% if project.data.source_href %}
+        source: <a href="{{ project.data.source_href }}" target="_blank">github</a> <br>
+        {% endif %}
+        tech: {{ project.data.tech }}<br>
+    </small>
+    <br>
 </article>
