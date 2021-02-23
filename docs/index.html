@@ -216,8 +216,25 @@ Used eleventy.js to generate single static page.</p>
     <hr>
     
         <article>
+    <h2 class='title'>Weekday Trend</h2>
+    <span class='desc'><p>Analysing what day of the week is best to trade for a stock. Some stocks show the most uptrends on certain day of the week.</p>
+</span>
+    <small class='info'>
+        
+        link: <a href="https://imgur.com/a/NDHkyJO" target="_blank">Weekday Trend</a><br>
+        
+        
+        
+        tech: Python, Pandas, Matplotlib<br>
+    </small>
+    <hr class="divider">
+</article>
+
+    
+        <article>
     <h2 class='title'>Nightly Strategy Backtest</h2>
-    <span class='desc'><p>Backtesting of 5000+ stocks for overnight strategy. Creating plots comparing it to benchmarks</p>
+    <span class='desc'><p>Backtesting of 5000+ stocks for overnight strategy. Creating plots comparing it to benchmarks. There are many stock which
+barely make it during the day, but big gains overnight. At least for the last 2 years.</p>
 </span>
     <small class='info'>
         
@@ -227,23 +244,7 @@ Used eleventy.js to generate single static page.</p>
         
         source: <a href="https://github.com/tombohub/stock-charts/blob/master/src/scripts/nightly_backtest.py" target="_blank">github</a> <br>
         
-        tech: Python, Pandas, Pinkfish<br>
-    </small>
-    <hr class="divider">
-</article>
-
-    
-        <article>
-    <h2 class='title'>Moving Average Analysis</h2>
-    <span class='desc'><p>Command line script to get stock moving averages simple analytics fast and convenient</p>
-</span>
-    <small class='info'>
-        
-        
-        
-        source: <a href="https://github.com/tombohub/stock-charts/blob/master/src/scripts/stock_stats.py" target="_blank">github</a> <br>
-        
-        tech: Python, Pandas<br>
+        tech: Python, Pandas, Seaborn, Pinkfish<br>
     </small>
     <hr class="divider">
 </article>
@@ -251,7 +252,7 @@ Used eleventy.js to generate single static page.</p>
     
         <article>
     <h2 class='title'>Scrape Huge Forum</h2>
-    <span class='desc'><p>Scraping forum with 3+ million posts. It took 2 weeks of 24/7 script running across 4 servers.
+    <span class='desc'><p>Scraping forum with 3+ million posts. It took 2 weeks of 24/7 script running across 4 servers. It required good organization since the forum is closing in 2 weeks. I even had a gantt chart to plan and keep track of the servers. While it was fun to do it, morality prevents me from replicating the old forum.
 Repo is private.</p>
 </span>
     <small class='info'>
@@ -265,25 +266,8 @@ Repo is private.</p>
 
     
         <article>
-    <h2 class='title'>Text to Youtube</h2>
-    <span class='desc'><p>Scraping public domain books, creating images from text, creating video from images and uploading to Youtube.
-All nice with background image and music. Auto update title, description, tags and thumbnail via Youtube API.</p>
-</span>
-    <small class='info'>
-        
-        link: <a href="https://www.youtube.com/channel/UCTcB8W_l7_vOBOotccYvHhA" target="_blank">Text to Youtube</a><br>
-        
-        
-        
-        tech: PHP, ffmpeg, ImageMagick, Youtube API, SQlite<br>
-    </small>
-    <hr class="divider">
-</article>
-
-    
-        <article>
     <h2 class='title'>Nightly Strategy Backtest</h2>
-    <span class='desc'><p>Analytics of 7500+ stocks grouped by the industries. Work still in progress.</p>
+    <span class='desc'><p>Analytics of 7500+ stocks grouped by the industries. Goal is to test the theory that growth of the industry is what matters, more than the individual stocks. Work still in progress.</p>
 </span>
     <small class='info'>
         
@@ -298,16 +282,16 @@ All nice with background image and music. Auto update title, description, tags a
 
     
         <article>
-    <h2 class='title'>Weekday Trend</h2>
-    <span class='desc'><p>Analysing what day of the week is best to trade for a stock. Some stocks show the most uptrends on certain day of the week.</p>
+    <h2 class='title'>Moving Average Analysis</h2>
+    <span class='desc'><p>Command line script to get stock moving averages simple analytics fast and convenient. Keeping a trading journal is very important for traders. This script automatically organizes trades the way I want it so it saves me a lot of time.</p>
 </span>
     <small class='info'>
         
-        link: <a href="https://imgur.com/a/NDHkyJO" target="_blank">Weekday Trend</a><br>
         
         
+        source: <a href="https://github.com/tombohub/stock-charts/blob/master/src/scripts/stock_stats.py" target="_blank">github</a> <br>
         
-        tech: Python, Pandas, Matplotlib<br>
+        tech: Python, Pandas<br>
     </small>
     <hr class="divider">
 </article>
@@ -353,6 +337,21 @@ All nice with background image and music. Auto update title, description, tags a
 
     
         <article>
+    <h2 class='title'>New Domains</h2>
+    <span class='desc'><p>~120.000 DNS requests a day for getting IPs of daily new domains looking for specific range and organizing
+into the database. Repo is currently private</p>
+</span>
+    <small class='info'>
+        
+        
+        
+        tech: asyncio Python, Django<br>
+    </small>
+    <hr class="divider">
+</article>
+
+    
+        <article>
     <h2 class='title'>Text to Youtube</h2>
     <span class='desc'><p>Scraping public domain books, creating images from text, creating video from images and uploading to Youtube.
 All nice with background image and music. Auto update title, description, tags and thumbnail via Youtube API.</p>
@@ -364,21 +363,6 @@ All nice with background image and music. Auto update title, description, tags a
         
         
         tech: PHP, ffmpeg, ImageMagick, Youtube API, SQlite<br>
-    </small>
-    <hr class="divider">
-</article>
-
-    
-        <article>
-    <h2 class='title'>New Domains</h2>
-    <span class='desc'><p>~120.000 DNS requests a day for getting IPs of daily new domains looking for specific range and organizing
-into the database. Repo is currently private</p>
-</span>
-    <small class='info'>
-        
-        
-        
-        tech: asyncio Python, Django<br>
     </small>
     <hr class="divider">
 </article>

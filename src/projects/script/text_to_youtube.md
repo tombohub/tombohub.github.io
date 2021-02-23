@@ -1,7 +1,7 @@
 ---
 title: Text to Youtube
 link_href: https://www.youtube.com/channel/UCTcB8W_l7_vOBOotccYvHhA
-tags: [data, scrape, script]
+tags: [scrape, script]
 tech: PHP, ffmpeg, ImageMagick, Youtube API, SQlite
 ---
 Scraping public domain books, creating images from text, creating video from images and uploading to Youtube.
