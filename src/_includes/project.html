@@ -1,15 +1,15 @@
 <article>
-    <h2 style="color: #d0d0d6;">{{ project.data.title }}</h2>
-    <span>{{ project.templateContent }}</span>
-    <small style="color: #c7c7c9;">
+    <h2 class='title'>{{ project.data.title }}</h2>
+    <span class='desc'>{{ project.templateContent }}</span>
+    <small class='info'>
         {% if project.data.link_href %}
-        link: <a href="{{ project.data.link_href }}" target="_blank" style="color: #9b9bc5;">{{ project.data.title }}</a><br>
+        link: <a href="{{ project.data.link_href }}" target="_blank">{{ project.data.title }}</a><br>
         {% endif %}
         
         {% if project.data.source_href %}
-        source: <a href="{{ project.data.source_href }}" target="_blank" style="color: #9b9bc5;">github</a> <br>
+        source: <a href="{{ project.data.source_href }}" target="_blank">github</a> <br>
         {% endif %}
         tech: {{ project.data.tech }}<br>
     </small>
-    <br>
+    <hr class="divider">
 </article>

@@ -1,5 +1,5 @@
 module.exports = (eleventyConfig) => {
-  eleventyConfig.addPassthroughCopy("src/ko.css");
+  eleventyConfig.addPassthroughCopy("src/style.css");
 
   return {
     dir: {
