@@ -1,7 +1,7 @@
 ---
-title: Stock Charts
+title: Daily Stock Charts
 tags: web
-link_href: https://tombohub.github.io/stock-charts/
+link_href: https://tombohub.github.io/daily-stock-charts/
 source_href: https://github.com/tombohub/stock-charts/tree/master/src/frontend
 tech: React
 date: 2021-01-25
