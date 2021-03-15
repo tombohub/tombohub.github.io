@@ -1,9 +1,10 @@
 ---
-title: Nightly Strategy Backtest
+title: Overnight Strategy Weekly Backtest
 tags: data
-link_href: https://drive.google.com/file/d/1OdYMe0eRVSR79DCtTiGXHCAcaz91Jdyj/view?usp=sharing
-source_href: https://github.com/tombohub/stock-charts/blob/master/src/scripts/nightly_backtest.py
-tech: Python, Pandas, Seaborn, Pinkfish
+report_href: https://public.tableau.com/views/week09Stocksovernightstrategybacktest/Stocks?:language=en&:retry=yes&:display_count=y&:origin=viz_share_link
+chart_href: https://drive.google.com/file/d/1cKfDzyFu2lCZ00pBX9j4k87sQRAtVbsr/view?usp=sharing
+spreadsheet_href: https://drive.google.com/file/d/1YUob4d8AlnV4FkrNMaXZXia16vtOYcP_/view?usp=sharing
+tech: Python, Pandas, Seaborn, Tableau, MS Excel, SQL
 date: 2021-01-01
 ---
 Backtesting of 5000+ stocks for overnight strategy. Creating plots comparing it to benchmarks. There are many stock which
