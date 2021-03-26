@@ -1,20 +1,20 @@
 --- 
 layout: base.html
 ---
-<section id='web'>
-    <h1>Web</h1>
-    <hr>
-    <hr>
-    {% for project in collections.web reversed %}
-        {% include project.html %}
-    {% endfor %}
-</section>
-<br><br>
 <section id='data'>
     <h1>Data</h1>
     <hr>
     <hr>
     {% for project in collections.data %}
+    {% include project.html %}
+    {% endfor %}
+</section>
+<br><br>
+<section id='web'>
+    <h1>Web</h1>
+    <hr>
+    <hr>
+    {% for project in collections.web reversed %}
         {% include project.html %}
     {% endfor %}
 </section>
