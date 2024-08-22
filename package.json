@@ -1,24 +1,18 @@
 {
-  "name": "tombohub.github.io",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "astro",
+  "type": "module",
+  "version": "0.0.1",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "eleventy"
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/tombohub/tombohub.github.io.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/tombohub/tombohub.github.io/issues"
-  },
-  "homepage": "https://github.com/tombohub/tombohub.github.io#readme",
   "dependencies": {
-    "@11ty/eleventy": "^0.11.1"
+    "@astrojs/check": "^0.9.3",
+    "@astrojs/sitemap": "^3.1.6",
+    "astro": "^4.14.3",
+    "typescript": "^5.5.4"
   }
 }
