@@ -1,0 +1,86 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="description" content="Astro description"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v4.14.3"><link rel="sitemap" href="/sitemap-index.xml"><meta name="google-site-verification" content="v-bk1pawOow2Be4T46sqQG2YNDa84WSjgOUgykNr4_M"><title>Improve django stringly template</title><style>*,*:before,*:after{box-sizing:border-box}*{margin:0}body{line-height:1.5;-webkit-font-smoothing:antialiased}img,picture,video,canvas,svg{display:block;max-width:100%}input,button,textarea,select{font:inherit}p,h1,h2,h3,h4,h5,h6{overflow-wrap:break-word}#root,#__next{isolation:isolate}body{font-size:x-large}
+</style></head> <body> <header class="header"> <nav> <a href="/">Home</a> |
+<a href="/shorts">Shorts</a> |
+<a href="/projects/">Projects</a> |
+<a href="/about/">About</a> -
+<a href="https://www.github.com/tombohub">github</a> </nav> </header>  <h2>Improve django stringly template</h2> <h3 id="stringly-typed">Stringly typed</h3>
+<p>Problem with django templates, and many other templates, is that we have to use strings to do some mini logic. In this todo we have to check against string ‘Done’ and ‘Not done’ status to show different text in button. Also there is lot of code compared to react’s ternary condition.</p>
+<br>
+<p>Model:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:#F97583">from</span><span style="color:#E1E4E8"> django.db </span><span style="color:#F97583">import</span><span style="color:#E1E4E8"> models</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> Todo</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">models</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">Model</span><span style="color:#E1E4E8">):</span></span>
+<span class="line"><span style="color:#79B8FF">    STATUS_CHOICES</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> [(</span><span style="color:#9ECBFF">"Done"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"Done"</span><span style="color:#E1E4E8">), (</span><span style="color:#9ECBFF">"Not Done"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"Not Done"</span><span style="color:#E1E4E8">)]</span></span>
+<span class="line"><span style="color:#E1E4E8">    title </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> models.CharField(</span><span style="color:#FFAB70">max_length</span><span style="color:#F97583">=</span><span style="color:#79B8FF">20</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">    status </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> models.TextField(</span><span style="color:#FFAB70">choices</span><span style="color:#F97583">=</span><span style="color:#79B8FF">STATUS_CHOICES</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">default</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">"Not Done"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"></span></code></pre>
+<br>
+<p>Template:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="html"><code><span class="line"><span style="color:#E1E4E8">&#x3C;</span><span style="color:#85E89D">button</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">  {% if todo.status == 'Done' %} Mark not done {% elif todo.status == 'Not Done'</span></span>
+<span class="line"><span style="color:#E1E4E8">  %} Mark done {% endif %}</span></span>
+<span class="line"><span style="color:#E1E4E8">&#x3C;/</span><span style="color:#85E89D">button</span><span style="color:#E1E4E8">></span></span>
+<span class="line"></span></code></pre>
+<br>
+<p>I guess we can use some property methods on django model, but then what’s up with that <em>too much boilerplate</em> that many people like to say.</p>
+<br>
+<p>We can maybe use boolean instead of status <code>Done</code> and <code>Not Done</code>. Ok, but I don’t think that’s scalable, boolean here boolean there boolean soup everywhere. Use status.</p>
+<br>
+<h3 id="enumeration-type-choice">Enumeration type choice</h3>
+<p>The way to somewhat mitigate this is to use <a href="https://docs.djangoproject.com/en/5.1/ref/models/fields/#enumeration-types">enumeration type choice</a>:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:#F97583">from</span><span style="color:#E1E4E8"> django.db </span><span style="color:#F97583">import</span><span style="color:#E1E4E8"> models</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> Todo</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">models</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">Model</span><span style="color:#E1E4E8">):</span></span>
+<span class="line"><span style="color:#F97583">    class</span><span style="color:#B392F0"> Status</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">models</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">TextChoices</span><span style="color:#E1E4E8">):</span></span>
+<span class="line"><span style="color:#79B8FF">        DONE</span><span style="color:#F97583"> =</span><span style="color:#9ECBFF"> "Done"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"Done"</span></span>
+<span class="line"><span style="color:#79B8FF">        NOT_DONE</span><span style="color:#F97583"> =</span><span style="color:#9ECBFF"> "Not Done"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"Not Done"</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    title </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> models.CharField(</span><span style="color:#FFAB70">max_length</span><span style="color:#F97583">=</span><span style="color:#79B8FF">20</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">    status </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> models.TextField(</span><span style="color:#FFAB70">choices</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">Status.choices, </span><span style="color:#FFAB70">default</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">Status.</span><span style="color:#79B8FF">NOT_DONE</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"></span></code></pre>
+<br>
+<p>Then in template we can use it like this:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="html"><code><span class="line"><span style="color:#E1E4E8">&#x3C;</span><span style="color:#85E89D">button</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">  {% if todo.status == todo.Status.DONE %} Mark not done {% elif todo.status ==</span></span>
+<span class="line"><span style="color:#E1E4E8">  todo.Status.NOT_DONE %} Mark done {% endif %}</span></span>
+<span class="line"><span style="color:#E1E4E8">&#x3C;/</span><span style="color:#85E89D">button</span><span style="color:#E1E4E8">></span></span>
+<span class="line"></span></code></pre>
+<p>Now maybe PyCharm will provide intellisense, I am not sure.</p>
+<br>
+<h3 id="template-filter">Template Filter</h3>
+<p>If you repeat this often use <a href="https://docs.djangoproject.com/en/5.1/howto/custom-template-tags/">template filter</a>.</p>
+<br>
+<p>Filter:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:#F97583">from</span><span style="color:#E1E4E8"> django </span><span style="color:#F97583">import</span><span style="color:#E1E4E8"> template</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">from</span><span style="color:#E1E4E8"> todoist.models </span><span style="color:#F97583">import</span><span style="color:#E1E4E8"> Todo</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">register </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> template.Library()</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">@register.filter</span></span>
+<span class="line"><span style="color:#F97583">def</span><span style="color:#B392F0"> toggle_status_label</span><span style="color:#E1E4E8">(status):</span></span>
+<span class="line"><span style="color:#F97583">    if</span><span style="color:#E1E4E8"> status </span><span style="color:#F97583">==</span><span style="color:#E1E4E8"> Todo.Status.</span><span style="color:#79B8FF">DONE</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#9ECBFF"> "Mark not Done"</span></span>
+<span class="line"><span style="color:#F97583">    elif</span><span style="color:#E1E4E8"> status </span><span style="color:#F97583">==</span><span style="color:#E1E4E8"> Todo.Status.</span><span style="color:#79B8FF">NOT_DONE</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#9ECBFF"> "Mark Done"</span></span>
+<span class="line"></span></code></pre>
+<br>
+<p>Template:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="html"><code><span class="line"><span style="color:#E1E4E8">{% load todo_filters %}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">&#x3C;!-- some code in between --></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">&#x3C;</span><span style="color:#85E89D">button</span><span style="color:#E1E4E8">>{{todo.status|toggle_status_label}}&#x3C;/</span><span style="color:#85E89D">button</span><span style="color:#E1E4E8">></span></span>
+<span class="line"></span></code></pre>
+<br>
+<h3 id="errors">Errors</h3>
+<p>Good thing about Django is it has best error reports I’ve seen so far.</p>
+<br>
+<p>If you misspell the work like I did:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="html"><code><span class="line"><span style="color:#E1E4E8">{% load todo_filter %}</span></span>
+<span class="line"></span></code></pre>
+<br>
+<p>It will show nice error:
+<img src="https://i.imgur.com/KuCd0Bi.png" alt="error django"></p>
+<h3 id="conclusion">Conclusion</h3>
+<p>All in all, django template is ok if you do almost nothing of logic. Little bit of logic becomes tedious. I think they should upgrade, it’s not 2006 anymore.</p>  <footer></footer> </body></html>
