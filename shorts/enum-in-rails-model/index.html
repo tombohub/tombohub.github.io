@@ -1,0 +1,36 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="description" content="Astro description"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v4.14.3"><link rel="sitemap" href="/sitemap-index.xml"><meta name="google-site-verification" content="v-bk1pawOow2Be4T46sqQG2YNDa84WSjgOUgykNr4_M"><title>Enum in Rails model</title><style>*,*:before,*:after{box-sizing:border-box}*{margin:0}body{line-height:1.5;-webkit-font-smoothing:antialiased}img,picture,video,canvas,svg{display:block;max-width:100%}input,button,textarea,select{font:inherit}p,h1,h2,h3,h4,h5,h6{overflow-wrap:break-word}#root,#__next{isolation:isolate}body{font-size:x-large}
+</style></head> <body> <header class="header"> <nav> <a href="/">Home</a> |
+<a href="/shorts">Shorts</a> |
+<a href="/projects/">Projects</a> |
+<a href="/about/">About</a> -
+<a href="https://www.github.com/tombohub">github</a> </nav> </header>  <h2>Enum in Rails model</h2> <p>Rails doesn’t have choices like Django. There are few steps to create choice.</p>
+<ol>
+<li>Generate model</li>
+</ol>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>rails generate model Todo title: string status: integer</span></span>
+<span class="line"><span></span></span></code></pre>
+<br>
+<ol start="2">
+<li>Edit generated model:</li>
+</ol>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="ruby"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> Todo</span><span style="color:#F97583"> &#x3C;</span><span style="color:#B392F0"> ApplicationRecord</span></span>
+<span class="line"><span style="color:#E1E4E8">  enum </span><span style="color:#79B8FF">status:</span><span style="color:#E1E4E8"> { </span><span style="color:#9ECBFF">'Not Done'</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">'Done'</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8"> }</span></span>
+<span class="line"><span style="color:#F97583">end</span></span>
+<span class="line"></span></code></pre>
+<br>
+<ol start="3">
+<li>Edit generated migration file to add default status:</li>
+</ol>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="ruby"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> CreateTodos</span><span style="color:#F97583"> &#x3C;</span><span style="color:#B392F0"> ActiveRecord::Migration</span><span style="color:#E1E4E8">[</span><span style="color:#79B8FF">7.2</span><span style="color:#E1E4E8">]</span></span>
+<span class="line"><span style="color:#F97583">  def</span><span style="color:#B392F0"> change</span></span>
+<span class="line"><span style="color:#E1E4E8">    create_table </span><span style="color:#79B8FF">:todos</span><span style="color:#F97583"> do</span><span style="color:#E1E4E8"> |t|</span></span>
+<span class="line"><span style="color:#E1E4E8">      t.string </span><span style="color:#79B8FF">:title</span></span>
+<span class="line"><span style="color:#E1E4E8">      t.integer </span><span style="color:#79B8FF">:status</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">default:</span><span style="color:#79B8FF"> 0</span><span style="color:#6A737D"> # &#x3C;- add default here</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">      t.timestamps</span></span>
+<span class="line"><span style="color:#F97583">    end</span></span>
+<span class="line"><span style="color:#F97583">  end</span></span>
+<span class="line"><span style="color:#F97583">end</span></span>
+<span class="line"></span></code></pre>
+<br>
+<p>Too much work and broken connections. Django wins here.</p>  <footer></footer> </body></html>
