@@ -1,28 +1,36 @@
 <article>
     <h2 class='title'>{{ project.data.title }}</h2>
-    <span class='desc'>{{ project.templateContent }}</span>
-    <small class='info'>
-        {% if project.data.link_href %}
-        link: <a href="{{ project.data.link_href }}" target="_blank">{{ project.data.title }}</a><br>
-        {% endif %}
-        
-        {% if project.data.source_href %}
-        source: <a href="{{ project.data.source_href }}" target="_blank">github</a> <br>
-        {% endif %}
-        
-        {% if project.data.report_href %}
-        report: <a href="{{ project.data.report_href }}" target="_blank">github</a> <br>
-        {% endif %}
-        
-        {% if project.data.chart_href %}
-        chart: <a href="{{ project.data.chart_href }}" target="_blank">github</a> <br>
-        {% endif %}
-        
-        {% if project.data.spreadsheet_href %}
-        spreadsheet: <a href="{{ project.data.spreadsheet_href }}" target="_blank">github</a> <br>
-        {% endif %}
-        
-        tech: {{ project.data.tech }}<br>
-    </small>
+    <div class="content">
+        <div class="image">
+            <img src="https://via.placeholder.com/150" alt="">
+        </div>
+        <div class="body">
+
+            <span class='desc'>{{ project.templateContent }}</span>
+            <small class='info'>
+                {% if project.data.link_href %}
+                link: <a href="{{ project.data.link_href }}" target="_blank">{{ project.data.title }}</a><br>
+                {% endif %}
+
+                {% if project.data.source_href %}
+                source: <a href="{{ project.data.source_href }}" target="_blank">github</a> <br>
+                {% endif %}
+
+                {% if project.data.report_href %}
+                report: <a href="{{ project.data.report_href }}" target="_blank">github</a> <br>
+                {% endif %}
+
+                {% if project.data.chart_href %}
+                chart: <a href="{{ project.data.chart_href }}" target="_blank">github</a> <br>
+                {% endif %}
+
+                {% if project.data.spreadsheet_href %}
+                spreadsheet: <a href="{{ project.data.spreadsheet_href }}" target="_blank">github</a> <br>
+                {% endif %}
+
+                tech: {{ project.data.tech }}<br>
+            </small>
+        </div>
+    </div>
     <hr class="divider">
 </article>
