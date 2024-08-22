@@ -1,0 +1,13 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+
+const shorts = await getCollection("shorts");
+---
+
+<BaseLayout pageTitle="Shorts">
+ {shorts.map(short =>
+        <a href={`/shorts/${short.slug}`}>{short.data.title}</a>
+        <span> - {short.data.date.toLocaleDateString()}</span>
+        )}
+</BaseLayout>

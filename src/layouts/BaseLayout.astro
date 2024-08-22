@@ -1,30 +1,33 @@
 ---
-import Header from "../components/Header.astro"
-import Footer from "../components/Footer.astro"
-import '../styles/reset.css'
-import '../styles/style.css'
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import "../styles/reset.css";
+import "../styles/style.css";
 
 interface Props {
-	pageTitle: string
+  pageTitle: string;
 }
-const {pageTitle} = Astro.props
+const { pageTitle } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="en">
-	<>
-		<meta charset="UTF-8" />
-		<meta name="description" content="Astro description" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<link rel="sitemap" href="/sitemap-index.xml" />
-		<title>{pageTitle}</title>
-	</head>
-	<body>
-		<Header/>
-		<slot/>
-		<Footer/>
-	</body>
+  <>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Astro description" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta
+      name="google-site-verification"
+      content="v-bk1pawOow2Be4T46sqQG2YNDa84WSjgOUgykNr4_M"
+    />
+    <title>{pageTitle}</title>
+  </>
+  <body>
+    <Header />
+    <slot />
+    <Footer />
+  </body>
 </html>
-

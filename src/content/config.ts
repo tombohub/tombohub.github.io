@@ -19,7 +19,17 @@ const projectsCollection = defineCollection({
     tags: z.array(z.string()),
   }),
 });
+
+const shortsCollection = defineCollection({
+  type: "content",
+  schema: z.object({
+    title: z.string(),
+    date: z.date(),
+  }),
+});
+
 export const collections = {
   blog: blogCollection,
   projects: projectsCollection,
+  shorts: shortsCollection,
 };
