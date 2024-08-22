@@ -23,9 +23,6 @@
   }
 
 
-.title {
-}
-
 .info {
   font-style: italic;
   font-family: 'Roboto';
@@ -40,4 +37,18 @@
   font-weight: 400;
   font-size: 110%;
   margin-bottom: 0.3em;
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+}
+
+img {
+  max-width: 400px;
+  width: 200px;
+}
+
+.body {
+  margin-left: 2em;
 }

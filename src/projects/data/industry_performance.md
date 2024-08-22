@@ -1,7 +1,7 @@
 ---
 title: Industry Performance
 tags: data
-link_href: https://public.tableau.com/profile/tomo5069#!/vizhome/ind_perf_/filtered
+link_href: https://public.tableau.com/shared/8JNZ2HD4K?:display_count=y&:origin=viz_share_link
 tech: Python, Pandas, Tableau
 date: 2021-01-02
 ---
