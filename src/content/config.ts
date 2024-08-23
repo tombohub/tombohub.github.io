@@ -5,6 +5,8 @@ const blogCollection = defineCollection({
   schema: z.object({
     title: z.string(),
     date: z.date(),
+    draft: z.boolean(),
+    tags: z.array(z.string()),
   }),
 });
 
@@ -20,16 +22,7 @@ const projectsCollection = defineCollection({
   }),
 });
 
-const shortsCollection = defineCollection({
-  type: "content",
-  schema: z.object({
-    title: z.string(),
-    date: z.date(),
-  }),
-});
-
 export const collections = {
   blog: blogCollection,
   projects: projectsCollection,
-  shorts: shortsCollection,
 };

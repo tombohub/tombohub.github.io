@@ -6,8 +6,12 @@ const shorts = await getCollection("shorts");
 ---
 
 <BaseLayout pageTitle="Shorts">
- {shorts.map(short =>
+  {
+    shorts.map(short => (
+      <li>
         <a href={`/shorts/${short.slug}`}>{short.data.title}</a>
         <span> - {short.data.date.toLocaleDateString()}</span>
-        )}
+      </li>
+    ))
+  }
 </BaseLayout>

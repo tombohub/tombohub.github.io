@@ -1,15 +1,18 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro"
-import { getCollection } from "astro:content"
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
 
-const blogPosts = await getCollection('blog')
-const pageTitle = 'Home'
+const blogPosts = await getCollection("blog");
+const pageTitle = "Home";
 ---
 
 <BaseLayout pageTitle={pageTitle}>
-    {blogPosts.map(post =>
+  {
+    blogPosts.map(post => (
+      <li>
         <a href={`/blog/${post.slug}`}>{post.data.title}</a>
         <span> - {post.data.date.toLocaleDateString()}</span>
-        )}
-
+      </li>
+    ))
+  }
 </BaseLayout>
