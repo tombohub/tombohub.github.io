@@ -1,0 +1,271 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="description" content="Astro description"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v4.14.3"><link rel="sitemap" href="/sitemap-index.xml"><meta name="google-site-verification" content="v-bk1pawOow2Be4T46sqQG2YNDa84WSjgOUgykNr4_M"><title>I&#39;ve build todo in 12 web frameworks</title><style>*,*:before,*:after{box-sizing:border-box}*{margin:0}body{line-height:1.5;-webkit-font-smoothing:antialiased}img,picture,video,canvas,svg{display:block;max-width:100%}input,button,textarea,select{font:inherit}p,h1,h2,h3,h4,h5,h6{overflow-wrap:break-word}#root,#__next{isolation:isolate}body{font-size:large;margin:auto;max-width:777px}
+</style></head> <body> <header class="header"> <nav> <a href="/">Home</a> |
+<a href="/projects/">Projects</a> |
+<a href="/about/">About</a> -
+<a href="https://www.github.com/tombohub">github</a> </nav> </header>  <h2>I&#39;ve build todo in 12 web frameworks</h2> <h3 id="django">Django</h3>
+<p><a href="https://github.com/tombohub/simple-django-todo">Repo</a></p>
+<br>
+<h4 id="model">Model</h4>
+<p>I knew django before so this was the easiest one. Django has straight forward model definition. Just create a class:</p>
+<br>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:#F97583">from</span><span style="color:#E1E4E8"> django.core.validators </span><span style="color:#F97583">import</span><span style="color:#E1E4E8"> MinLengthValidator</span></span>
+<span class="line"><span style="color:#F97583">from</span><span style="color:#E1E4E8"> django.db </span><span style="color:#F97583">import</span><span style="color:#E1E4E8"> models</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> Todo</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">models</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">Model</span><span style="color:#E1E4E8">):</span></span>
+<span class="line"><span style="color:#F97583">    class</span><span style="color:#B392F0"> Status</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">models</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">TextChoices</span><span style="color:#E1E4E8">):</span></span>
+<span class="line"><span style="color:#79B8FF">        DONE</span><span style="color:#F97583"> =</span><span style="color:#9ECBFF"> "Done"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"Done"</span></span>
+<span class="line"><span style="color:#79B8FF">        NOT_DONE</span><span style="color:#F97583"> =</span><span style="color:#9ECBFF"> "Not Done"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"Not Done"</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    title </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> models.CharField(</span><span style="color:#FFAB70">max_length</span><span style="color:#F97583">=</span><span style="color:#79B8FF">20</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">validators</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">[MinLengthValidator(</span><span style="color:#79B8FF">3</span><span style="color:#E1E4E8">)])</span></span>
+<span class="line"><span style="color:#E1E4E8">    status </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> models.TextField(</span><span style="color:#FFAB70">choices</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">Status.choices, </span><span style="color:#FFAB70">default</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">Status.</span><span style="color:#79B8FF">NOT_DONE</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"></span></code></pre>
+<p><br> create migration file:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="console"><code><span class="line"><span style="color:#79B8FF">python ./manage.py makemigration</span></span>
+<span class="line"></span></code></pre>
+<br>
+<p>It will name and create a migration file. Then run migrations:</p>
+<br>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="console"><code><span class="line"><span style="color:#79B8FF">python ./manage.py migrate</span></span>
+<span class="line"></span></code></pre>
+<p>It’s the easiest model creation and migration I’ve tried so far out of any framework. Top notch.</p>
+<p>Everything else pretty normal. Django is more explicit compared to rails and laravel. For that reason, I believe, it doesn’t have cli generators. Less conventions.</p>
+<br>
+<h4 id="template">Template</h4>
+<p>In django template we cannot use the python code so we need to resort to things like:</p>
+<br>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="html"><code><span class="line"><span style="color:#E1E4E8">&#x3C;</span><span style="color:#85E89D">button</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">  {% if todo.status == 'Done' %} Mark not done {% elif todo.status == 'Not Done'</span></span>
+<span class="line"><span style="color:#E1E4E8">  %} Mark done {% endif %}</span></span>
+<span class="line"><span style="color:#E1E4E8">&#x3C;/</span><span style="color:#85E89D">button</span><span style="color:#E1E4E8">></span></span>
+<span class="line"></span></code></pre>
+<br>
+<p>or create a <a href="https://docs.djangoproject.com/en/5.1/howto/custom-template-tags/">filter</a> and use it:</p>
+<br>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="html"><code><span class="line"><span style="color:#E1E4E8">&#x3C;</span><span style="color:#85E89D">button</span><span style="color:#E1E4E8">>{{todo.status|toggle_status_label}}&#x3C;/</span><span style="color:#85E89D">button</span><span style="color:#E1E4E8">></span></span>
+<span class="line"></span></code></pre>
+<br>
+<h4 id="forms">Forms</h4>
+<p>Django has <a href="https://docs.djangoproject.com/en/5.1/topics/forms/">form framework</a>. Makes it super easy to go from model->template. This is what makes it rapid development. People will say it’s an antipattern, but purpose of django is to publish articles on news website with some data in it. That was very clever from the creator of Django. It makes me even more bamboozled why was he also against the logic in templates saying it’s an antipattern. I would say go all the way and allow logic in templates and be even more rapid dev framework man. Just do it.</p>
+<h3 id="rails">Rails</h3>
+<br>
+<p><a href="https://github.com/tombohub/simple-rails-todo">Repo</a></p>
+<br>
+<h4 id="magic">Magic</h4>
+<p>This one took me a while. There is a lot of conventions to know regarding route names, using request data in controller and especially <a href="https://turbo.hotwired.dev/">Turbo</a>. Turbo is default and integrated with forms and links.</p>
+<p>For example, no need to pass params into the controller action it’s automatically present:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="ruby"><code><span class="line"><span style="color:#F97583">def</span><span style="color:#B392F0"> destroy</span></span>
+<span class="line"><span style="color:#E1E4E8">    @todo </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> Todo</span><span style="color:#E1E4E8">.find(params[</span><span style="color:#79B8FF">:id</span><span style="color:#E1E4E8">])</span></span>
+<span class="line"><span style="color:#E1E4E8">    @todo.destroy</span></span>
+<span class="line"><span style="color:#E1E4E8">    redirect_to todos_path, </span><span style="color:#79B8FF">notice:</span><span style="color:#9ECBFF"> "Todo deleted"</span></span>
+<span class="line"><span style="color:#F97583">  end</span></span>
+<span class="line"></span></code></pre>
+<br>
+<p>Also, because of class attributes, we don’t need to pass context when rendering another action:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="ruby"><code><span class="line"><span style="color:#F97583">  def</span><span style="color:#B392F0"> create</span></span>
+<span class="line"><span style="color:#E1E4E8">    @todo </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> Todo</span><span style="color:#E1E4E8">.</span><span style="color:#F97583">new</span><span style="color:#E1E4E8">(todo_params)</span></span>
+<span class="line"><span style="color:#F97583">    if</span><span style="color:#E1E4E8"> @todo.save</span></span>
+<span class="line"><span style="color:#E1E4E8">      redirect_to todos_path, </span><span style="color:#79B8FF">notice:</span><span style="color:#9ECBFF"> "Todo was created"</span></span>
+<span class="line"><span style="color:#F97583">    else</span></span>
+<span class="line"><span style="color:#E1E4E8">      @todos </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> Todo</span><span style="color:#E1E4E8">.all</span></span>
+<span class="line"><span style="color:#E1E4E8">      render </span><span style="color:#79B8FF">:index</span></span>
+<span class="line"><span style="color:#F97583">    end</span></span>
+<span class="line"><span style="color:#F97583">  end</span></span>
+<span class="line"></span></code></pre>
+  <br>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="ruby"><code><span class="line"><span style="color:#E1E4E8">@todos </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> Todo</span><span style="color:#E1E4E8">.all </span><span style="color:#6A737D"># @todos is present in index template</span></span>
+<span class="line"><span style="color:#E1E4E8">render </span><span style="color:#79B8FF">:index</span></span>
+<span class="line"></span></code></pre>
+<br>
+<p>Unlike Django where we need to be explicit:</p>
+<br>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:#E1E4E8">todos </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> Todo.objects.all()</span></span>
+<span class="line"><span style="color:#F97583">return</span><span style="color:#E1E4E8"> render(request, </span><span style="color:#9ECBFF">"todoist/index.html"</span><span style="color:#E1E4E8">, {</span><span style="color:#9ECBFF">'todos'</span><span style="color:#E1E4E8">: todos})</span></span>
+<span class="line"></span></code></pre>
+<br>
+<h4 id="template-1">Template</h4>
+<p>Good thing is we can use ruby inside template:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="ruby"><code><span class="line"><span style="color:#F97583">&#x3C;%=</span><span style="color:#E1E4E8"> link_to (todo.status </span><span style="color:#F97583">==</span><span style="color:#9ECBFF"> 'Not Done'</span><span style="color:#F97583"> ?</span><span style="color:#9ECBFF"> 'mark done'</span><span style="color:#E1E4E8"> : </span><span style="color:#9ECBFF">'mark not done'</span><span style="color:#E1E4E8">), toggle_status_todo_path(todo), </span><span style="color:#79B8FF">data:</span><span style="color:#E1E4E8"> { </span><span style="color:#79B8FF">turbo_method:</span><span style="color:#79B8FF"> :post</span><span style="color:#E1E4E8"> } </span><span style="color:#9ECBFF">%></span></span>
+<span class="line"></span></code></pre>
+<h3 id="laravel">Laravel</h3>
+<br>
+<p><a href="https://github.com/tombohub/simple-laravel-todo">Repo</a></p>
+<br>
+<h4 id="model-1">Model</h4>
+<p>Laravel migrations:</p>
+<br>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="php"><code><span class="line"><span style="color:#F97583">return</span><span style="color:#F97583"> new</span><span style="color:#F97583"> class</span><span style="color:#F97583"> extends</span><span style="color:#B392F0"> Migration</span></span>
+<span class="line"><span style="color:#E1E4E8">{</span></span>
+<span class="line"><span style="color:#6A737D">    /**</span></span>
+<span class="line"><span style="color:#6A737D">     * Run the migrations.</span></span>
+<span class="line"><span style="color:#6A737D">     */</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> function</span><span style="color:#B392F0"> up</span><span style="color:#E1E4E8">()</span><span style="color:#F97583">:</span><span style="color:#F97583"> void</span></span>
+<span class="line"><span style="color:#E1E4E8">    {</span></span>
+<span class="line"><span style="color:#6A737D">        //</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">    /**</span></span>
+<span class="line"><span style="color:#6A737D">     * Reverse the migrations.</span></span>
+<span class="line"><span style="color:#6A737D">     */</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> function</span><span style="color:#B392F0"> down</span><span style="color:#E1E4E8">()</span><span style="color:#F97583">:</span><span style="color:#F97583"> void</span></span>
+<span class="line"><span style="color:#E1E4E8">    {</span></span>
+<span class="line"><span style="color:#6A737D">        //</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">};</span></span>
+<span class="line"></span></code></pre>
+<br>
+<p>This is it. It’s up to you to fill out everything. Laravel takes total opposite approach from Django ORM.</p>
+<br>
+<h4 id="types">Types</h4>
+<p>One thing I miss in these 3 frameworks is typings. Especially in templates. I don’t know the best setup. In vscode I got some spelling errors which didn’t show in vscode, but was runtime error. I’d rather have squiggly lines telling me errors.</p>
+<br>
+<h4 id="thoughts">Thoughts</h4>
+<p>All in all, this is good framework with lot of batteries included. Lot of magic strings. If I had to choose out of big 3 maybe I would choose this one because it’s most straight forward and richest UI support. Blade components, Inertia, Livewire. I have found out that for simpleish apps UI takes most of the time. So UI tools and support are super important. Django is worst in this department.</p>
+<br>
+<p>Too bad Laravel ORM is not to my liking. Django is far better for me. Other than that I think I’ve enjoyed this one the most. Balanced convention - configuration ratio. Everything flows smoothly into each other like Danube river into the Black sea.</p>
+<br>
+<h3 id="phoenix">Phoenix</h3>
+<br>
+<p><a href="https://github.com/tombohub/simple_phoenix_todo">Repo</a></p>
+<br>
+<h4 id="vscode-support">Vscode support</h4>
+<p>Copilot is already lacking. I can see this is gonna be a problem. It told me to do so much stuff and configuration while command <code>mix phx.gen.schema Todo title:string</code> is sufficient.</p>
+<br>
+<p>I got stuck because vscode adds parenthesis upon save while GPT tells me not to add parenthesis:</p>
+<br>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="elixir"><code><span class="line"><span style="color:#E1E4E8">schema </span><span style="color:#9ECBFF">"todos"</span><span style="color:#F97583"> do</span></span>
+<span class="line"><span style="color:#E1E4E8">    field </span><span style="color:#79B8FF">:status</span><span style="color:#E1E4E8">, </span><span style="color:#B392F0">Ecto</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">enum</span><span style="color:#E1E4E8">(), </span><span style="color:#79B8FF">values:</span><span style="color:#E1E4E8"> [</span><span style="color:#79B8FF">:done</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">:not_done</span><span style="color:#E1E4E8">]</span></span>
+<span class="line"><span style="color:#E1E4E8">    field </span><span style="color:#79B8FF">:title</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">:string</span></span>
+<span class="line"></span></code></pre>
+<br>
+<p>and I get the error undefined function:</p>
+<br>
+<p><img  src="/_astro/elixir-error.B8k2c_s1_qsVkn.webp" alt="elixir error" width="631" height="166" loading="lazy" decoding="async"></p>
+<br>
+<p>I’ve tried googling, but all the solutions are same and still getting error. This is too much time now. I am giving up on enum and will validate model on creation.</p>
+<br>
+<p>It warns me if path doesn’t exist which is really neat and makes it less stringly typed:</p>
+<br>
+![vscode no path warning](../../assets/images/phoenix-path-not-exists-warn.png)
+<h4 id="live-reload">Live reload</h4>
+<p>It has live reload. Changes to templates are automatically refreshed which is very nice!</p>
+<br>
+<h4 id="copilot">Copilot</h4>
+<p>Using chat GPT. I am not confident in Copilot for Phoenix.</p>
+<br>
+<h4 id="documentation">Documentation</h4>
+<p>Trying to make a form I couldn’f find anything about it in <a href="https://hexdocs.pm/phoenix/overview.html">phoenix docs</a>, so I google and found something in <a href="https://hexdocs.pm/phoenix_html/Phoenix.HTML.Form.html">hexdocs</a>. Why are they separated?</p>
+<h4 id="elixir">Elixir</h4>
+<p>Elixir is functional language I’ve never used outside of mini tutorial. It’s making me harder to understand the function signatures and code in general. I am relying on GPT to write code as I also find it harder to find in documentation things I need. Phoenix doesn’t have start tutorial like Rails. At least I didn’t see it in documentation.</p>
+<h4 id="orm">ORM</h4>
+<p>Elixir doesn’t have objects, but structs so maybe proper name would be Struct Relational Mapping -> SRM. Therefore, unlike Django, Rails and Laravel, Phoenix doesn’t use <a href="https://en.wikipedia.org/wiki/Active_record_pattern">Active Record</a>, but <a href="https://en.wikipedia.org/wiki/Data_mapper_pattern">Data Mapper</a> pattern.</p>
+<br>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="elixir"><code><span class="line"><span style="color:#6A737D"># ...</span></span>
+<span class="line"><span style="color:#E1E4E8">changeset </span><span style="color:#F97583">=</span><span style="color:#B392F0"> Todo</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">changeset</span><span style="color:#E1E4E8">(%</span><span style="color:#B392F0">Todo</span><span style="color:#E1E4E8">{}, todo_params)</span></span>
+<span class="line"><span style="color:#F97583">case</span><span style="color:#B392F0"> Repo</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">insert</span><span style="color:#E1E4E8">(changeset) </span><span style="color:#6A737D"># data mapper</span></span>
+<span class="line"><span style="color:#6A737D"># ...</span></span>
+<span class="line"></span></code></pre>
+<br>
+<p>Phoenix doesn’t display errors when saving models like Django does. This will fail silently if there is no status field in form.</p>
+<br>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="elixir"><code><span class="line"><span style="color:#6A737D">  @doc false</span></span>
+<span class="line"><span style="color:#F97583">  def</span><span style="color:#B392F0"> changeset</span><span style="color:#E1E4E8">(todo, attrs) </span><span style="color:#F97583">do</span></span>
+<span class="line"><span style="color:#E1E4E8">    todo</span></span>
+<span class="line"><span style="color:#F97583">    |></span><span style="color:#B392F0"> cast</span><span style="color:#E1E4E8">(attrs, [</span><span style="color:#79B8FF">:title</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">:status</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">:status</span><span style="color:#E1E4E8">])</span></span>
+<span class="line"><span style="color:#F97583">    |></span><span style="color:#B392F0"> validate_required</span><span style="color:#E1E4E8">([</span><span style="color:#79B8FF">:title</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">:status</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">:status</span><span style="color:#E1E4E8">])</span></span>
+<span class="line"><span style="color:#F97583">    |></span><span style="color:#B392F0"> validate_inclusion</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">:status</span><span style="color:#E1E4E8">, [</span><span style="color:#9ECBFF">"Done"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"Not Done"</span><span style="color:#E1E4E8">])</span></span>
+<span class="line"><span style="color:#F97583">    |></span><span style="color:#B392F0"> validate_length</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">:title</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">min:</span><span style="color:#79B8FF"> 3</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">  end</span></span>
+<span class="line"></span></code></pre>
+<p>To insert default status value we do insert line <code>attrs = Map.put_new....</code>:
+<br></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="elixir"><code><span class="line"><span style="color:#6A737D">  @doc false</span></span>
+<span class="line"><span style="color:#F97583">  def</span><span style="color:#B392F0"> changeset</span><span style="color:#E1E4E8">(todo, attrs) </span><span style="color:#F97583">do</span></span>
+<span class="line"><span style="color:#E1E4E8">    attrs </span><span style="color:#F97583">=</span><span style="color:#B392F0"> Map</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">put_new</span><span style="color:#E1E4E8">(attrs, </span><span style="color:#9ECBFF">"status"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"Not Done"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    todo</span></span>
+<span class="line"><span style="color:#F97583">    |></span><span style="color:#B392F0"> cast</span><span style="color:#E1E4E8">(attrs, [</span><span style="color:#79B8FF">:title</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">:status</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">:status</span><span style="color:#E1E4E8">])</span></span>
+<span class="line"><span style="color:#F97583">    |></span><span style="color:#B392F0"> validate_required</span><span style="color:#E1E4E8">([</span><span style="color:#79B8FF">:title</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">:status</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">:status</span><span style="color:#E1E4E8">])</span></span>
+<span class="line"><span style="color:#F97583">    |></span><span style="color:#B392F0"> validate_inclusion</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">:status</span><span style="color:#E1E4E8">, [</span><span style="color:#9ECBFF">"Done"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"Not Done"</span><span style="color:#E1E4E8">])</span></span>
+<span class="line"><span style="color:#F97583">    |></span><span style="color:#B392F0"> validate_length</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">:title</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">min:</span><span style="color:#79B8FF"> 3</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">  end</span></span>
+<span class="line"></span></code></pre>
+<br>
+<h4 id="form">Form</h4>
+<p>Already struggling with how to make a form. There is no fast straight forward answer, neither in docs nor googling. Gotta spend time to research. Also I am having this error in vscode:</p>
+<br>
+<p><img  src="/_astro/phoenix-form-error-vscode.BG0PEEhC_2ikRaO.webp" alt="form phoenix error vscode" width="1383" height="147" loading="lazy" decoding="async"></p>
+<br>
+<p>On forum I found this <a href="https://phoenixonrails.com/blog/you-can-stop-using-form-for-in-phoenix">article</a> and changed form to:</p>
+<br>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="elixir"><code><span class="line"><span style="color:#F97583">&#x3C;</span><span style="color:#E1E4E8">.form </span><span style="color:#79B8FF">:let=</span><span style="color:#E1E4E8">{f} </span><span style="color:#F97583">for=</span><span style="color:#E1E4E8">{@changeset} action</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">{</span><span style="color:#9ECBFF">~p"/create"</span><span style="color:#E1E4E8">}</span><span style="color:#F97583">></span></span>
+<span class="line"><span style="color:#F97583">  &#x3C;</span><span style="color:#E1E4E8">.input field</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">{f[</span><span style="color:#79B8FF">:title</span><span style="color:#E1E4E8">]} </span><span style="color:#F97583">/></span></span>
+<span class="line"><span style="color:#F97583">&#x3C;/</span><span style="color:#E1E4E8">.form</span><span style="color:#F97583">></span></span>
+<span class="line"></span></code></pre>
+<br>
+<p>and finally got some form in template.</p>
+<br>
+<p>Another error now trying to display error flash messages with code from GPT:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="elixir"><code><span class="line"><span style="color:#E1E4E8">![get_flash error](</span><span style="color:#F97583">../../</span><span style="color:#E1E4E8">assets</span><span style="color:#F97583">/</span><span style="color:#E1E4E8">images</span><span style="color:#F97583">/</span><span style="color:#E1E4E8">phoenix</span><span style="color:#F97583">-</span><span style="color:#E1E4E8">get_flash</span><span style="color:#F97583">-</span><span style="color:#E1E4E8">method</span><span style="color:#F97583">-</span><span style="color:#E1E4E8">error.png)</span></span>
+<span class="line"></span></code></pre>
+<br>
+<p>I am getting tired of these errors. <a href="https://hexdocs.pm/phoenix/controllers.html#flash-messages">Documentation</a> shows how to create flash message, but not how to render. I guess I’ll have to google.</p>
+<br>
+<p>In this <a href="https://elixirforum.com/t/no-function-clause-matching-usercontroller-create-method-when-posting/35746">post</a> I saw some code and this works:</p>
+<br>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="elixir"><code><span class="line"><span style="color:#F97583">&#x3C;</span><span style="color:#E1E4E8">%</span><span style="color:#F97583">=</span><span style="color:#B392F0"> live_flash</span><span style="color:#E1E4E8">(@flash, </span><span style="color:#79B8FF">:error</span><span style="color:#E1E4E8">) %</span><span style="color:#F97583">></span></span>
+<span class="line"></span></code></pre>
+<br>
+<p>except now I get warning <code>live_flash</code> is deprecated, but you know what? IDGF, I’ve spent already too much time. If it works, it will be shipped. Only thing is I don’t see what is the error here since Phoenix doesn’t show model save error, now I have to put it in the flash message. Another thing IDGF anymore. I gotta move on.</p>
+<br>
+<p>Another error: This time it’s</p>
+<br>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>FunctionClauseError at POST /create</span></span>
+<span class="line"><span>no function clause matching in Phoenix.Controller.redirect/2</span></span>
+<span class="line"><span></span></span></code></pre>
+<br>
+<p>for this Controller:</p>
+<br>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="elixir"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#B392F0"> Ecto</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">Query</span></span>
+<span class="line"><span style="color:#F97583">alias</span><span style="color:#B392F0"> SimplePhoenixTodo</span><span style="color:#E1E4E8">.{</span><span style="color:#B392F0">Repo</span><span style="color:#E1E4E8">, </span><span style="color:#B392F0">Todo</span><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">defmodule</span><span style="color:#B392F0"> SimplePhoenixTodoWeb</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">PageController</span><span style="color:#F97583"> do</span></span>
+<span class="line"><span style="color:#F97583">  alias</span><span style="color:#B392F0"> Phoenix</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">Router</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">Route</span></span>
+<span class="line"><span style="color:#F97583">  use</span><span style="color:#B392F0"> SimplePhoenixTodoWeb</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">:controller</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  def</span><span style="color:#B392F0"> home</span><span style="color:#E1E4E8">(conn, </span><span style="color:#6A737D">_params</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">do</span></span>
+<span class="line"><span style="color:#6A737D">    # The home page is often custom made,</span></span>
+<span class="line"><span style="color:#6A737D">    # so skip the default app layout.</span></span>
+<span class="line"><span style="color:#E1E4E8">    changeset </span><span style="color:#F97583">=</span><span style="color:#B392F0"> Todo</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">changeset</span><span style="color:#E1E4E8">(%</span><span style="color:#B392F0">Todo</span><span style="color:#E1E4E8">{}, %{})</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">    render</span><span style="color:#E1E4E8">(conn, </span><span style="color:#79B8FF">:home</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">layout:</span><span style="color:#79B8FF"> false</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">changeset:</span><span style="color:#E1E4E8"> changeset)</span></span>
+<span class="line"><span style="color:#F97583">  end</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  def</span><span style="color:#B392F0"> create</span><span style="color:#E1E4E8">(conn, %{</span><span style="color:#9ECBFF">"todo"</span><span style="color:#F97583"> =></span><span style="color:#E1E4E8"> todo_params}) </span><span style="color:#F97583">do</span></span>
+<span class="line"><span style="color:#E1E4E8">    changeset </span><span style="color:#F97583">=</span><span style="color:#B392F0"> Todo</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">changeset</span><span style="color:#E1E4E8">(%</span><span style="color:#B392F0">Todo</span><span style="color:#E1E4E8">{}, todo_params)</span></span>
+<span class="line"><span style="color:#B392F0">    IO</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">inspect</span><span style="color:#E1E4E8">(todo_params, </span><span style="color:#79B8FF">label:</span><span style="color:#9ECBFF"> "Todo Params"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    case</span><span style="color:#B392F0"> Repo</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">insert</span><span style="color:#E1E4E8">(changeset) </span><span style="color:#F97583">do</span></span>
+<span class="line"><span style="color:#E1E4E8">      {</span><span style="color:#79B8FF">:ok</span><span style="color:#E1E4E8">, </span><span style="color:#6A737D">_todo</span><span style="color:#E1E4E8">} </span><span style="color:#F97583">-></span></span>
+<span class="line"><span style="color:#E1E4E8">        conn</span></span>
+<span class="line"><span style="color:#F97583">        |></span><span style="color:#B392F0"> put_flash</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">:info</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"Todo created success"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">        |></span><span style="color:#B392F0"> redirect</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">~p"/"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">      {</span><span style="color:#79B8FF">:error</span><span style="color:#E1E4E8">, %</span><span style="color:#B392F0">Ecto</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">Changeset</span><span style="color:#E1E4E8">{} </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> changeset} </span><span style="color:#F97583">-></span></span>
+<span class="line"><span style="color:#E1E4E8">        conn</span></span>
+<span class="line"><span style="color:#F97583">        |></span><span style="color:#B392F0"> put_flash</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#79B8FF">          :error</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#9ECBFF">          "Failed to create todo"</span></span>
+<span class="line"><span style="color:#E1E4E8">        )</span></span>
+<span class="line"><span style="color:#F97583">        |></span><span style="color:#B392F0"> redirect</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">~p"/"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">    end</span></span>
+<span class="line"><span style="color:#F97583">  end</span></span>
+<span class="line"><span style="color:#F97583">end</span></span>
+<span class="line"></span></code></pre>
+<br>
+<p>What am I doing wrong now? GPT keeps saying I need to use <code>redirect(to: Routes.page_path(conn, :home))</code>, but when I use that than I get warning <code>Routes.page_path/2 is undefined (module Routes is not available or is yet to be defined)</code>. I am REALLY now getting annoyed. Seems like we need to put <code>to:</code> in <code>redirect</code>: <code>redirect(to: ~p"/")</code>, but why GPT doesn’t say that? This is the disatvantage of not so popular libraries. In the future this will be very important. We used to say googlebility, but now we will say GPTability of some library. Only when AI will be able to read documentation and answer questions it will not matter as much.</p>
+<br>
+<p>After some more problems I have accepted that GPT doesn’t really know Phoenix or Elixir and cannot rely as much as for Typescript and React for example. I won’t even mention them anymore. At this point I am not interested in learning anymore and reading documentation. Just want to ship this todo and move on to another project.</p>
+<br>
+<h4 id="final-word">Final word</h4>
+<p>I rushed to get this done. At this point I have stopped enjoying learning. GPT code is outdated. It’s simply too much to learn and resources are not as available as for more popular libraries and languages. As a hobbyst I need to get answers fast because I don’t have much time in a day and this framework and language doesn’t provide that compared to some others. I believe it’s good framework, there is high satisfaction on <a href="https://survey.stackoverflow.co/2024/technology/#2-web-frameworks-and-technologies">Stack overflow survey</a>, but it’s not for me. I would do it maybe if I am professional or paid to work on it.</p>  <footer></footer> </body></html>
