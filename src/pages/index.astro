@@ -3,12 +3,19 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
 
 const blogPosts = await getCollection("blog");
+
+const filteredPosts = blogPosts
+  .filter(post => post.data.status == "published")
+  .toSorted((a, b) => a.data.postNumber + b.data.postNumber);
+
+const postCount = filteredPosts.length;
 const pageTitle = "Home";
 ---
 
 <BaseLayout pageTitle={pageTitle}>
+  {postCount} posts
   {
-    blogPosts.map(post => (
+    filteredPosts.map(post => (
       <li>
         <a href={`/blog/${post.slug}`}>{post.data.title}</a>
         <span> - {post.data.date.toLocaleDateString()}</span>

@@ -1,6 +1,8 @@
 ---
 title: How to fix Permission denied error Rails on Windows
 date: 2024-08-22
+status: published
+postNumber: 6
 tags: [rails, windows]
 ---
 

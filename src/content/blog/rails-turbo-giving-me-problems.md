@@ -1,6 +1,8 @@
 ---
 title: Rails Turbo gave me problems
 date: 2023-08-22
+status: published
+postNumber: 9
 tags: [rails, turbo]
 ---
 

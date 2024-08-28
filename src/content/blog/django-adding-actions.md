@@ -1,6 +1,8 @@
 ---
 title: Django adding action
 date: 2024-08-22
+status: published
+postNumber: 2
 tags: [django]
 ---
 

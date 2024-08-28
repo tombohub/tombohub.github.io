@@ -39,13 +39,6 @@
       "contentTypes": [
         "projects"
       ]
-    },
-    {
-      "title": "shorts",
-      "path": "[[workspace]]/src/content/shorts",
-      "contentTypes": [
-        "shorts"
-      ]
     }
   ],
   "frontMatter.content.publicFolder": {

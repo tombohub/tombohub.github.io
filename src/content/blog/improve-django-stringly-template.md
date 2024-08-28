@@ -1,6 +1,8 @@
 ---
 title: Improve django stringly template
 date: 2024-08-22
+status: published
+postNumber: 1
 tags: [django, template, html]
 ---
 

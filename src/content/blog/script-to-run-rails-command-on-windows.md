@@ -1,6 +1,8 @@
 ---
 title: Script to run rails command on windows
 date: 2024-08-22
+status: published
+postNumber: 5
 tags: [rails, windows]
 ---
 

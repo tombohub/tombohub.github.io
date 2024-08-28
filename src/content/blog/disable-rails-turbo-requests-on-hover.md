@@ -1,6 +1,8 @@
 ---
 title: Disable Rails Turbo requests on hover
 date: 2024-08-23
+status: published
+postNumber: 8
 tags: [rails, turbo]
 ---
 

@@ -1,3 +1,5 @@
 body {
-    font-size: x-large;
+    font-size: large;
+    margin: auto;
+    max-width: 777px;
 }

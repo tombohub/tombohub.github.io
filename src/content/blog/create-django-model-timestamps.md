@@ -1,6 +1,8 @@
 ---
 title: Create Django model timestamps
 date: 2024-08-22
+status: published
+postNumber: 3
 tags: [django]
 ---
 

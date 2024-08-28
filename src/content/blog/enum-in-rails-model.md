@@ -1,6 +1,8 @@
 ---
 title: Enum in Rails model
 date: 2024-08-22
+status: published
+postNumber: 4
 tags: [rails]
 ---
 
@@ -8,7 +10,7 @@ Rails doesn't have choices like Django. There are few steps to create choice.
 
 1. Generate model
 
-```consoles
+```console
 rails generate model Todo title: string status: integer
 ```
 

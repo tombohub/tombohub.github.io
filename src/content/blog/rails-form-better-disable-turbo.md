@@ -1,6 +1,8 @@
 ---
 title: Rails form better disable Turbo
 date: 2024-08-22
+status: published
+postNumber: 7
 tags: [rails, turbo, form]
 ---
 
