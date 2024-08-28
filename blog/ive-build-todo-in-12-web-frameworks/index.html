@@ -4,10 +4,8 @@
 <a href="/about/">About</a> -
 <a href="https://www.github.com/tombohub">github</a> </nav> </header>  <h2>I&#39;ve build todo in 12 web frameworks</h2> <h3 id="django">Django</h3>
 <p><a href="https://github.com/tombohub/simple-django-todo">Repo</a></p>
-<br>
 <h4 id="model">Model</h4>
 <p>I knew django before so this was the easiest one. Django has straight forward model definition. Just create a class:</p>
-<br>
 <pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:#F97583">from</span><span style="color:#E1E4E8"> django.core.validators </span><span style="color:#F97583">import</span><span style="color:#E1E4E8"> MinLengthValidator</span></span>
 <span class="line"><span style="color:#F97583">from</span><span style="color:#E1E4E8"> django.db </span><span style="color:#F97583">import</span><span style="color:#E1E4E8"> models</span></span>
 <span class="line"></span>
@@ -20,37 +18,28 @@
 <span class="line"><span style="color:#E1E4E8">    title </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> models.CharField(</span><span style="color:#FFAB70">max_length</span><span style="color:#F97583">=</span><span style="color:#79B8FF">20</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">validators</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">[MinLengthValidator(</span><span style="color:#79B8FF">3</span><span style="color:#E1E4E8">)])</span></span>
 <span class="line"><span style="color:#E1E4E8">    status </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> models.TextField(</span><span style="color:#FFAB70">choices</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">Status.choices, </span><span style="color:#FFAB70">default</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">Status.</span><span style="color:#79B8FF">NOT_DONE</span><span style="color:#E1E4E8">)</span></span>
 <span class="line"></span></code></pre>
-<p><br> create migration file:</p>
+<p>create migration file:</p>
 <pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="console"><code><span class="line"><span style="color:#79B8FF">python ./manage.py makemigration</span></span>
 <span class="line"></span></code></pre>
-<br>
 <p>It will name and create a migration file. Then run migrations:</p>
-<br>
 <pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="console"><code><span class="line"><span style="color:#79B8FF">python ./manage.py migrate</span></span>
 <span class="line"></span></code></pre>
 <p>It’s the easiest model creation and migration I’ve tried so far out of any framework. Top notch.</p>
 <p>Everything else pretty normal. Django is more explicit compared to rails and laravel. For that reason, I believe, it doesn’t have cli generators. Less conventions.</p>
-<br>
 <h4 id="template">Template</h4>
 <p>In django template we cannot use the python code so we need to resort to things like:</p>
-<br>
 <pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="html"><code><span class="line"><span style="color:#E1E4E8">&#x3C;</span><span style="color:#85E89D">button</span><span style="color:#E1E4E8">></span></span>
 <span class="line"><span style="color:#E1E4E8">  {% if todo.status == 'Done' %} Mark not done {% elif todo.status == 'Not Done'</span></span>
 <span class="line"><span style="color:#E1E4E8">  %} Mark done {% endif %}</span></span>
 <span class="line"><span style="color:#E1E4E8">&#x3C;/</span><span style="color:#85E89D">button</span><span style="color:#E1E4E8">></span></span>
 <span class="line"></span></code></pre>
-<br>
 <p>or create a <a href="https://docs.djangoproject.com/en/5.1/howto/custom-template-tags/">filter</a> and use it:</p>
-<br>
 <pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="html"><code><span class="line"><span style="color:#E1E4E8">&#x3C;</span><span style="color:#85E89D">button</span><span style="color:#E1E4E8">>{{todo.status|toggle_status_label}}&#x3C;/</span><span style="color:#85E89D">button</span><span style="color:#E1E4E8">></span></span>
 <span class="line"></span></code></pre>
-<br>
 <h4 id="forms">Forms</h4>
 <p>Django has <a href="https://docs.djangoproject.com/en/5.1/topics/forms/">form framework</a>. Makes it super easy to go from model->template. This is what makes it rapid development. People will say it’s an antipattern, but purpose of django is to publish articles on news website with some data in it. That was very clever from the creator of Django. It makes me even more bamboozled why was he also against the logic in templates saying it’s an antipattern. I would say go all the way and allow logic in templates and be even more rapid dev framework man. Just do it.</p>
 <h3 id="rails">Rails</h3>
-<br>
 <p><a href="https://github.com/tombohub/simple-rails-todo">Repo</a></p>
-<br>
 <h4 id="magic">Magic</h4>
 <p>This one took me a while. There is a lot of conventions to know regarding route names, using request data in controller and especially <a href="https://turbo.hotwired.dev/">Turbo</a>. Turbo is default and integrated with forms and links.</p>
 <p>For example, no need to pass params into the controller action it’s automatically present:</p>
@@ -60,7 +49,6 @@
 <span class="line"><span style="color:#E1E4E8">    redirect_to todos_path, </span><span style="color:#79B8FF">notice:</span><span style="color:#9ECBFF"> "Todo deleted"</span></span>
 <span class="line"><span style="color:#F97583">  end</span></span>
 <span class="line"></span></code></pre>
-<br>
 <p>Also, because of class attributes, we don’t need to pass context when rendering another action:</p>
 <pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="ruby"><code><span class="line"><span style="color:#F97583">  def</span><span style="color:#B392F0"> create</span></span>
 <span class="line"><span style="color:#E1E4E8">    @todo </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> Todo</span><span style="color:#E1E4E8">.</span><span style="color:#F97583">new</span><span style="color:#E1E4E8">(todo_params)</span></span>
@@ -72,28 +60,21 @@
 <span class="line"><span style="color:#F97583">    end</span></span>
 <span class="line"><span style="color:#F97583">  end</span></span>
 <span class="line"></span></code></pre>
-  <br>
 <pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="ruby"><code><span class="line"><span style="color:#E1E4E8">@todos </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> Todo</span><span style="color:#E1E4E8">.all </span><span style="color:#6A737D"># @todos is present in index template</span></span>
 <span class="line"><span style="color:#E1E4E8">render </span><span style="color:#79B8FF">:index</span></span>
 <span class="line"></span></code></pre>
-<br>
 <p>Unlike Django where we need to be explicit:</p>
-<br>
 <pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:#E1E4E8">todos </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> Todo.objects.all()</span></span>
 <span class="line"><span style="color:#F97583">return</span><span style="color:#E1E4E8"> render(request, </span><span style="color:#9ECBFF">"todoist/index.html"</span><span style="color:#E1E4E8">, {</span><span style="color:#9ECBFF">'todos'</span><span style="color:#E1E4E8">: todos})</span></span>
 <span class="line"></span></code></pre>
-<br>
 <h4 id="template-1">Template</h4>
 <p>Good thing is we can use ruby inside template:</p>
 <pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="ruby"><code><span class="line"><span style="color:#F97583">&#x3C;%=</span><span style="color:#E1E4E8"> link_to (todo.status </span><span style="color:#F97583">==</span><span style="color:#9ECBFF"> 'Not Done'</span><span style="color:#F97583"> ?</span><span style="color:#9ECBFF"> 'mark done'</span><span style="color:#E1E4E8"> : </span><span style="color:#9ECBFF">'mark not done'</span><span style="color:#E1E4E8">), toggle_status_todo_path(todo), </span><span style="color:#79B8FF">data:</span><span style="color:#E1E4E8"> { </span><span style="color:#79B8FF">turbo_method:</span><span style="color:#79B8FF"> :post</span><span style="color:#E1E4E8"> } </span><span style="color:#9ECBFF">%></span></span>
 <span class="line"></span></code></pre>
 <h3 id="laravel">Laravel</h3>
-<br>
 <p><a href="https://github.com/tombohub/simple-laravel-todo">Repo</a></p>
-<br>
 <h4 id="model-1">Model</h4>
 <p>Laravel migrations:</p>
-<br>
 <pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="php"><code><span class="line"><span style="color:#F97583">return</span><span style="color:#F97583"> new</span><span style="color:#F97583"> class</span><span style="color:#F97583"> extends</span><span style="color:#B392F0"> Migration</span></span>
 <span class="line"><span style="color:#E1E4E8">{</span></span>
 <span class="line"><span style="color:#6A737D">    /**</span></span>
@@ -113,61 +94,42 @@
 <span class="line"><span style="color:#E1E4E8">    }</span></span>
 <span class="line"><span style="color:#E1E4E8">};</span></span>
 <span class="line"></span></code></pre>
-<br>
 <p>This is it. It’s up to you to fill out everything. Laravel takes total opposite approach from Django ORM.</p>
-<br>
 <h4 id="types">Types</h4>
 <p>One thing I miss in these 3 frameworks is typings. Especially in templates. I don’t know the best setup. In vscode I got some spelling errors which didn’t show in vscode, but was runtime error. I’d rather have squiggly lines telling me errors.</p>
-<br>
 <h4 id="thoughts">Thoughts</h4>
 <p>All in all, this is good framework with lot of batteries included. Lot of magic strings. If I had to choose out of big 3 maybe I would choose this one because it’s most straight forward and richest UI support. Blade components, Inertia, Livewire. I have found out that for simpleish apps UI takes most of the time. So UI tools and support are super important. Django is worst in this department.</p>
-<br>
 <p>Too bad Laravel ORM is not to my liking. Django is far better for me. Other than that I think I’ve enjoyed this one the most. Balanced convention - configuration ratio. Everything flows smoothly into each other like Danube river into the Black sea.</p>
-<br>
 <h3 id="phoenix">Phoenix</h3>
-<br>
 <p><a href="https://github.com/tombohub/simple_phoenix_todo">Repo</a></p>
-<br>
 <h4 id="vscode-support">Vscode support</h4>
 <p>Copilot is already lacking. I can see this is gonna be a problem. It told me to do so much stuff and configuration while command <code>mix phx.gen.schema Todo title:string</code> is sufficient.</p>
-<br>
 <p>I got stuck because vscode adds parenthesis upon save while GPT tells me not to add parenthesis:</p>
-<br>
 <pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="elixir"><code><span class="line"><span style="color:#E1E4E8">schema </span><span style="color:#9ECBFF">"todos"</span><span style="color:#F97583"> do</span></span>
 <span class="line"><span style="color:#E1E4E8">    field </span><span style="color:#79B8FF">:status</span><span style="color:#E1E4E8">, </span><span style="color:#B392F0">Ecto</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">enum</span><span style="color:#E1E4E8">(), </span><span style="color:#79B8FF">values:</span><span style="color:#E1E4E8"> [</span><span style="color:#79B8FF">:done</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">:not_done</span><span style="color:#E1E4E8">]</span></span>
 <span class="line"><span style="color:#E1E4E8">    field </span><span style="color:#79B8FF">:title</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">:string</span></span>
 <span class="line"></span></code></pre>
-<br>
 <p>and I get the error undefined function:</p>
-<br>
 <p><img  src="/_astro/elixir-error.B8k2c_s1_qsVkn.webp" alt="elixir error" width="631" height="166" loading="lazy" decoding="async"></p>
-<br>
 <p>I’ve tried googling, but all the solutions are same and still getting error. This is too much time now. I am giving up on enum and will validate model on creation.</p>
-<br>
 <p>It warns me if path doesn’t exist which is really neat and makes it less stringly typed:</p>
-<br>
-![vscode no path warning](../../assets/images/phoenix-path-not-exists-warn.png)
+<p><img  src="/_astro/phoenix-path-not-exists-warn.BgElBKta_c8Evx.webp" alt="vscode no path warning" width="1144" height="351" loading="lazy" decoding="async"></p>
 <h4 id="live-reload">Live reload</h4>
 <p>It has live reload. Changes to templates are automatically refreshed which is very nice!</p>
-<br>
 <h4 id="copilot">Copilot</h4>
 <p>Using chat GPT. I am not confident in Copilot for Phoenix.</p>
-<br>
 <h4 id="documentation">Documentation</h4>
 <p>Trying to make a form I couldn’f find anything about it in <a href="https://hexdocs.pm/phoenix/overview.html">phoenix docs</a>, so I google and found something in <a href="https://hexdocs.pm/phoenix_html/Phoenix.HTML.Form.html">hexdocs</a>. Why are they separated?</p>
 <h4 id="elixir">Elixir</h4>
 <p>Elixir is functional language I’ve never used outside of mini tutorial. It’s making me harder to understand the function signatures and code in general. I am relying on GPT to write code as I also find it harder to find in documentation things I need. Phoenix doesn’t have start tutorial like Rails. At least I didn’t see it in documentation.</p>
 <h4 id="orm">ORM</h4>
 <p>Elixir doesn’t have objects, but structs so maybe proper name would be Struct Relational Mapping -> SRM. Therefore, unlike Django, Rails and Laravel, Phoenix doesn’t use <a href="https://en.wikipedia.org/wiki/Active_record_pattern">Active Record</a>, but <a href="https://en.wikipedia.org/wiki/Data_mapper_pattern">Data Mapper</a> pattern.</p>
-<br>
 <pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="elixir"><code><span class="line"><span style="color:#6A737D"># ...</span></span>
 <span class="line"><span style="color:#E1E4E8">changeset </span><span style="color:#F97583">=</span><span style="color:#B392F0"> Todo</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">changeset</span><span style="color:#E1E4E8">(%</span><span style="color:#B392F0">Todo</span><span style="color:#E1E4E8">{}, todo_params)</span></span>
 <span class="line"><span style="color:#F97583">case</span><span style="color:#B392F0"> Repo</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">insert</span><span style="color:#E1E4E8">(changeset) </span><span style="color:#6A737D"># data mapper</span></span>
 <span class="line"><span style="color:#6A737D"># ...</span></span>
 <span class="line"></span></code></pre>
-<br>
 <p>Phoenix doesn’t display errors when saving models like Django does. This will fail silently if there is no status field in form.</p>
-<br>
 <pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="elixir"><code><span class="line"><span style="color:#6A737D">  @doc false</span></span>
 <span class="line"><span style="color:#F97583">  def</span><span style="color:#B392F0"> changeset</span><span style="color:#E1E4E8">(todo, attrs) </span><span style="color:#F97583">do</span></span>
 <span class="line"><span style="color:#E1E4E8">    todo</span></span>
@@ -177,8 +139,7 @@
 <span class="line"><span style="color:#F97583">    |></span><span style="color:#B392F0"> validate_length</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">:title</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">min:</span><span style="color:#79B8FF"> 3</span><span style="color:#E1E4E8">)</span></span>
 <span class="line"><span style="color:#F97583">  end</span></span>
 <span class="line"></span></code></pre>
-<p>To insert default status value we do insert line <code>attrs = Map.put_new....</code>:
-<br></p>
+<p>To insert default status value we do insert line <code>attrs = Map.put_new....</code>:</p>
 <pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="elixir"><code><span class="line"><span style="color:#6A737D">  @doc false</span></span>
 <span class="line"><span style="color:#F97583">  def</span><span style="color:#B392F0"> changeset</span><span style="color:#E1E4E8">(todo, attrs) </span><span style="color:#F97583">do</span></span>
 <span class="line"><span style="color:#E1E4E8">    attrs </span><span style="color:#F97583">=</span><span style="color:#B392F0"> Map</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">put_new</span><span style="color:#E1E4E8">(attrs, </span><span style="color:#9ECBFF">"status"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"Not Done"</span><span style="color:#E1E4E8">)</span></span>
@@ -190,42 +151,28 @@
 <span class="line"><span style="color:#F97583">    |></span><span style="color:#B392F0"> validate_length</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">:title</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">min:</span><span style="color:#79B8FF"> 3</span><span style="color:#E1E4E8">)</span></span>
 <span class="line"><span style="color:#F97583">  end</span></span>
 <span class="line"></span></code></pre>
-<br>
 <h4 id="form">Form</h4>
 <p>Already struggling with how to make a form. There is no fast straight forward answer, neither in docs nor googling. Gotta spend time to research. Also I am having this error in vscode:</p>
-<br>
 <p><img  src="/_astro/phoenix-form-error-vscode.BG0PEEhC_2ikRaO.webp" alt="form phoenix error vscode" width="1383" height="147" loading="lazy" decoding="async"></p>
-<br>
 <p>On forum I found this <a href="https://phoenixonrails.com/blog/you-can-stop-using-form-for-in-phoenix">article</a> and changed form to:</p>
-<br>
 <pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="elixir"><code><span class="line"><span style="color:#F97583">&#x3C;</span><span style="color:#E1E4E8">.form </span><span style="color:#79B8FF">:let=</span><span style="color:#E1E4E8">{f} </span><span style="color:#F97583">for=</span><span style="color:#E1E4E8">{@changeset} action</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">{</span><span style="color:#9ECBFF">~p"/create"</span><span style="color:#E1E4E8">}</span><span style="color:#F97583">></span></span>
 <span class="line"><span style="color:#F97583">  &#x3C;</span><span style="color:#E1E4E8">.input field</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">{f[</span><span style="color:#79B8FF">:title</span><span style="color:#E1E4E8">]} </span><span style="color:#F97583">/></span></span>
 <span class="line"><span style="color:#F97583">&#x3C;/</span><span style="color:#E1E4E8">.form</span><span style="color:#F97583">></span></span>
 <span class="line"></span></code></pre>
-<br>
 <p>and finally got some form in template.</p>
-<br>
 <p>Another error now trying to display error flash messages with code from GPT:</p>
 <pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="elixir"><code><span class="line"><span style="color:#E1E4E8">![get_flash error](</span><span style="color:#F97583">../../</span><span style="color:#E1E4E8">assets</span><span style="color:#F97583">/</span><span style="color:#E1E4E8">images</span><span style="color:#F97583">/</span><span style="color:#E1E4E8">phoenix</span><span style="color:#F97583">-</span><span style="color:#E1E4E8">get_flash</span><span style="color:#F97583">-</span><span style="color:#E1E4E8">method</span><span style="color:#F97583">-</span><span style="color:#E1E4E8">error.png)</span></span>
 <span class="line"></span></code></pre>
-<br>
 <p>I am getting tired of these errors. <a href="https://hexdocs.pm/phoenix/controllers.html#flash-messages">Documentation</a> shows how to create flash message, but not how to render. I guess I’ll have to google.</p>
-<br>
 <p>In this <a href="https://elixirforum.com/t/no-function-clause-matching-usercontroller-create-method-when-posting/35746">post</a> I saw some code and this works:</p>
-<br>
 <pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="elixir"><code><span class="line"><span style="color:#F97583">&#x3C;</span><span style="color:#E1E4E8">%</span><span style="color:#F97583">=</span><span style="color:#B392F0"> live_flash</span><span style="color:#E1E4E8">(@flash, </span><span style="color:#79B8FF">:error</span><span style="color:#E1E4E8">) %</span><span style="color:#F97583">></span></span>
 <span class="line"></span></code></pre>
-<br>
 <p>except now I get warning <code>live_flash</code> is deprecated, but you know what? IDGF, I’ve spent already too much time. If it works, it will be shipped. Only thing is I don’t see what is the error here since Phoenix doesn’t show model save error, now I have to put it in the flash message. Another thing IDGF anymore. I gotta move on.</p>
-<br>
 <p>Another error: This time it’s</p>
-<br>
 <pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>FunctionClauseError at POST /create</span></span>
 <span class="line"><span>no function clause matching in Phoenix.Controller.redirect/2</span></span>
 <span class="line"><span></span></span></code></pre>
-<br>
 <p>for this Controller:</p>
-<br>
 <pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="elixir"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#B392F0"> Ecto</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">Query</span></span>
 <span class="line"><span style="color:#F97583">alias</span><span style="color:#B392F0"> SimplePhoenixTodo</span><span style="color:#E1E4E8">.{</span><span style="color:#B392F0">Repo</span><span style="color:#E1E4E8">, </span><span style="color:#B392F0">Todo</span><span style="color:#E1E4E8">}</span></span>
 <span class="line"></span>
@@ -262,17 +209,12 @@
 <span class="line"><span style="color:#F97583">  end</span></span>
 <span class="line"><span style="color:#F97583">end</span></span>
 <span class="line"></span></code></pre>
-<br>
 <p>What am I doing wrong now? GPT keeps saying I need to use <code>redirect(to: Routes.page_path(conn, :home))</code>, but when I use that than I get warning <code>Routes.page_path/2 is undefined (module Routes is not available or is yet to be defined)</code>. I am REALLY now getting annoyed. Seems like we need to put <code>to:</code> in <code>redirect</code>: <code>redirect(to: ~p"/")</code>, but why GPT doesn’t say that? This is the disatvantage of not so popular libraries. In the future this will be very important. We used to say googlebility, but now we will say GPTability of some library. Only when AI will be able to read documentation and answer questions it will not matter as much.</p>
-<br>
 <p>After some more problems I have accepted that GPT doesn’t really know Phoenix or Elixir and cannot rely as much as for Typescript and React for example. I won’t even mention them anymore. At this point I am not interested in learning anymore and reading documentation. Just want to ship this todo and move on to another project.</p>
-<br>
 <h4 id="final-word">Final word</h4>
 <p>I rushed to get this done. At this point I have stopped enjoying learning. GPT code is outdated. It’s simply too much to learn and resources are not as available as for more popular libraries and languages. As a hobbyst I need to get answers fast because I don’t have much time in a day and this framework and language doesn’t provide that compared to some others. I believe it’s good framework, there is high satisfaction on <a href="https://survey.stackoverflow.co/2024/technology/#2-web-frameworks-and-technologies">Stack overflow survey</a>, but it’s not for me. I would do it maybe if I am professional or paid to work on it.</p>
 <h3 id="nextjs-app">Nextjs (app)</h3>
-<br>
 <p><a href="https://github.com/tombohub/simple-nextjs-todo">repo</a></p>
-<br>
 <h4 id="workflow">Workflow</h4>
 <p>Right off the bat, unlike the other frameworks, I had to find ORM to use. I am using Drizzle. That means we have to hook up library for something essential like database access as well as any other library and then make them all work together. It’s a mess bound to happen. I am not gonna go into the definition of full stack framework, but certainly it’s not battery included framework.</p>
 <p>Ok, drizzle is giving error that todos table doesn’t exist when it obviously does, I am gonna use kysely.</p>
@@ -298,21 +240,13 @@
 <span class="line"><span style="color:#E1E4E8">  );</span></span>
 <span class="line"><span style="color:#E1E4E8">}</span></span>
 <span class="line"></span></code></pre>
-<br>
 <p>It can be hardly any more simpler. What’s the problem?</p>
-<br>
 <p>After some more tinkering seems like problem is not in Nextjs it’s in nodejs itself, or combination of node and kysely | drizzle. I mean it’s hilarious I am still trying to query database after like 2 hours.</p>
-<br>
 <p>Trying to use just the <a href="https://www.npmjs.com/package/better-sqlite3">better-sqlite3</a> package already giving <code>esModuleInterop</code> flag, cannot run on node command line <code>TypeError: import_better_sqlite3.Database is not a constructor</code>, this is bloody disaster. Ok… Let’s try the <a href="https://www.npmjs.com/package/sqlite3">node sqlite3</a>.</p>
-<br>
 <p>Ok <code>sqlite3</code> worked.</p>
-<br>
 <p>I am ashamed to admit I copy pasted database link and it didn’t paste backslashes. That means it was not able to connect to database. It was giving me error like table doesn’t exist instead of cannot connect to database. And that is why kids, you need good ORM because it checks all these errors and other crap. You don’t want to reinvent infrastructural patterns like database abstraction which is already solved thousands of times. Leave that to the pros and focus on business logic. Ok moving on with <code>kysely</code> and <code>better-sqlite3</code>.</p>
-<br>
 <p>I am having todos listed and able to insert into database, but now I have to revalidate because it doesn’t do by itself.</p>
-<br>
 <p>Using <a href="https://nextjs.org/docs/app/building-your-application/data-fetching/caching-and-revalidating#on-demand-revalidation">on demand revalidation</a> todos are refreshed after mutation, but the input stays with old value. This is what I mean. We have to do all these small things ourselves. Framework is supposed to have sensible defaults and in this case user expects input to reset after submit. Leaving old value is good in some app like scenarios, but most of the time submit form means new fresh form after successful submission. And it’s not super simple thing to do based on <a href="https://www.reddit.com/r/nextjs/comments/1cdd2bm/how_do_you_reset_a_form_upon_submitting_it_with/">this reddit post</a>. I am not gonna fix this. There is more stuff like validation, status messages etc which seems like I will have to do myself or find a library. I don’t have time for that.</p>
-<br>
 <p>I think I am done with Nextjs, I never liked and I don’t like it after this also. I got the gist what is server component and action all about and that’s good enough for me.
 Here are some other opinions:</p>
 <h4 id="architecture">Architecture</h4>
@@ -322,33 +256,22 @@ Here are some other opinions:</p>
 <h4 id="conclusion">Conclusion</h4>
 <p>I mean server components are nice thing. Feels good to be able to query database and also use typescript frontend and react components and libraries. Problem is Nextjs is not <strong>battery included</strong> framework and I wouldn’t use it as a full on solution. There is lot of plugging we need to do and it’s a waste of time. Just look at what’s included in <a href="https://laravel.com/docs/11.x/artisan">Laravel</a>. We barely need to do any infrastructural logic and we can focus on business logic. That’s what framework is supposed to provide. I would call Nextjs frontend framework and that’s it. At best it can be used as <a href="https://learn.microsoft.com/en-us/azure/architecture/patterns/backends-for-frontends">backend for frontend</a> framework. I am gonna presume Remix, Nuxt, Sveltekit is the same thing.</p>
 <h3 id="symfony">Symfony</h3>
-<br>
 <p><a href="https://github.com/tombohub/simple-symfony-todo">Repo</a></p>
-<br>
 <h4 id="workflow-1">Workflow</h4>
 <p>I have already installed symfony from before. Starting new project is with command line</p>
-<br>
 <pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="console"><code><span class="line"><span style="color:#79B8FF"> symfony new --webapp simple-symfony-todo</span></span>
 <span class="line"></span></code></pre>
- <br>
 <p>Let’s create a todo model. Seems like in Symfony there is command line for everything, even for creating a model which in Symfony are php classes, like Django.</p>
-<p>First we need to install some packages:
-<br></p>
+<p>First we need to install some packages:</p>
 <pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="console"><code><span class="line"><span style="color:#79B8FF">composer require symfony/orm-pack</span></span>
 <span class="line"><span style="color:#79B8FF">composer require --dev symfony/maker-bundle</span></span>
 <span class="line"></span></code></pre>
-<br>
-Then create an entity:
-<br>
-```
-php bin/console make:entity
-```
-<br>
-This is nice. It even gives you help right there right now
-<br>
+<p>Then create an entity:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>php bin/console make:entity</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>This is nice. It even gives you help right there right now</p>
 <p><img  src="/_astro/symfony-property-help.BglZZKY7_ZAfyzP.webp" alt="properties help" width="512" height="325" loading="lazy" decoding="async"></p>
-<p><br> Ok let’s go with enum type. It asks me to put which enum class it is so I need to create it. Luckily, Copilot knows what to do. In the end Symfony generated lot of code:
-<br></p>
+<p>Ok let’s go with enum type. It asks me to put which enum class it is so I need to create it. Luckily, Copilot knows what to do. In the end Symfony generated lot of code:</p>
 <pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="php"><code><span class="line"><span style="color:#F97583">&#x3C;?</span><span style="color:#79B8FF">php</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#F97583">namespace</span><span style="color:#B392F0"> App\Entity</span><span style="color:#E1E4E8">;</span></span>
@@ -401,19 +324,13 @@ This is nice. It even gives you help right there right now
 <span class="line"><span style="color:#E1E4E8">    }</span></span>
 <span class="line"><span style="color:#E1E4E8">}</span></span>
 <span class="line"></span></code></pre>
-<br>
 <p>That is a lot of code for 2 properties. Is PHP like Java to need to have getter and setter for each property? Maybe there is shorter version, but it’s not important right now.</p>
-<br>
 <p>One thing I need right now is to make <code>status</code> property default to <code>Not Done</code>. Copilot suggests assigning default value to the property. I guess that’s how Doctrine work, it is just a PHP class after all:</p>
-<br>
 <pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="php"><code><span class="line"><span style="color:#E1E4E8">#[</span><span style="color:#79B8FF">ORM\Column</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">enumType</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">TodoStatus</span><span style="color:#F97583">::class</span><span style="color:#E1E4E8">)]</span></span>
 <span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> ?</span><span style="color:#79B8FF">TodoStatus</span><span style="color:#E1E4E8"> $status </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> TodoStatus</span><span style="color:#F97583">::</span><span style="color:#79B8FF">NOT_DONE</span><span style="color:#E1E4E8">;</span></span>
 <span class="line"></span></code></pre>
-<br>
 <p>Migration went smooth, no problems there. What’s interesting is that created table is called <code>todo</code>, unlike <code>todos</code> previous frameworks. As a side note Symfony <a href="https://symfony.com/doc/current/doctrine.html">docs</a> are easy to read along and I find myself not needing Copilot as much. Dare contrast to the Phoenix.</p>
-<br>
 <p>Create controller now. Command works fine. Again <code>todo</code> instead of <code>todos</code>:</p>
-<br>
 <pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="php"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> TodoController</span><span style="color:#F97583"> extends</span><span style="color:#B392F0"> AbstractController</span></span>
 <span class="line"><span style="color:#E1E4E8">{</span></span>
 <span class="line"><span style="color:#E1E4E8">    #[</span><span style="color:#79B8FF">Route</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'/todo'</span><span style="color:#E1E4E8">, </span><span style="color:#B392F0">name</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">'app_todo'</span><span style="color:#E1E4E8">)]</span></span>
@@ -425,19 +342,13 @@ This is nice. It even gives you help right there right now
 <span class="line"><span style="color:#E1E4E8">    }</span></span>
 <span class="line"><span style="color:#E1E4E8">}</span></span>
 <span class="line"></span></code></pre>
-<br>
 <p>I actually prefer this literal configuration because I am learning strictly code and not some convention/surprises. As you can also see, routes are defined inside the PHP class annotation. No extra <code>routes.php</code>. Maybe there is option, but this is the default.</p>
-<br>
 <p>I am trying to run server, but Copilot give command <code>php bin/console server:run</code> which doesn’t work. Correct command to start server is <code>symfony server:start</code> using symfony cli tool. I don’t like this commands switching thing. Give me one tool and that’s it, another mental load.</p>
-<br>
 <p>Documentation is really nice and readable. I managed to create form and submission wen smoothly, no errors on the first run.</p>
-<br>
 <p>Now, I am gonna apply some validation on todo title. Symfony once again asks to install another package for validation. It really is lot of package installing. Validators are easiest to apply as annotation on entity:</p>
-<br>
 <pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="php"><code><span class="line"><span style="color:#E1E4E8">    #[</span><span style="color:#79B8FF">Assert\Length</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">min</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">3</span><span style="color:#E1E4E8">)]</span></span>
 <span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> ?string</span><span style="color:#E1E4E8"> $title </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">;</span></span>
 <span class="line"></span></code></pre>
-<br>
 <p>It worked first time and error message was displayed as part of the form. Just like in Django. We don’t need to do error checking and display error if there is any. Mental load relieved.</p>
 <p>I have added flush message very easy also: <code>$this->addFlash('info', 'Todo created');</code>.</p>
 <p>Everything is going smooth. Much different than Phoenix.</p>
@@ -448,14 +359,12 @@ This is nice. It even gives you help right there right now
 <p>Orm is <a href="https://www.doctrine-project.org/">Doctrine</a>, looks like Data Mapper pattern. Very explicit, need to declare <a href="https://stackoverflow.com/questions/41188002/what-does-the-term-plain-old-php-object-popo-exactly-mean">Plain old PHP objects</a> and it’s called Entity</p>
 <h4 id="forms-1">Forms</h4>
 <p>Symfony has form framework/builder, like Django. That’s nice. Here is an example:</p>
-<br>
 <pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="php"><code><span class="line"><span style="color:#E1E4E8">$form </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> $this</span><span style="color:#F97583">-></span><span style="color:#B392F0">createFormBuilder</span><span style="color:#E1E4E8">($task)</span></span>
 <span class="line"><span style="color:#F97583">            -></span><span style="color:#B392F0">add</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'task'</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">TextType</span><span style="color:#F97583">::class</span><span style="color:#E1E4E8">)</span></span>
 <span class="line"><span style="color:#F97583">            -></span><span style="color:#B392F0">add</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'dueDate'</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">DateType</span><span style="color:#F97583">::class</span><span style="color:#E1E4E8">)</span></span>
 <span class="line"><span style="color:#F97583">            -></span><span style="color:#B392F0">add</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'save'</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">SubmitType</span><span style="color:#F97583">::class</span><span style="color:#E1E4E8">, [</span><span style="color:#9ECBFF">'label'</span><span style="color:#F97583"> =></span><span style="color:#9ECBFF"> 'Create Task'</span><span style="color:#E1E4E8">])</span></span>
 <span class="line"><span style="color:#F97583">            -></span><span style="color:#B392F0">getForm</span><span style="color:#E1E4E8">();</span></span>
 <span class="line"></span></code></pre>
-<br>
 <p>This is good, I support that. I think ASP.Net Core should do the same. There is so much you can do with creating forms, check the <a href="https://symfony.com/doc/current/forms.html">docs</a>. We can even use command line to generate forms. Killer feature. I would say, on the first look, even more powerful than Django forms. Those 2 have different approaches. Django uses Attribute access to work on form in template</p>
 <pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="html"><code><span class="line"><span style="color:#E1E4E8">{{ form.field.errors }}</span></span>
 <span class="line"></span></code></pre>
@@ -481,18 +390,13 @@ This is nice. It even gives you help right there right now
 <p>Symfony is so far best framework, for me, I’ve tried in this trial. It’s simply design to scale, architectural expansion, providing anything you’ll ever need. Everything is based on modular, decoupled design. Pro level. Laravel is crippled version of Symfony designed to skip steps in order to speed up development. Each one has a purpose, but if I am gonna do project for years and complex domain logic I would definitely use Symfony. I am honestly bamboozled how come is not more popular, but on the other hand not so much. People like easy solutions and Laravel, Django and Rails seems easier to learn than Symfony. Symfony has very distinct layers and it can be tedious or harder to understand for beginners, usually referring it to <code>boilerplate</code>, but it’s what it takes for for framework to allow you to scale architecturally.</p>
 <h3 id="adonis">Adonis</h3>
 <p><a href="https://github.com/tombohub/simple-adonis-todo">Repo</a></p>
-<br>
 <p>Adonis has live reload, always a good thing about javascript frameworks.
 It’s based on Laravel and I expect to be fairly similar.</p>
-<br>
 <p>Created model <code>Todo</code> with command <code>node ace make:model Todo</code>. Very nice, as I expected. Run migrations, ok. Now problem, I don’t know where is the sqlite database, can’t find it in project folders. Doesn’t matter, as long as data is somewhere there. I forgot to add <code>title</code> and <code>status</code> columns. I have added them to the Todo class, but it still created migration for creating a table, without new fields. I found database. It’s in <code>tmp</code> folder. Tried again it doesn’t create fields in migration.</p>
-<br>
 <p>Controller and route went smooth. We have to create route in another file. After Symfony I prefer to create router along with controller, colocation. There is no form module so I will have to create form and hook it up myself. Copilot so far helpful</p>
-<br>
 <p>I am not gonna implement flash message and validation. Adonis has both and I have no doubt it’s working good. Adonis is good framework. It’s pitty that people are swindled by marketing from dev ‘celebrities’ and big companies and don’t give Adonis recognition it deserves.</p>
 <h4 id="orm-2">ORM</h4>
 <p>Orm is <a href="https://docs.adonisjs.com/guides/database/lucid">Lucid</a>. Has commands for creating models and making migrations. Migrations are semi automatic, it creates table with default columns, but the ones extra we need to add ourselves. Its Active Record:</p>
-<br>
 <pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#F97583">const</span><span style="color:#79B8FF"> todo</span><span style="color:#F97583"> =</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> Todo</span><span style="color:#E1E4E8">();</span></span>
 <span class="line"><span style="color:#E1E4E8">todo.title </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> data.title;</span></span>
 <span class="line"><span style="color:#F97583">await</span><span style="color:#E1E4E8"> todo.</span><span style="color:#B392F0">save</span><span style="color:#E1E4E8">();</span></span>
@@ -503,29 +407,22 @@ It’s based on Laravel and I expect to be fairly similar.</p>
 <img  src="/_astro/adonis-vscode-route-intellisense.BHcanZFo_1gpYmg.webp" alt="route help" width="674" height="142" loading="lazy" decoding="async"></p>
 <h4 id="routing">Routing</h4>
 <p>There is not automatic binding, we have to do ourselves:</p>
-<br>
 <pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#E1E4E8">  async </span><span style="color:#B392F0">toggle</span><span style="color:#E1E4E8">(ctx: HttpContext) {</span></span>
 <span class="line"><span style="color:#F97583">    const</span><span style="color:#79B8FF"> todoId</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> ctx.params.id</span></span>
 <span class="line"><span style="color:#E1E4E8">  }</span></span>
 <span class="line"></span></code></pre>
-<br>
 <p>Like Symfony, route params in template are explicit:</p>
-<br>
 <pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="edge"><code><span class="line"><span style="color:#E1E4E8">&#x3C;</span><span style="color:#85E89D">a</span><span style="color:#B392F0"> href</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"</span><span style="color:#9ECBFF">{{</span><span style="color:#B392F0">route</span><span style="color:#9ECBFF">(</span><span style="color:#9ECBFF">'toggle'</span><span style="color:#9ECBFF">), {id: </span><span style="color:#E1E4E8">todo</span><span style="color:#9ECBFF">.</span><span style="color:#E1E4E8">id</span><span style="color:#9ECBFF">}}}</span><span style="color:#9ECBFF">"</span><span style="color:#E1E4E8">>Done&#x3C;/</span><span style="color:#85E89D">a</span><span style="color:#E1E4E8">></span></span>
 <span class="line"></span></code></pre>
-<br>
 <p>Little bit annoying to write this long redirect:</p>
-<br>
 <pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="js"><code><span class="line"><span style="color:#F97583">return</span><span style="color:#E1E4E8"> ctx.response.</span><span style="color:#B392F0">redirect</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">toRoute</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"index"</span><span style="color:#E1E4E8">);</span></span>
 <span class="line"></span></code></pre>
 <h4 id="template-3">Template</h4>
 <p>Template engine is <a href="https://edgejs.dev/docs/introduction">Edge</a>. Good thing about it is we can write javascript:</p>
-<br>
 <pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="js"><code><span class="line"><span style="color:#E1E4E8">    &#x3C;</span><span style="color:#85E89D">a</span><span style="color:#B392F0"> href</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">"{{route('toggle', {id: todo.id})}}"</span><span style="color:#E1E4E8">></span></span>
 <span class="line"><span style="color:#E1E4E8">        {{todo.status </span><span style="color:#F97583">===</span><span style="color:#9ECBFF"> 'Done'</span><span style="color:#F97583"> ?</span><span style="color:#9ECBFF"> 'Mark Not done'</span><span style="color:#F97583"> :</span><span style="color:#9ECBFF"> 'Mark Done'</span><span style="color:#E1E4E8">}}</span></span>
 <span class="line"><span style="color:#E1E4E8">    &#x3C;/</span><span style="color:#85E89D">a</span><span style="color:#E1E4E8">></span></span>
 <span class="line"></span></code></pre>
-<br>
 <p>Still not typed and I am not sure if we can import types from outside like we can in Symfony.</p>
 <h4 id="final-word-1">Final word</h4>
 <p>Adonis is not bad. It’s something in between Laravel and Symfony, much closer to Laravel. If you want to use Typescript it’s very good. It has ORM, template, storage I recommend. I am little bit sustained because nodejs tooling, typescript and all that stuff, doesn’t feel stable. Maybe it’s just a feeling and reality is different. What is important is you feel good about writing in framework. You don’t want that baggage always whispering in your ear while trying to code.</p>
@@ -533,24 +430,17 @@ It’s based on Laravel and I expect to be fairly similar.</p>
 <p><a href="https://github.com/tombohub/simple-nestjs-todo">Repo</a></p>
 <h4 id="workflow-2">Workflow</h4>
 <p>This is IoC container for typescript. Installation successful. Running server is <code>npm run start</code> instead of <code>npm run dev</code>. It doesn’t show port number:</p>
-<br>
 <p><img  src="/_astro/Ive-built-nestjs-no-port-number.48QN94Aw_Z1xkXOC.webp" alt="no port" width="1140" height="158" loading="lazy" decoding="async"></p>
-<br>
 <p>Bunch of lint errors:</p>
-<br>
 <p><img  src="/_astro/ive-build-nestjs-lint-errors.D3WpSHCm_1DEe6s.webp" alt="lint errors" width="696" height="331" loading="lazy" decoding="async"></p>
-<br>
 <p>No live reload. Changing something I need to restart server and refresh the page. That’s a downer. We have to use <code>npm run start:dev</code>, which reloads server, but not the page. Better than nothing.</p>
 <h4 id="creating-model">Creating Model</h4>
 <p>Seems like I need to install ORM of my choice. Most supported one is <a href="https://typeorm.io/">TypeOrm</a>. Means there is no sqlite out of the box to start going fast.
 Documentation is here under the <a href="https://docs.nestjs.com/techniques/database"><code>Techniques</code></a>. I mean why techniques?</p>
-<br>
 <pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="console"><code><span class="line"><span style="color:#79B8FF">npm install --save @nestjs/typeorm typeorm sqlite3</span></span>
 <span class="line"></span></code></pre>
-<br>
 <p>Ok, It doesn’t say how to hook up sqlite, I wanted to write shortcut to database something like <code>@/db.sqlite</code>, but I don’t know if it’s gonna work. Do I need to put full path? Googling <code>Nestjs sqlite</code> first result is Sequilize, not TypeOrm.</p>
 <p>There is this code for setting up the module</p>
-<br>
 <pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="js"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> { DataSource } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> 'typeorm'</span><span style="color:#E1E4E8">;</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#E1E4E8">@</span><span style="color:#B392F0">Module</span><span style="color:#E1E4E8">({</span></span>
