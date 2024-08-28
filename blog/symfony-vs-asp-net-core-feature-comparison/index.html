@@ -1,0 +1,117 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="description" content="Astro description"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v4.14.3"><link rel="sitemap" href="/sitemap-index.xml"><meta name="google-site-verification" content="v-bk1pawOow2Be4T46sqQG2YNDa84WSjgOUgykNr4_M"><title>I&#39;ve build todo in 10 web frameworks</title><style>*,*:before,*:after{box-sizing:border-box}*{margin:0}body{line-height:1.5;-webkit-font-smoothing:antialiased}img,picture,video,canvas,svg{display:block;max-width:100%}input,button,textarea,select{font:inherit}p,h1,h2,h3,h4,h5,h6{overflow-wrap:break-word}#root,#__next{isolation:isolate}body{font-size:large;margin:auto;max-width:777px}
+</style></head> <body> <header class="header"> <nav> <a href="/">Home</a> |
+<a href="/projects/">Projects</a> |
+<a href="/about/">About</a> -
+<a href="https://www.github.com/tombohub">github</a> </nav> </header>  <h2>I&#39;ve build todo in 10 web frameworks</h2> <h2 id="intro">Intro</h2>
+<p>In the other <a href="https://tombohub.github.io/blog/ive-build-todo-in-10-web-frameworks/">post</a> I have rapid tested 10 frameworks and settled on 2: <a href="https://symfony.com/">Symfony</a> and <a href="https://dotnet.microsoft.com/en-us/apps/aspnet">ASP.Net Core</a>.</p>
+<p>I will check the features of each and see how it compares to the other one. If documentation is not approachable to feature discovery I will probably not include it. I also won’t go into detailed features. Routing is a feature. Named routes is details. I will exclude the ones I am not interested in. Ok, let’s go.</p>
+<h2 id="command-line-tool">Command line tool</h2>
+<h3 id="simfony">Simfony</h3>
+<p>Symfony has excellent command line tool. I cannot even describe what it has. Check the <a href="https://symfony.com/doc/current/components/console.html">docs</a>.
+List of commands is so big that <code>php bin/console list</code> took like 10 seconds to list them all. Debug, Doctrine, mailer, generators you name it. +</p>
+<h3 id="aspnet-core">Asp.net core</h3>
+<p>Command line tool is called <a href="https://learn.microsoft.com/en-us/dotnet/core/tools/">dotnet</a>. It’s more of a all around tool more than specifically designed for web development. We can install extra tools, but it’s not in your face like Symfony’s <code>console</code> and probably need to search for them, but who wants to do that? I am not paid to do it so I’d rather not.</p>
+<blockquote>
+<p>Symfony 1 : Asp 0</p>
+</blockquote>
+<h2 id="template-engine">Template engine</h2>
+<h3 id="symfony">Symfony</h3>
+<p>It uses <a href="https://twig.symfony.com/">Twig</a>. This is stringly template engine and don’t have much to say about it.</p>
+<h3 id="asp">Asp</h3>
+<p>It uses <a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/views/razor?view=aspnetcore-8.0">Razor</a> templates. It’s statically typed and allows to use C#. I like that. +</p>
+<blockquote>
+<p>Symfony 1 : Asp 1</p>
+</blockquote>
+<h2 id="orm">ORM</h2>
+<h3 id="symfony-1">Symfony</h3>
+<p>Uses <a href="https://www.doctrine-project.org/">Doctrine ORM</a>. Looks like lots of string to me. It is <a href="https://symfony.com/doc/current/doctrine.html#automatically-fetching-objects-entityvalueresolver">integrated</a> into Symfony. I don’t know much about it. Bulk upsert didn’t provide obvious result in google search.</p>
+<h3 id="asp-1">Asp</h3>
+<p>Uses <a href="https://learn.microsoft.com/en-us/ef/core/">Entity Framework Core</a>. It’s not as integrated in framework, no automatic fetching. We can use <a href="https://learn.microsoft.com/en-us/dotnet/csharp/linq/">LINQ</a> for querying which is a killer feature. Bulk upsert provides obvious <a href="https://entityframework-extensions.net/bulk-extensions">result</a>. +</p>
+<blockquote>
+<p>Symfony 1 : Asp 2</p>
+</blockquote>
+<h2 id="forms">Forms</h2>
+<h3 id="symfony-2">Symfony</h3>
+<p>Has full on <a href="https://symfony.com/doc/current/forms.html">forms component</a>. I’ve heard that’s the biggest components and just the documentation for forms is bigger than the whole Laravel documentation. It can be reusable to use in many views. It has <a href="https://symfony.com/doc/current/form/events.html">form events</a>. +</p>
+<h3 id="asp-2">Asp</h3>
+<p>No form component. There is automatic <a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/models/model-binding?view=aspnetcore-8.0">model binding</a> via <a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/views/tag-helpers/intro?view=aspnetcore-8.0">tag helpers</a>.</p>
+<blockquote>
+<p>Symfony 2: Asp 2</p>
+</blockquote>
+<h2 id="errors-debugging">Errors/ Debugging</h2>
+<h3 id="symfony-3">Symfony</h3>
+<p>Has nicer error pages. Debug toolbar. +</p>
+<h3 id="asp-3">Asp</h3>
+<p>Ugly error pages. No debug toolbar</p>
+<blockquote>
+<p>Symfony 3 : Asp 2</p>
+</blockquote>
+<h2 id="mailer">Mailer</h2>
+<h3 id="symfony-4">Symfony</h3>
+<p>It has <a href="https://symfony.com/doc/current/mailer.html">mailer component</a>. It can use <a href="https://symfony.com/doc/current/mailer.html#twig-html-css">templates for email</a>. +</p>
+<h3 id="asp-4">Asp</h3>
+<p>GPT says there is not native mailer component. Tutorials are using <a href="https://mimekit.net/">MailKit</a>.</p>
+<blockquote>
+<p>Symfony 4 : Asp 2</p>
+</blockquote>
+<h2 id="validation">Validation</h2>
+<h3 id="symfony-5">Symfony</h3>
+<p>It has <a href="https://symfony.com/doc/current/validation.html">validation</a> based on <a href="https://jcp.org/en/jsr/detail?id=303">JSR303 Bean Validation specification</a>.
+Lot of validation, even for <a href="https://symfony.com/doc/current/validation.html#doctrine-constraints">Doctrine</a>. It has more validation constraints than Asp out of the box. +</p>
+<h3 id="asp-5">Asp</h3>
+<p>Also has <a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/models/validation?view=aspnetcore-8.0">validation</a>. Less constraints than Symfony. People use library <a href="https://docs.fluentvalidation.net/en/latest/index.html">FluentValidation</a>. It has <a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/models/validation?view=aspnetcore-8.0#remote-attribute">remote</a> validation. <a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/models/validation?view=aspnetcore-8.0#top-level-node-validation">Action parameters validation</a>. +</p>
+<blockquote>
+<p>Symfony 5 : Asp 3</p>
+</blockquote>
+<h2 id="messaging">Messaging</h2>
+<h3 id="symfony-6">Symfony</h3>
+<p>It has <a href="https://symfony.com/doc/current/messenger.html">messenger component</a> +</p>
+<h3 id="asp-6">Asp</h3>
+<p>Doesn’t have</p>
+<blockquote>
+<p>Symfony 6 : Asp 3</p>
+</blockquote>
+<h2 id="scheduling">Scheduling</h2>
+<h3 id="symfony-7">Symfony</h3>
+<p>It has <a href="https://symfony.com/doc/current/scheduler.html">scheduler</a> +</p>
+<h3 id="asp-7">Asp</h3>
+<p>Doesn’t have scheduler. Use <a href="https://www.hangfire.io/">Hangfire</a> or <a href="https://www.quartz-scheduler.net/">Quarts.NET</a></p>
+<blockquote>
+<p>Symfony 7 : Asp 3</p>
+</blockquote>
+<h2 id="notifications">Notifications</h2>
+<h3 id="symfony-8">Symfony</h3>
+<p><a href="https://symfony.com/doc/current/notifier.html">Notifications</a> +</p>
+<h3 id="asp-8">Asp</h3>
+<p>No</p>
+<blockquote>
+<p>Symfony 8 : Asp 3</p>
+</blockquote>
+<h2 id="storage">Storage</h2>
+<h3 id="symfony-9">Symfony</h3>
+<p>No -</p>
+<h3 id="asp-9">Asp</h3>
+<p>No -</p>
+<blockquote>
+<p>If you don’t have something essential like <a href="https://laravel.com/docs/11.x/filesystem#amazon-s3-compatible-filesystems">managing file uploads</a> you both deserve a minus
+Symfony 6 : Asp 2</p>
+</blockquote>
+<h2 id="documentation-and-learning-resources">Documentation and Learning Resources</h2>
+<h3 id="symfony-10">Symfony</h3>
+<p><a href="https://symfony.com/">Start page</a>.
+<a href="https://symfony.com/doc/current/index.html">Documentation</a>
+<a href="https://symfony.com/book">Book</a>
+<a href="https://symfonycasts.com/">Symfonycast</a>
+Everything is designed to lead to to the learning path. Me personally documentation, I’ve enjoyed the most. +</p>
+<h3 id="asp-10">Asp</h3>
+<p><a href="https://learn.microsoft.com/en-us/aspnet/core/?view=aspnetcore-8.0">Start Page</a>
+<a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/overview?view=aspnetcore-8.0">Documentation</a>. This documentation is for Asp.Net Core MVC. General documentation for Asp.Net Core is <a href="https://learn.microsoft.com/en-us/aspnet/core/introduction-to-aspnet-core?view=aspnetcore-8.0">here</a>. It’s mixed with Razor Pages, Blazor etc. And then there is general part which applies to all of Asp.Net Core.
+This is the Microsoft <a href="https://dotnet.microsoft.com/en-us/learn">Learning Centre</a>. After some clicking we can find Asp.Net Core <a href="https://learn.microsoft.com/en-us/training/paths/aspnet-core-web-app/">Learning Path</a>.
+It’s obvious Microsoft has a lot of products and Asp.Net Core is not their sole focus. It’s .NET framework and then whatever they build on top of it.</p>
+<blockquote>
+<p>Symfony 7 : Asp 3</p>
+</blockquote>
+<h2 id="final-word">Final word</h2>
+<p>Symfony seems much more oriented around web development. Asp.Net Core is more of a web development addition to the .NET framework. It gives great foundation to build everything you need, but you have to build it. As a hobby developer I’d rather have ready made solutions even if they are opinionated, although for long term project non opinionated might be good. Symfony seems flexible enough, on the first look, to provide opinionated start and enough flexibility to change things down the road.</p>
+<p>Asp.Net Core does have another framework built on top of it called <a href="https://abp.io/">ABP Framework</a> which I tried to use, but it couldn’t create a project or I didn’t know how. It seems very opinionated and definitely oriented towards big serious companies. I am not the one, at the moment.</p>
+<p>Symfony it is.</p>  <footer></footer> </body></html>
