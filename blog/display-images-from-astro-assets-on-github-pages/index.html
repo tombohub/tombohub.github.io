@@ -2,4 +2,21 @@
 </style></head> <body> <header class="header"> <nav> <a href="/">Home</a> |
 <a href="/projects/">Projects</a> |
 <a href="/about/">About</a> -
-<a href="https://www.github.com/tombohub">github</a> </nav> </header>  <h2>Display images with Astro from assets folder on Github pages</h2> <p>I have deployed Astro website on Github pages, but noticed images are not displaying. The reason Astro bundles images in <code>_astro</code> folder and Github pages does not allow fetching from any folder starting with <code>_</code>.</p>  <footer></footer> </body></html>
+<a href="https://www.github.com/tombohub">github</a> </nav> </header>  <h2>Display images with Astro from assets folder on Github pages</h2> <p>I have deployed Astro website on Github pages, but noticed images are not displaying. The reason Astro bundles images in <code>_astro</code> folder and Github pages does not allow fetching from any folder starting with <code>_</code>.</p>
+<p>Solution is to change the folder name where Astro bundles assets.</p>
+<p>This is done in <code>astro.config.mjs</code>, docs <a href="https://docs.astro.build/en/reference/configuration-reference/#buildassets">here</a></p>
+<p>Write name of the folder without leading underscore. Like this:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="js"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> { defineConfig } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> "astro/config"</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> sitemap </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> "@astrojs/sitemap"</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">// https://astro.build/config</span></span>
+<span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> default</span><span style="color:#B392F0"> defineConfig</span><span style="color:#E1E4E8">({</span></span>
+<span class="line"><span style="color:#E1E4E8">  site: </span><span style="color:#9ECBFF">"https://yoursite.com/"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">  integrations: [</span><span style="color:#B392F0">sitemap</span><span style="color:#E1E4E8">()],</span></span>
+<span class="line"><span style="color:#E1E4E8">  build: {</span></span>
+<span class="line"><span style="color:#E1E4E8">    assets: </span><span style="color:#9ECBFF">"assets"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">  },</span></span>
+<span class="line"><span style="color:#E1E4E8">});</span></span>
+<span class="line"></span></code></pre>
+<p>It should work now.</p>  <footer></footer> </body></html>
