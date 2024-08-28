@@ -1,7 +1,7 @@
 ---
 title: Display images with Astro from assets folder on Github pages
 date: 2024-08-27
-status: draft
+status: published
 postNumber: 11
 tags: [astro]
 ---
