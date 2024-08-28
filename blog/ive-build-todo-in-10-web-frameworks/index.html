@@ -110,10 +110,10 @@
 <span class="line"><span style="color:#E1E4E8">    field </span><span style="color:#79B8FF">:title</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">:string</span></span>
 <span class="line"></span></code></pre>
 <p>and I get the error undefined function:</p>
-<p><img  src="/_astro/elixir-error.B8k2c_s1_qsVkn.webp" alt="elixir error" width="631" height="166" loading="lazy" decoding="async"></p>
+<p><img  src="/assets/elixir-error.B8k2c_s1_1U4P5G.webp" alt="elixir error" width="631" height="166" loading="lazy" decoding="async"></p>
 <p>I’ve tried googling, but all the solutions are same and still getting error. This is too much time now. I am giving up on enum and will validate model on creation.</p>
 <p>It warns me if path doesn’t exist which is really neat and makes it less stringly typed:</p>
-<p><img  src="/_astro/phoenix-path-not-exists-warn.BgElBKta_c8Evx.webp" alt="vscode no path warning" width="1144" height="351" loading="lazy" decoding="async"></p>
+<p><img  src="/assets/phoenix-path-not-exists-warn.BgElBKta_ZXKvPe.webp" alt="vscode no path warning" width="1144" height="351" loading="lazy" decoding="async"></p>
 <h4 id="live-reload">Live reload</h4>
 <p>It has live reload. Changes to templates are automatically refreshed which is very nice!</p>
 <h4 id="copilot">Copilot</h4>
@@ -153,7 +153,7 @@
 <span class="line"></span></code></pre>
 <h4 id="form">Form</h4>
 <p>Already struggling with how to make a form. There is no fast straight forward answer, neither in docs nor googling. Gotta spend time to research. Also I am having this error in vscode:</p>
-<p><img  src="/_astro/phoenix-form-error-vscode.BG0PEEhC_2ikRaO.webp" alt="form phoenix error vscode" width="1383" height="147" loading="lazy" decoding="async"></p>
+<p><img  src="/assets/phoenix-form-error-vscode.BG0PEEhC_Z1FaQr7.webp" alt="form phoenix error vscode" width="1383" height="147" loading="lazy" decoding="async"></p>
 <p>On forum I found this <a href="https://phoenixonrails.com/blog/you-can-stop-using-form-for-in-phoenix">article</a> and changed form to:</p>
 <pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="elixir"><code><span class="line"><span style="color:#F97583">&#x3C;</span><span style="color:#E1E4E8">.form </span><span style="color:#79B8FF">:let=</span><span style="color:#E1E4E8">{f} </span><span style="color:#F97583">for=</span><span style="color:#E1E4E8">{@changeset} action</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">{</span><span style="color:#9ECBFF">~p"/create"</span><span style="color:#E1E4E8">}</span><span style="color:#F97583">></span></span>
 <span class="line"><span style="color:#F97583">  &#x3C;</span><span style="color:#E1E4E8">.input field</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">{f[</span><span style="color:#79B8FF">:title</span><span style="color:#E1E4E8">]} </span><span style="color:#F97583">/></span></span>
@@ -270,7 +270,7 @@ Here are some other opinions:</p>
 <pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>php bin/console make:entity</span></span>
 <span class="line"><span></span></span></code></pre>
 <p>This is nice. It even gives you help right there right now</p>
-<p><img  src="/_astro/symfony-property-help.BglZZKY7_ZAfyzP.webp" alt="properties help" width="512" height="325" loading="lazy" decoding="async"></p>
+<p><img  src="/assets/symfony-property-help.BglZZKY7_ZqokqM.webp" alt="properties help" width="512" height="325" loading="lazy" decoding="async"></p>
 <p>Ok let’s go with enum type. It asks me to put which enum class it is so I need to create it. Luckily, Copilot knows what to do. In the end Symfony generated lot of code:</p>
 <pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="php"><code><span class="line"><span style="color:#F97583">&#x3C;?</span><span style="color:#79B8FF">php</span></span>
 <span class="line"></span>
@@ -403,8 +403,8 @@ It’s based on Laravel and I expect to be fairly similar.</p>
 <span class="line"></span></code></pre>
 <h4 id="tooling">Tooling</h4>
 <p>Adonis has a cli for generating stuff you need. I like the vscode help :</p>
-<p><img  src="/_astro/adonis-vscode-help.BjzkOdsY_gLi0S.webp" alt="vscode help" width="797" height="302" loading="lazy" decoding="async">
-<img  src="/_astro/adonis-vscode-route-intellisense.BHcanZFo_1gpYmg.webp" alt="route help" width="674" height="142" loading="lazy" decoding="async"></p>
+<p><img  src="/assets/adonis-vscode-help.BjzkOdsY_Z3RcYs.webp" alt="vscode help" width="797" height="302" loading="lazy" decoding="async">
+<img  src="/assets/adonis-vscode-route-intellisense.BHcanZFo_Z1Nvdqf.webp" alt="route help" width="674" height="142" loading="lazy" decoding="async"></p>
 <h4 id="routing">Routing</h4>
 <p>There is not automatic binding, we have to do ourselves:</p>
 <pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#E1E4E8">  async </span><span style="color:#B392F0">toggle</span><span style="color:#E1E4E8">(ctx: HttpContext) {</span></span>
@@ -430,9 +430,9 @@ It’s based on Laravel and I expect to be fairly similar.</p>
 <p><a href="https://github.com/tombohub/simple-nestjs-todo">Repo</a></p>
 <h4 id="workflow-2">Workflow</h4>
 <p>This is IoC container for typescript. Installation successful. Running server is <code>npm run start</code> instead of <code>npm run dev</code>. It doesn’t show port number:</p>
-<p><img  src="/_astro/Ive-built-nestjs-no-port-number.48QN94Aw_Z1xkXOC.webp" alt="no port" width="1140" height="158" loading="lazy" decoding="async"></p>
+<p><img  src="/assets/Ive-built-nestjs-no-port-number.48QN94Aw_rTWbN.webp" alt="no port" width="1140" height="158" loading="lazy" decoding="async"></p>
 <p>Bunch of lint errors:</p>
-<p><img  src="/_astro/ive-build-nestjs-lint-errors.D3WpSHCm_1DEe6s.webp" alt="lint errors" width="696" height="331" loading="lazy" decoding="async"></p>
+<p><img  src="/assets/ive-build-nestjs-lint-errors.D3WpSHCm_Z1IaJL.webp" alt="lint errors" width="696" height="331" loading="lazy" decoding="async"></p>
 <p>No live reload. Changing something I need to restart server and refresh the page. That’s a downer. We have to use <code>npm run start:dev</code>, which reloads server, but not the page. Better than nothing.</p>
 <h4 id="creating-model">Creating Model</h4>
 <p>Seems like I need to install ORM of my choice. Most supported one is <a href="https://typeorm.io/">TypeOrm</a>. Means there is no sqlite out of the box to start going fast.
@@ -453,14 +453,14 @@ Documentation is here under the <a href="https://docs.nestjs.com/techniques/data
 <p><code>UsersModule</code> appeared it wasn’t there before. Is it important? Where is it coming from? I am not gonna research, only ignore.</p>
 <p>Seems like there is no command to create entity. I have to do myself.</p>
 <p>Literally copied the example from <a href="https://docs.nestjs.com/techniques/database#repository-pattern">docs</a> and having all these errors ( I have reloaded window ):</p>
-<p><img  src="/_astro/ive-built-nestjs-entity-errors.Os8Ruo8p_1WVkMR.webp" alt="entity errors" width="785" height="563" loading="lazy" decoding="async"></p>
+<p><img  src="/assets/ive-built-nestjs-entity-errors.Os8Ruo8p_11hzsw.webp" alt="entity errors" width="785" height="563" loading="lazy" decoding="async"></p>
 <p>What now? Googling again? Why even documentation example doesn’t work? If this keeps on happening I am just gonna give up, I have no time for this. This is one of the error:</p>
 <pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="js"><code><span class="line"><span style="color:#E1E4E8">Unable to resolve signature </span><span style="color:#F97583">of</span><span style="color:#E1E4E8"> property decorator when called </span><span style="color:#F97583">as</span><span style="color:#B392F0"> an</span><span style="color:#B392F0"> expression</span><span style="color:#E1E4E8">.</span></span>
 <span class="line"><span style="color:#E1E4E8">  Argument </span><span style="color:#F97583">of</span><span style="color:#E1E4E8"> type </span><span style="color:#9ECBFF">'ClassFieldDecoratorContext&#x3C;User, number> &#x26; { name: "id"; private: false; static: false; }'</span><span style="color:#E1E4E8"> is not assignable to parameter </span><span style="color:#F97583">of</span><span style="color:#E1E4E8"> type </span><span style="color:#9ECBFF">'string | symbol'</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">ts</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">1240</span><span style="color:#E1E4E8">)</span></span>
 <span class="line"></span></code></pre>
 <p>Whatever that means.</p>
 <p>… I went to play some guitar and when I came back errors disappeared:</p>
-<p><img  src="/_astro/ive-built-nestjs-enityt-no-errors.BkbYo64b_1HA3jU.webp" alt="no errors" width="785" height="549" loading="lazy" decoding="async"></p>
+<p><img  src="/assets/ive-built-nestjs-enityt-no-errors.BkbYo64b_Z2fSPA1.webp" alt="no errors" width="785" height="549" loading="lazy" decoding="async"></p>
 <p>Wow. Ok. If only other problems can be resolved like this.</p>
 <p>We need to hook up everything in <code>app.module.ts</code>, then we create another module for like <code>Todo</code>. I guess that’s what they mean when they say <em>boilerplate</em></p>
 <h4 id="views">Views</h4>
@@ -526,14 +526,14 @@ In this one command <code>mvn spring-boot:run</code> doesn’t start the app, bu
 <h4 id="controller">Controller</h4>
 <p>There is no command for creating controller.</p>
 <p>In <code>TodoController.java</code> file trying to type <code>@Controller</code> hoping it will offer import, but it doesn’t:
-<img  src="/_astro/ive-built-spring-no-auto-import.URx6DiS7_ZlXH6W.webp" alt="no imports" width="536" height="185" loading="lazy" decoding="async">
+<img  src="/assets/ive-built-spring-no-auto-import.URx6DiS7_Q0BrY.webp" alt="no imports" width="536" height="185" loading="lazy" decoding="async">
 I guess manual or copy paste.</p>
 <p>I’ve pasted imports. Trying now to type <code>@Controller</code> no intellisense:
-<img  src="/_astro/ive-built-spring-no-intellisense.ekcuPyPT_8TqqL.webp" alt="no intellisense" width="710" height="341" loading="lazy" decoding="async"></p>
+<img  src="/assets/ive-built-spring-no-intellisense.ekcuPyPT_29amsc.webp" alt="no intellisense" width="710" height="341" loading="lazy" decoding="async"></p>
 <p>I expected full on intellisense Java being static language. Is it because of Vscode? Something is off? Let’s try the <a href="https://www.jetbrains.com/idea/">IDEA</a>. Seems like it’s working:</p>
-<p><img  src="/_astro/ive-built-spring-idea-intellisense-yes.yNKGmtaY_26kR5K.webp" alt="idea" width="751" height="411" loading="lazy" decoding="async"></p>
+<p><img  src="/assets/ive-built-spring-idea-intellisense-yes.yNKGmtaY_1uAe8o.webp" alt="idea" width="751" height="411" loading="lazy" decoding="async"></p>
 <p>After reloading Vscode intellisense works:</p>
-<p><img  src="/_astro/ive-built-spring-vscode-intellisense-yes.CN_8Uk9F_11by3q.webp" alt="vscode intellisense is wworking" width="777" height="134" loading="lazy" decoding="async"></p>
+<p><img  src="/assets/ive-built-spring-vscode-intellisense-yes.CN_8Uk9F_1MSiWm.webp" alt="vscode intellisense is wworking" width="777" height="134" loading="lazy" decoding="async"></p>
 <p>I’ve expect this to return string:</p>
 <pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">package</span><span style="color:#E1E4E8"> com.example.servingwebcontent;</span></span>
 <span class="line"></span>
@@ -549,7 +549,7 @@ I guess manual or copy paste.</p>
 <span class="line"><span style="color:#E1E4E8">}</span></span>
 <span class="line"></span></code></pre>
 <p>but it seems it want’s to render the view called <code>dasa</code>. This is the error page:</p>
-<p><img  src="/_astro/ive-built-spring-error-page.DAqdFxrT_2dcu6F.webp" alt="spring error page" width="644" height="307" loading="lazy" decoding="async"></p>
+<p><img  src="/assets/ive-built-spring-error-page.DAqdFxrT_10Qht8.webp" alt="spring error page" width="644" height="307" loading="lazy" decoding="async"></p>
 <p>We have to use <code>@ResponseBody</code>:</p>
 <pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#E1E4E8">@</span><span style="color:#F97583">Controller</span></span>
 <span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> TodoController</span><span style="color:#E1E4E8"> {</span></span>
@@ -613,7 +613,7 @@ This is the line to ass service:</p>
 <p>Migration worked.</p>
 <h4 id="form-1">Form</h4>
 <p>There is not intellisense in vscode for razor templates:
-<img  src="/_astro/ive-built-aspmvc-vscode-razor-intellisense-no.BL9FMJ7Y_ACO0S.webp" alt="razor no intellisens" width="411" height="123" loading="lazy" decoding="async"></p>
+<img  src="/assets/ive-built-aspmvc-vscode-razor-intellisense-no.BL9FMJ7Y_1IxcBy.webp" alt="razor no intellisens" width="411" height="123" loading="lazy" decoding="async"></p>
 <p>I will switch to Visual Studio. Vscode is just tryout. Still work in progress.</p>
 <p>In <a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/views/razor?view=aspnetcore-8.0">Razor templates</a> we can declare view model type:</p>
 <pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="razor"><code><span class="line"><span style="color:#F97583">@model</span><span style="color:#B392F0"> IEnumerable</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">TodoModel</span><span style="color:#E1E4E8">></span></span>
@@ -630,11 +630,11 @@ This is the line to ass service:</p>
 <span class="line"></span></code></pre>
 <p>and deal with single todo, list of todos and anything we assign into the array. Because we can only have one <code>@model</code> directive we have to create a class to design view model for this particular view. So that’s what I am gonna do.</p>
 <p>Good thing about Visual Studio it has free AI intellisense:</p>
-<p><img  src="/_astro/ive-built-aspnetmvc-ai-intellisense.C12ozOo0_1PTaSv.webp" alt="ai intellisense" width="613" height="205" loading="lazy" decoding="async"></p>
+<p><img  src="/assets/ive-built-aspnetmvc-ai-intellisense.C12ozOo0_Dmzsh.webp" alt="ai intellisense" width="613" height="205" loading="lazy" decoding="async"></p>
 <p>It’s really smart, like knows exactly what I need:</p>
-<p><img  src="/_astro/ive-built-aspnetmvc-ai-intellisense-smart.pi4k-xxq_8gWAx.webp" alt="smart intellisense" width="519" height="190" loading="lazy" decoding="async"></p>
+<p><img  src="/assets/ive-built-aspnetmvc-ai-intellisense-smart.pi4k-xxq_Z12Yqza.webp" alt="smart intellisense" width="519" height="190" loading="lazy" decoding="async"></p>
 <p>Now we can see here price for fully static typing. Because I have designed EF core model with <code>required</code> modifier, meaning it cannot be null, now I have to initialize it every time I create instance:</p>
-<p><img  src="/_astro/ive-built-aspnetmvc-required-property-error.CUj6OW8Z_21GdNn.webp" alt="required property error" width="966" height="245" loading="lazy" decoding="async">
+<p><img  src="/assets/ive-built-aspnetmvc-required-property-error.CUj6OW8Z_Z2udohF.webp" alt="required property error" width="966" height="245" loading="lazy" decoding="async">
 <sub>I’ve renamed view model to TodoIndexViewModel</sub></p>
 <p>It’s not like in Symfony Doctrine where this doesn’t cause error:</p>
 <pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="php"><code><span class="line"><span style="color:#E1E4E8"> $todo </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#79B8FF"> Todo</span><span style="color:#E1E4E8">();</span></span>
@@ -680,10 +680,10 @@ This is the line to ass service:</p>
 <span class="line"></span></code></pre>
 <p>Asp net core is using <a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/views/tag-helpers/intro?view=aspnetcore-8.0">tag helpers</a> like <code>asp-for</code> to bind input value to the model property. Something like Rails I guess? But typed of course.</p>
 <p>Let’s run and oops there is an error page:</p>
-<p><img  src="/_astro/ive-built-aspnetmvc-error-page.CTcDY7N1_Z2wUj1V.webp" alt="asp net mvc error page" width="1000" height="649" loading="lazy" decoding="async"></p>
+<p><img  src="/assets/ive-built-aspnetmvc-error-page.CTcDY7N1_Z1jUYs0.webp" alt="asp net mvc error page" width="1000" height="649" loading="lazy" decoding="async"></p>
 <p>Man it’s ugly. This is what I mean, it looks unfinished.</p>
 <p>Compare it to Symfony error page:</p>
-<p><img  src="/_astro/ive-built-aspnetmvc-symfony-error-page.DIytWp0O_No0vz.webp" alt="symfony error page" width="1022" height="914" loading="lazy" decoding="async"></p>
+<p><img  src="/assets/ive-built-aspnetmvc-symfony-error-page.DIytWp0O_2sYM88.webp" alt="symfony error page" width="1022" height="914" loading="lazy" decoding="async"></p>
 <p>Looks like a professional. Even has a debug toolbar at the bottom.</p>
 <p>The reason for error is that I declared one type in the view template:</p>
 <pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="razor"><code><span class="line"><span style="color:#F97583">@model</span><span style="color:#B392F0"> TodoIndexViewModel</span></span>
