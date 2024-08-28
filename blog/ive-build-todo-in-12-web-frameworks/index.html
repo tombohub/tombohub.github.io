@@ -268,4 +268,619 @@
 <p>After some more problems I have accepted that GPT doesn’t really know Phoenix or Elixir and cannot rely as much as for Typescript and React for example. I won’t even mention them anymore. At this point I am not interested in learning anymore and reading documentation. Just want to ship this todo and move on to another project.</p>
 <br>
 <h4 id="final-word">Final word</h4>
-<p>I rushed to get this done. At this point I have stopped enjoying learning. GPT code is outdated. It’s simply too much to learn and resources are not as available as for more popular libraries and languages. As a hobbyst I need to get answers fast because I don’t have much time in a day and this framework and language doesn’t provide that compared to some others. I believe it’s good framework, there is high satisfaction on <a href="https://survey.stackoverflow.co/2024/technology/#2-web-frameworks-and-technologies">Stack overflow survey</a>, but it’s not for me. I would do it maybe if I am professional or paid to work on it.</p>  <footer></footer> </body></html>
+<p>I rushed to get this done. At this point I have stopped enjoying learning. GPT code is outdated. It’s simply too much to learn and resources are not as available as for more popular libraries and languages. As a hobbyst I need to get answers fast because I don’t have much time in a day and this framework and language doesn’t provide that compared to some others. I believe it’s good framework, there is high satisfaction on <a href="https://survey.stackoverflow.co/2024/technology/#2-web-frameworks-and-technologies">Stack overflow survey</a>, but it’s not for me. I would do it maybe if I am professional or paid to work on it.</p>
+<h3 id="nextjs-app">Nextjs (app)</h3>
+<br>
+<p><a href="https://github.com/tombohub/simple-nextjs-todo">repo</a></p>
+<br>
+<h4 id="workflow">Workflow</h4>
+<p>Right off the bat, unlike the other frameworks, I had to find ORM to use. I am using Drizzle. That means we have to hook up library for something essential like database access as well as any other library and then make them all work together. It’s a mess bound to happen. I am not gonna go into the definition of full stack framework, but certainly it’s not battery included framework.</p>
+<p>Ok, drizzle is giving error that todos table doesn’t exist when it obviously does, I am gonna use kysely.</p>
+<p>Ok, it’s the same error:</p>
+<p><img src="https://i.imgur.com/wWXU8Mf.png" alt="error no table todos"></p>
+<p>Seems like this is the Nextjs problem. Why? This is the code:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> { db } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> "@/db"</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> default</span><span style="color:#F97583"> function</span><span style="color:#B392F0"> Home</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">  async</span><span style="color:#F97583"> function</span><span style="color:#B392F0"> createTodo</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">formData</span><span style="color:#F97583">:</span><span style="color:#B392F0"> FormData</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#9ECBFF">    "use server"</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">    const</span><span style="color:#79B8FF"> title</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> formData.</span><span style="color:#B392F0">get</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"title"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#F97583">    const</span><span style="color:#79B8FF"> status</span><span style="color:#F97583"> =</span><span style="color:#9ECBFF"> "Not Done"</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">    await</span><span style="color:#E1E4E8"> db.</span><span style="color:#B392F0">insertInto</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"todos"</span><span style="color:#E1E4E8">).</span><span style="color:#B392F0">values</span><span style="color:#E1E4E8">({ title, status }).</span><span style="color:#B392F0">execute</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#F97583">  return</span><span style="color:#E1E4E8"> (</span></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;></span></span>
+<span class="line"><span style="color:#E1E4E8">      &#x3C;</span><span style="color:#85E89D">form</span><span style="color:#B392F0"> action</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">{createTodo}></span></span>
+<span class="line"><span style="color:#E1E4E8">        &#x3C;</span><span style="color:#85E89D">input</span><span style="color:#B392F0"> name</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">"title"</span><span style="color:#E1E4E8"> /></span></span>
+<span class="line"><span style="color:#E1E4E8">        &#x3C;</span><span style="color:#85E89D">button</span><span style="color:#E1E4E8">>Add&#x3C;/</span><span style="color:#85E89D">button</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">      &#x3C;/</span><span style="color:#85E89D">form</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;/></span></span>
+<span class="line"><span style="color:#E1E4E8">  );</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span></code></pre>
+<br>
+<p>It can be hardly any more simpler. What’s the problem?</p>
+<br>
+<p>After some more tinkering seems like problem is not in Nextjs it’s in nodejs itself, or combination of node and kysely | drizzle. I mean it’s hilarious I am still trying to query database after like 2 hours.</p>
+<br>
+<p>Trying to use just the <a href="https://www.npmjs.com/package/better-sqlite3">better-sqlite3</a> package already giving <code>esModuleInterop</code> flag, cannot run on node command line <code>TypeError: import_better_sqlite3.Database is not a constructor</code>, this is bloody disaster. Ok… Let’s try the <a href="https://www.npmjs.com/package/sqlite3">node sqlite3</a>.</p>
+<br>
+<p>Ok <code>sqlite3</code> worked.</p>
+<br>
+<p>I am ashamed to admit I copy pasted database link and it didn’t paste backslashes. That means it was not able to connect to database. It was giving me error like table doesn’t exist instead of cannot connect to database. And that is why kids, you need good ORM because it checks all these errors and other crap. You don’t want to reinvent infrastructural patterns like database abstraction which is already solved thousands of times. Leave that to the pros and focus on business logic. Ok moving on with <code>kysely</code> and <code>better-sqlite3</code>.</p>
+<br>
+<p>I am having todos listed and able to insert into database, but now I have to revalidate because it doesn’t do by itself.</p>
+<br>
+<p>Using <a href="https://nextjs.org/docs/app/building-your-application/data-fetching/caching-and-revalidating#on-demand-revalidation">on demand revalidation</a> todos are refreshed after mutation, but the input stays with old value. This is what I mean. We have to do all these small things ourselves. Framework is supposed to have sensible defaults and in this case user expects input to reset after submit. Leaving old value is good in some app like scenarios, but most of the time submit form means new fresh form after successful submission. And it’s not super simple thing to do based on <a href="https://www.reddit.com/r/nextjs/comments/1cdd2bm/how_do_you_reset_a_form_upon_submitting_it_with/">this reddit post</a>. I am not gonna fix this. There is more stuff like validation, status messages etc which seems like I will have to do myself or find a library. I don’t have time for that.</p>
+<br>
+<p>I think I am done with Nextjs, I never liked and I don’t like it after this also. I got the gist what is server component and action all about and that’s good enough for me.
+Here are some other opinions:</p>
+<h4 id="architecture">Architecture</h4>
+<p>Nextjs doesn’t follow any architecture and I am surprised people mention it like a solution to organizing app. I think it’s just glorified router. No architecture here.</p>
+<h4 id="ui-flow">UI flow</h4>
+<p>Best thing about Javascript frameworks is they best hot reload and we can see changes immediately. It works in vscode simple browser, while other real server render frameworks show blank page.</p>
+<h4 id="conclusion">Conclusion</h4>
+<p>I mean server components are nice thing. Feels good to be able to query database and also use typescript frontend and react components and libraries. Problem is Nextjs is not <strong>battery included</strong> framework and I wouldn’t use it as a full on solution. There is lot of plugging we need to do and it’s a waste of time. Just look at what’s included in <a href="https://laravel.com/docs/11.x/artisan">Laravel</a>. We barely need to do any infrastructural logic and we can focus on business logic. That’s what framework is supposed to provide. I would call Nextjs frontend framework and that’s it. At best it can be used as <a href="https://learn.microsoft.com/en-us/azure/architecture/patterns/backends-for-frontends">backend for frontend</a> framework. I am gonna presume Remix, Nuxt, Sveltekit is the same thing.</p>
+<h3 id="symfony">Symfony</h3>
+<br>
+<p><a href="https://github.com/tombohub/simple-symfony-todo">Repo</a></p>
+<br>
+<h4 id="workflow-1">Workflow</h4>
+<p>I have already installed symfony from before. Starting new project is with command line</p>
+<br>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="console"><code><span class="line"><span style="color:#79B8FF"> symfony new --webapp simple-symfony-todo</span></span>
+<span class="line"></span></code></pre>
+ <br>
+<p>Let’s create a todo model. Seems like in Symfony there is command line for everything, even for creating a model which in Symfony are php classes, like Django.</p>
+<p>First we need to install some packages:
+<br></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="console"><code><span class="line"><span style="color:#79B8FF">composer require symfony/orm-pack</span></span>
+<span class="line"><span style="color:#79B8FF">composer require --dev symfony/maker-bundle</span></span>
+<span class="line"></span></code></pre>
+<br>
+Then create an entity:
+<br>
+```
+php bin/console make:entity
+```
+<br>
+This is nice. It even gives you help right there right now
+<br>
+<p><img  src="/_astro/symfony-property-help.BglZZKY7_ZAfyzP.webp" alt="properties help" width="512" height="325" loading="lazy" decoding="async"></p>
+<p><br> Ok let’s go with enum type. It asks me to put which enum class it is so I need to create it. Luckily, Copilot knows what to do. In the end Symfony generated lot of code:
+<br></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="php"><code><span class="line"><span style="color:#F97583">&#x3C;?</span><span style="color:#79B8FF">php</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">namespace</span><span style="color:#B392F0"> App\Entity</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">use</span><span style="color:#79B8FF"> App\Enum\TodoStatus</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">use</span><span style="color:#79B8FF"> App\Repository\TodoRepository</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">use</span><span style="color:#79B8FF"> Doctrine\ORM\Mapping</span><span style="color:#F97583"> as</span><span style="color:#B392F0"> ORM</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">#[</span><span style="color:#79B8FF">ORM\Entity</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">repositoryClass</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">TodoRepository</span><span style="color:#F97583">::class</span><span style="color:#E1E4E8">)]</span></span>
+<span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> Todo</span></span>
+<span class="line"><span style="color:#E1E4E8">{</span></span>
+<span class="line"><span style="color:#E1E4E8">    #[</span><span style="color:#79B8FF">ORM\Id</span><span style="color:#E1E4E8">]</span></span>
+<span class="line"><span style="color:#E1E4E8">    #[</span><span style="color:#79B8FF">ORM\GeneratedValue</span><span style="color:#E1E4E8">]</span></span>
+<span class="line"><span style="color:#E1E4E8">    #[</span><span style="color:#79B8FF">ORM\Column</span><span style="color:#E1E4E8">]</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> ?int</span><span style="color:#E1E4E8"> $id </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    #[</span><span style="color:#79B8FF">ORM\Column</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">length</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">255</span><span style="color:#E1E4E8">)]</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> ?string</span><span style="color:#E1E4E8"> $title </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    #[</span><span style="color:#79B8FF">ORM\Column</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">enumType</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">TodoStatus</span><span style="color:#F97583">::class</span><span style="color:#E1E4E8">)]</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> ?</span><span style="color:#79B8FF">TodoStatus</span><span style="color:#E1E4E8"> $status </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> function</span><span style="color:#B392F0"> getId</span><span style="color:#E1E4E8">()</span><span style="color:#F97583">:</span><span style="color:#F97583"> ?int</span></span>
+<span class="line"><span style="color:#E1E4E8">    {</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#79B8FF"> $this</span><span style="color:#F97583">-></span><span style="color:#E1E4E8">id;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> function</span><span style="color:#B392F0"> getTitle</span><span style="color:#E1E4E8">()</span><span style="color:#F97583">:</span><span style="color:#F97583"> ?string</span></span>
+<span class="line"><span style="color:#E1E4E8">    {</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#79B8FF"> $this</span><span style="color:#F97583">-></span><span style="color:#E1E4E8">title;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> function</span><span style="color:#B392F0"> setTitle</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">string</span><span style="color:#E1E4E8"> $title)</span><span style="color:#F97583">:</span><span style="color:#F97583"> static</span></span>
+<span class="line"><span style="color:#E1E4E8">    {</span></span>
+<span class="line"><span style="color:#79B8FF">        $this</span><span style="color:#F97583">-></span><span style="color:#E1E4E8">title </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> $title;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#79B8FF"> $this</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> function</span><span style="color:#B392F0"> getStatus</span><span style="color:#E1E4E8">()</span><span style="color:#F97583">:</span><span style="color:#F97583"> ?</span><span style="color:#79B8FF">TodoStatus</span></span>
+<span class="line"><span style="color:#E1E4E8">    {</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#79B8FF"> $this</span><span style="color:#F97583">-></span><span style="color:#E1E4E8">status;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> function</span><span style="color:#B392F0"> setStatus</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">TodoStatus</span><span style="color:#E1E4E8"> $status)</span><span style="color:#F97583">:</span><span style="color:#F97583"> static</span></span>
+<span class="line"><span style="color:#E1E4E8">    {</span></span>
+<span class="line"><span style="color:#79B8FF">        $this</span><span style="color:#F97583">-></span><span style="color:#E1E4E8">status </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> $status;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#79B8FF"> $this</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span></code></pre>
+<br>
+<p>That is a lot of code for 2 properties. Is PHP like Java to need to have getter and setter for each property? Maybe there is shorter version, but it’s not important right now.</p>
+<br>
+<p>One thing I need right now is to make <code>status</code> property default to <code>Not Done</code>. Copilot suggests assigning default value to the property. I guess that’s how Doctrine work, it is just a PHP class after all:</p>
+<br>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="php"><code><span class="line"><span style="color:#E1E4E8">#[</span><span style="color:#79B8FF">ORM\Column</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">enumType</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">TodoStatus</span><span style="color:#F97583">::class</span><span style="color:#E1E4E8">)]</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> ?</span><span style="color:#79B8FF">TodoStatus</span><span style="color:#E1E4E8"> $status </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> TodoStatus</span><span style="color:#F97583">::</span><span style="color:#79B8FF">NOT_DONE</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span></code></pre>
+<br>
+<p>Migration went smooth, no problems there. What’s interesting is that created table is called <code>todo</code>, unlike <code>todos</code> previous frameworks. As a side note Symfony <a href="https://symfony.com/doc/current/doctrine.html">docs</a> are easy to read along and I find myself not needing Copilot as much. Dare contrast to the Phoenix.</p>
+<br>
+<p>Create controller now. Command works fine. Again <code>todo</code> instead of <code>todos</code>:</p>
+<br>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="php"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> TodoController</span><span style="color:#F97583"> extends</span><span style="color:#B392F0"> AbstractController</span></span>
+<span class="line"><span style="color:#E1E4E8">{</span></span>
+<span class="line"><span style="color:#E1E4E8">    #[</span><span style="color:#79B8FF">Route</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'/todo'</span><span style="color:#E1E4E8">, </span><span style="color:#B392F0">name</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">'app_todo'</span><span style="color:#E1E4E8">)]</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> function</span><span style="color:#B392F0"> index</span><span style="color:#E1E4E8">()</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> Response</span></span>
+<span class="line"><span style="color:#E1E4E8">    {</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#79B8FF"> $this</span><span style="color:#F97583">-></span><span style="color:#B392F0">render</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'todo/index.html.twig'</span><span style="color:#E1E4E8">, [</span></span>
+<span class="line"><span style="color:#9ECBFF">            'controller_name'</span><span style="color:#F97583"> =></span><span style="color:#9ECBFF"> 'TodoController'</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">        ]);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span></code></pre>
+<br>
+<p>I actually prefer this literal configuration because I am learning strictly code and not some convention/surprises. As you can also see, routes are defined inside the PHP class annotation. No extra <code>routes.php</code>. Maybe there is option, but this is the default.</p>
+<br>
+<p>I am trying to run server, but Copilot give command <code>php bin/console server:run</code> which doesn’t work. Correct command to start server is <code>symfony server:start</code> using symfony cli tool. I don’t like this commands switching thing. Give me one tool and that’s it, another mental load.</p>
+<br>
+<p>Documentation is really nice and readable. I managed to create form and submission wen smoothly, no errors on the first run.</p>
+<br>
+<p>Now, I am gonna apply some validation on todo title. Symfony once again asks to install another package for validation. It really is lot of package installing. Validators are easiest to apply as annotation on entity:</p>
+<br>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="php"><code><span class="line"><span style="color:#E1E4E8">    #[</span><span style="color:#79B8FF">Assert\Length</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">min</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">3</span><span style="color:#E1E4E8">)]</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> ?string</span><span style="color:#E1E4E8"> $title </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span></code></pre>
+<br>
+<p>It worked first time and error message was displayed as part of the form. Just like in Django. We don’t need to do error checking and display error if there is any. Mental load relieved.</p>
+<p>I have added flush message very easy also: <code>$this->addFlash('info', 'Todo created');</code>.</p>
+<p>Everything is going smooth. Much different than Phoenix.</p>
+<p>Ok, trying to change status of todo I got an error: <code>Unable to generate a URL for the named route "dsad" as such route does not exist.</code> I guess I put ‘dsad’ somewhere and now I forgot where. It doesn’t say where in the error. In this regard Django error report is still unmatched.</p>
+<h4 id="architecture-1">Architecture</h4>
+<p>Symfony is based on Dependency injection. It’s IoC container and practically anything we want to use we need to install symfony package. There is a LOT of things here. Laravel is based on Symfony and is also IoC container. Laravel is Symfony with shortcuts. In symfony there is command line to generate controllers, models, views etc and everything has it’s place. Plugins are integrated and no need for reinventing the infrastructural wheel like we have to do for so called full stack frameworks like Nextjs. This is what framework is supposed to be. Hence the name -> FrameWork.</p>
+<h4 id="orm-1">ORM</h4>
+<p>Orm is <a href="https://www.doctrine-project.org/">Doctrine</a>, looks like Data Mapper pattern. Very explicit, need to declare <a href="https://stackoverflow.com/questions/41188002/what-does-the-term-plain-old-php-object-popo-exactly-mean">Plain old PHP objects</a> and it’s called Entity</p>
+<h4 id="forms-1">Forms</h4>
+<p>Symfony has form framework/builder, like Django. That’s nice. Here is an example:</p>
+<br>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="php"><code><span class="line"><span style="color:#E1E4E8">$form </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> $this</span><span style="color:#F97583">-></span><span style="color:#B392F0">createFormBuilder</span><span style="color:#E1E4E8">($task)</span></span>
+<span class="line"><span style="color:#F97583">            -></span><span style="color:#B392F0">add</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'task'</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">TextType</span><span style="color:#F97583">::class</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">            -></span><span style="color:#B392F0">add</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'dueDate'</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">DateType</span><span style="color:#F97583">::class</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">            -></span><span style="color:#B392F0">add</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'save'</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">SubmitType</span><span style="color:#F97583">::class</span><span style="color:#E1E4E8">, [</span><span style="color:#9ECBFF">'label'</span><span style="color:#F97583"> =></span><span style="color:#9ECBFF"> 'Create Task'</span><span style="color:#E1E4E8">])</span></span>
+<span class="line"><span style="color:#F97583">            -></span><span style="color:#B392F0">getForm</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"></span></code></pre>
+<br>
+<p>This is good, I support that. I think ASP.Net Core should do the same. There is so much you can do with creating forms, check the <a href="https://symfony.com/doc/current/forms.html">docs</a>. We can even use command line to generate forms. Killer feature. I would say, on the first look, even more powerful than Django forms. Those 2 have different approaches. Django uses Attribute access to work on form in template</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="html"><code><span class="line"><span style="color:#E1E4E8">{{ form.field.errors }}</span></span>
+<span class="line"></span></code></pre>
+<p>while Symfony is more functional approach:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="php"><code><span class="line"><span style="color:#B392F0">form_errors</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">form</span><span style="color:#F97583">.</span><span style="color:#79B8FF">field</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"></span></code></pre>
+<p>I really like Django, but Symfony is growing on me. They have different goals. Django aims for rapid development, Symfony for slower and and stable.</p>
+<h4 id="template-2">Template</h4>
+<p>Template is Twig. Don’t know much about it. Looks same as Django template. One thing I like is passing params to the route is explicit:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="twig"><code><span class="line"><span style="color:#E1E4E8">&#x3C;</span><span style="color:#85E89D">a</span><span style="color:#B392F0"> href</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"{{path('app_toggle', {'id': </span><span style="color:#E1E4E8">todo</span><span style="color:#9ECBFF">.</span><span style="color:#E1E4E8">id</span><span style="color:#9ECBFF">})}}"</span><span style="color:#E1E4E8">>Done&#x3C;/</span><span style="color:#85E89D">a</span><span style="color:#E1E4E8">></span></span>
+<span class="line"></span></code></pre>
+<p>It’s interesting we can pull in PHP enum inside the template:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="twig"><code><span class="line"><span style="color:#E1E4E8">&#x3C;</span><span style="color:#85E89D">a</span><span style="color:#B392F0"> href</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"{{path('app_toggle', {'id': </span><span style="color:#E1E4E8">todo</span><span style="color:#9ECBFF">.</span><span style="color:#E1E4E8">id</span><span style="color:#9ECBFF">})}}"</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">            {% </span><span style="color:#F97583">if</span><span style="color:#E1E4E8"> todo.status </span><span style="color:#F97583">==</span><span style="color:#79B8FF"> constant</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'App\\Enum\\TodoStatus::DONE'</span><span style="color:#E1E4E8">) %}</span></span>
+<span class="line"><span style="color:#E1E4E8">                Mark as Not Done</span></span>
+<span class="line"><span style="color:#E1E4E8">            {% </span><span style="color:#F97583">else</span><span style="color:#E1E4E8"> %}</span></span>
+<span class="line"><span style="color:#E1E4E8">                Mark as Done</span></span>
+<span class="line"><span style="color:#E1E4E8">            {% </span><span style="color:#F97583">endif</span><span style="color:#E1E4E8"> %}</span></span>
+<span class="line"><span style="color:#E1E4E8">        &#x3C;/</span><span style="color:#85E89D">a</span><span style="color:#E1E4E8">></span></span>
+<span class="line"></span></code></pre>
+<p>Still not typed like Razor templates, but better than Django</p>
+<h4 id="final-thought">Final Thought</h4>
+<p>Symfony is so far best framework, for me, I’ve tried in this trial. It’s simply design to scale, architectural expansion, providing anything you’ll ever need. Everything is based on modular, decoupled design. Pro level. Laravel is crippled version of Symfony designed to skip steps in order to speed up development. Each one has a purpose, but if I am gonna do project for years and complex domain logic I would definitely use Symfony. I am honestly bamboozled how come is not more popular, but on the other hand not so much. People like easy solutions and Laravel, Django and Rails seems easier to learn than Symfony. Symfony has very distinct layers and it can be tedious or harder to understand for beginners, usually referring it to <code>boilerplate</code>, but it’s what it takes for for framework to allow you to scale architecturally.</p>
+<h3 id="adonis">Adonis</h3>
+<p><a href="https://github.com/tombohub/simple-adonis-todo">Repo</a></p>
+<br>
+<p>Adonis has live reload, always a good thing about javascript frameworks.
+It’s based on Laravel and I expect to be fairly similar.</p>
+<br>
+<p>Created model <code>Todo</code> with command <code>node ace make:model Todo</code>. Very nice, as I expected. Run migrations, ok. Now problem, I don’t know where is the sqlite database, can’t find it in project folders. Doesn’t matter, as long as data is somewhere there. I forgot to add <code>title</code> and <code>status</code> columns. I have added them to the Todo class, but it still created migration for creating a table, without new fields. I found database. It’s in <code>tmp</code> folder. Tried again it doesn’t create fields in migration.</p>
+<br>
+<p>Controller and route went smooth. We have to create route in another file. After Symfony I prefer to create router along with controller, colocation. There is no form module so I will have to create form and hook it up myself. Copilot so far helpful</p>
+<br>
+<p>I am not gonna implement flash message and validation. Adonis has both and I have no doubt it’s working good. Adonis is good framework. It’s pitty that people are swindled by marketing from dev ‘celebrities’ and big companies and don’t give Adonis recognition it deserves.</p>
+<h4 id="orm-2">ORM</h4>
+<p>Orm is <a href="https://docs.adonisjs.com/guides/database/lucid">Lucid</a>. Has commands for creating models and making migrations. Migrations are semi automatic, it creates table with default columns, but the ones extra we need to add ourselves. Its Active Record:</p>
+<br>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#F97583">const</span><span style="color:#79B8FF"> todo</span><span style="color:#F97583"> =</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> Todo</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">todo.title </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> data.title;</span></span>
+<span class="line"><span style="color:#F97583">await</span><span style="color:#E1E4E8"> todo.</span><span style="color:#B392F0">save</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"></span></code></pre>
+<h4 id="tooling">Tooling</h4>
+<p>Adonis has a cli for generating stuff you need. I like the vscode help :</p>
+<p><img  src="/_astro/adonis-vscode-help.BjzkOdsY_gLi0S.webp" alt="vscode help" width="797" height="302" loading="lazy" decoding="async">
+<img  src="/_astro/adonis-vscode-route-intellisense.BHcanZFo_1gpYmg.webp" alt="route help" width="674" height="142" loading="lazy" decoding="async"></p>
+<h4 id="routing">Routing</h4>
+<p>There is not automatic binding, we have to do ourselves:</p>
+<br>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#E1E4E8">  async </span><span style="color:#B392F0">toggle</span><span style="color:#E1E4E8">(ctx: HttpContext) {</span></span>
+<span class="line"><span style="color:#F97583">    const</span><span style="color:#79B8FF"> todoId</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> ctx.params.id</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"></span></code></pre>
+<br>
+<p>Like Symfony, route params in template are explicit:</p>
+<br>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="edge"><code><span class="line"><span style="color:#E1E4E8">&#x3C;</span><span style="color:#85E89D">a</span><span style="color:#B392F0"> href</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"</span><span style="color:#9ECBFF">{{</span><span style="color:#B392F0">route</span><span style="color:#9ECBFF">(</span><span style="color:#9ECBFF">'toggle'</span><span style="color:#9ECBFF">), {id: </span><span style="color:#E1E4E8">todo</span><span style="color:#9ECBFF">.</span><span style="color:#E1E4E8">id</span><span style="color:#9ECBFF">}}}</span><span style="color:#9ECBFF">"</span><span style="color:#E1E4E8">>Done&#x3C;/</span><span style="color:#85E89D">a</span><span style="color:#E1E4E8">></span></span>
+<span class="line"></span></code></pre>
+<br>
+<p>Little bit annoying to write this long redirect:</p>
+<br>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="js"><code><span class="line"><span style="color:#F97583">return</span><span style="color:#E1E4E8"> ctx.response.</span><span style="color:#B392F0">redirect</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">toRoute</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"index"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"></span></code></pre>
+<h4 id="template-3">Template</h4>
+<p>Template engine is <a href="https://edgejs.dev/docs/introduction">Edge</a>. Good thing about it is we can write javascript:</p>
+<br>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="js"><code><span class="line"><span style="color:#E1E4E8">    &#x3C;</span><span style="color:#85E89D">a</span><span style="color:#B392F0"> href</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">"{{route('toggle', {id: todo.id})}}"</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">        {{todo.status </span><span style="color:#F97583">===</span><span style="color:#9ECBFF"> 'Done'</span><span style="color:#F97583"> ?</span><span style="color:#9ECBFF"> 'Mark Not done'</span><span style="color:#F97583"> :</span><span style="color:#9ECBFF"> 'Mark Done'</span><span style="color:#E1E4E8">}}</span></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;/</span><span style="color:#85E89D">a</span><span style="color:#E1E4E8">></span></span>
+<span class="line"></span></code></pre>
+<br>
+<p>Still not typed and I am not sure if we can import types from outside like we can in Symfony.</p>
+<h4 id="final-word-1">Final word</h4>
+<p>Adonis is not bad. It’s something in between Laravel and Symfony, much closer to Laravel. If you want to use Typescript it’s very good. It has ORM, template, storage I recommend. I am little bit sustained because nodejs tooling, typescript and all that stuff, doesn’t feel stable. Maybe it’s just a feeling and reality is different. What is important is you feel good about writing in framework. You don’t want that baggage always whispering in your ear while trying to code.</p>
+<h3 id="nestjs">Nestjs</h3>
+<p><a href="https://github.com/tombohub/simple-nestjs-todo">Repo</a></p>
+<h4 id="workflow-2">Workflow</h4>
+<p>This is IoC container for typescript. Installation successful. Running server is <code>npm run start</code> instead of <code>npm run dev</code>. It doesn’t show port number:</p>
+<br>
+<p><img  src="/_astro/Ive-built-nestjs-no-port-number.48QN94Aw_Z1xkXOC.webp" alt="no port" width="1140" height="158" loading="lazy" decoding="async"></p>
+<br>
+<p>Bunch of lint errors:</p>
+<br>
+<p><img  src="/_astro/ive-build-nestjs-lint-errors.D3WpSHCm_1DEe6s.webp" alt="lint errors" width="696" height="331" loading="lazy" decoding="async"></p>
+<br>
+<p>No live reload. Changing something I need to restart server and refresh the page. That’s a downer. We have to use <code>npm run start:dev</code>, which reloads server, but not the page. Better than nothing.</p>
+<h4 id="creating-model">Creating Model</h4>
+<p>Seems like I need to install ORM of my choice. Most supported one is <a href="https://typeorm.io/">TypeOrm</a>. Means there is no sqlite out of the box to start going fast.
+Documentation is here under the <a href="https://docs.nestjs.com/techniques/database"><code>Techniques</code></a>. I mean why techniques?</p>
+<br>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="console"><code><span class="line"><span style="color:#79B8FF">npm install --save @nestjs/typeorm typeorm sqlite3</span></span>
+<span class="line"></span></code></pre>
+<br>
+<p>Ok, It doesn’t say how to hook up sqlite, I wanted to write shortcut to database something like <code>@/db.sqlite</code>, but I don’t know if it’s gonna work. Do I need to put full path? Googling <code>Nestjs sqlite</code> first result is Sequilize, not TypeOrm.</p>
+<p>There is this code for setting up the module</p>
+<br>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="js"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> { DataSource } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> 'typeorm'</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">@</span><span style="color:#B392F0">Module</span><span style="color:#E1E4E8">({</span></span>
+<span class="line"><span style="color:#E1E4E8">  imports: [TypeOrmModule.</span><span style="color:#B392F0">forRoot</span><span style="color:#E1E4E8">(), UsersModule],</span></span>
+<span class="line"><span style="color:#E1E4E8">})</span></span>
+<span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> AppModule</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">  constructor</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">private</span><span style="color:#FFAB70"> dataSource</span><span style="color:#F97583">:</span><span style="color:#B392F0"> DataSource</span><span style="color:#E1E4E8">) {}</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span></code></pre>
+<p><code>UsersModule</code> appeared it wasn’t there before. Is it important? Where is it coming from? I am not gonna research, only ignore.</p>
+<p>Seems like there is no command to create entity. I have to do myself.</p>
+<p>Literally copied the example from <a href="https://docs.nestjs.com/techniques/database#repository-pattern">docs</a> and having all these errors ( I have reloaded window ):</p>
+<p><img  src="/_astro/ive-built-nestjs-entity-errors.Os8Ruo8p_1WVkMR.webp" alt="entity errors" width="785" height="563" loading="lazy" decoding="async"></p>
+<p>What now? Googling again? Why even documentation example doesn’t work? If this keeps on happening I am just gonna give up, I have no time for this. This is one of the error:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="js"><code><span class="line"><span style="color:#E1E4E8">Unable to resolve signature </span><span style="color:#F97583">of</span><span style="color:#E1E4E8"> property decorator when called </span><span style="color:#F97583">as</span><span style="color:#B392F0"> an</span><span style="color:#B392F0"> expression</span><span style="color:#E1E4E8">.</span></span>
+<span class="line"><span style="color:#E1E4E8">  Argument </span><span style="color:#F97583">of</span><span style="color:#E1E4E8"> type </span><span style="color:#9ECBFF">'ClassFieldDecoratorContext&#x3C;User, number> &#x26; { name: "id"; private: false; static: false; }'</span><span style="color:#E1E4E8"> is not assignable to parameter </span><span style="color:#F97583">of</span><span style="color:#E1E4E8"> type </span><span style="color:#9ECBFF">'string | symbol'</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">ts</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">1240</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"></span></code></pre>
+<p>Whatever that means.</p>
+<p>… I went to play some guitar and when I came back errors disappeared:</p>
+<p><img  src="/_astro/ive-built-nestjs-enityt-no-errors.BkbYo64b_1HA3jU.webp" alt="no errors" width="785" height="549" loading="lazy" decoding="async"></p>
+<p>Wow. Ok. If only other problems can be resolved like this.</p>
+<p>We need to hook up everything in <code>app.module.ts</code>, then we create another module for like <code>Todo</code>. I guess that’s what they mean when they say <em>boilerplate</em></p>
+<h4 id="views">Views</h4>
+<p>I’ve decided to move on to create a view. There is no command line for view. We need to create <code>views</code> folder and file inside.</p>
+<p>We also need to install template engine. Nests says <code>hbs</code>. We need to set it up in <code>main.ts</code>:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="js"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> { NestFactory } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> "@nestjs/core"</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> { AppModule } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> "./app.module"</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> { NestExpressApplication } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> "@nestjs/platform-express"</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> { join } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> "path"</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">async</span><span style="color:#F97583"> function</span><span style="color:#B392F0"> bootstrap</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> app</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">await</span><span style="color:#E1E4E8"> NestFactory.create) </span><span style="color:#F97583">&#x3C;</span><span style="color:#E1E4E8"> NestExpressApplication </span><span style="color:#F97583">></span><span style="color:#E1E4E8"> AppModule;</span></span>
+<span class="line"><span style="color:#E1E4E8">  app.</span><span style="color:#B392F0">useStaticAssets</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">join</span><span style="color:#E1E4E8">(__dirname, </span><span style="color:#9ECBFF">".."</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"public"</span><span style="color:#E1E4E8">));</span></span>
+<span class="line"><span style="color:#E1E4E8">  app.</span><span style="color:#B392F0">setBaseViewsDir</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">join</span><span style="color:#E1E4E8">(__dirname, </span><span style="color:#9ECBFF">".."</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"views"</span><span style="color:#E1E4E8">));</span></span>
+<span class="line"><span style="color:#E1E4E8">  app.</span><span style="color:#B392F0">setViewEngine</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"hbs"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#F97583">  await</span><span style="color:#E1E4E8"> app.</span><span style="color:#B392F0">listen</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">3000</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"><span style="color:#B392F0">bootstrap</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"></span></code></pre>
+<p>I have passed object to the template, but there was no error, just blank page.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="js"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> { Controller, Get, Render } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> '@nestjs/common'</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> { InjectRepository } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> '@nestjs/typeorm'</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> { AppService } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> './app.service'</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> { Repository } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> 'typeorm'</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> { Todo } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> './todo.entity'</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">@</span><span style="color:#B392F0">Controller</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> AppController</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">  constructor</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> readonly</span><span style="color:#FFAB70"> appService</span><span style="color:#F97583">:</span><span style="color:#B392F0"> AppService</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">    @</span><span style="color:#B392F0">InjectRepository</span><span style="color:#E1E4E8">(Todo) </span><span style="color:#F97583">private</span><span style="color:#FFAB70"> todoRepo</span><span style="color:#F97583">:</span><span style="color:#B392F0"> Repository</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">Todo</span><span style="color:#E1E4E8">>,</span></span>
+<span class="line"><span style="color:#E1E4E8">  ) {}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">  @</span><span style="color:#B392F0">Get</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">  @</span><span style="color:#B392F0">Render</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'index'</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">  async</span><span style="color:#B392F0"> index</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">    const</span><span style="color:#79B8FF"> todos</span><span style="color:#F97583"> =</span><span style="color:#F97583"> await</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.todoRepo.</span><span style="color:#B392F0">find</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#E1E4E8"> { todo: todos[</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">] };</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span></code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="hbs"><code><span class="line"><span style="color:#79B8FF">{{</span><span style="color:#FFAB70">todo.title</span><span style="color:#79B8FF">}}</span></span>
+<span class="line"></span></code></pre>
+<p>If I did something wrong I expect an error. There is no feedback here and that’s a recipe for lot of time debugging.</p>
+<h4 id="final-word-2">Final word</h4>
+<p>Nestjs doesn’t seem suitable for regular so called MVC framework (they are more like <a href="https://en.wikipedia.org/wiki/Action%E2%80%93domain%E2%80%93responder">Action-Domain-Responder</a> pattern.</p>
+<p>There is no integrated orm, views, everything seems to need to plug in in module, like older versions of Angular. Combined with finnicky experience characteristic to Javascript and Typescript tooling, ecosystem etc, I don’t have compelling reasons at the moment to use this framework over the <a href="https://adonisjs.com/">Adonis</a> or even <a href="https://remix.run/">Remix</a> if I really want to use Typescript, especially compared to <a href="https://symfony.com/">Symfony</a>. It doesn’t feel cohesive enough for I am looking for.</p>
+<h3 id="spring-boot">Spring Boot</h3>
+<h4 id="workflow-3">Workflow</h4>
+<p>I will use this <a href="https://docs.spring.io/spring-boot/tutorial/first-application/index.html">tutorial</a>. I also expect GPT and Copilot to be grate help since this is well known framework.</p>
+<p>I don’t think I will use this framework either so I’ll try to do fast.</p>
+<p>I followed the instructions, copy pasted code and when I run app got the error:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="console"><code><span class="line"><span style="color:#79B8FF">[ERROR] Failed to execute goal org.springframework.</span></span>
+<span class="line"><span style="color:#79B8FF">boot:spring-boot-maven-plugin:3.3.3:run (default-cli) on</span></span>
+<span class="line"><span style="color:#79B8FF">project myproject: Process terminated with exit code: 1 -></span></span>
+<span class="line"><span style="color:#79B8FF">[Help 1]</span></span>
+<span class="line"></span></code></pre>
+<p>Not a good start. I mean if starting example doesn’t work how can I trust the future. I’ll give it one more chance and download starter template.</p>
+<p>Downloaded demo from <a href="https://start.spring.io/">https://start.spring.io/</a>. <code>mvn spring-boot:run</code> at least doesn’t give error, but also doesn’t run application… It says <code>BUILD SUCCESS</code>. I expected to run app like they say in docs. <code>./mvnw spring-boot:run</code> also doesn’t run the app.</p>
+<p>Let’s try one more time with this guide: <a href="https://spring.io/guides/gs/serving-web-content">https://spring.io/guides/gs/serving-web-content</a>.
+In this one command <code>mvn spring-boot:run</code> doesn’t start the app, but <code>./mvnw spring-boot:run</code> does. Interesting. What’s more interesting is after trying again <code>mvn spring-boot:start</code> is now running the app. Do you see how this can be confusing to beginners? I have just spent like 45 min trying to merely start the app.</p>
+<p>I have changed the template little bit and server doesn’t reload. I am not gonna try to find solution, on first google search didn’t come up. Moving on.</p>
+<h4 id="controller">Controller</h4>
+<p>There is no command for creating controller.</p>
+<p>In <code>TodoController.java</code> file trying to type <code>@Controller</code> hoping it will offer import, but it doesn’t:
+<img  src="/_astro/ive-built-spring-no-auto-import.URx6DiS7_ZlXH6W.webp" alt="no imports" width="536" height="185" loading="lazy" decoding="async">
+I guess manual or copy paste.</p>
+<p>I’ve pasted imports. Trying now to type <code>@Controller</code> no intellisense:
+<img  src="/_astro/ive-built-spring-no-intellisense.ekcuPyPT_8TqqL.webp" alt="no intellisense" width="710" height="341" loading="lazy" decoding="async"></p>
+<p>I expected full on intellisense Java being static language. Is it because of Vscode? Something is off? Let’s try the <a href="https://www.jetbrains.com/idea/">IDEA</a>. Seems like it’s working:</p>
+<p><img  src="/_astro/ive-built-spring-idea-intellisense-yes.yNKGmtaY_26kR5K.webp" alt="idea" width="751" height="411" loading="lazy" decoding="async"></p>
+<p>After reloading Vscode intellisense works:</p>
+<p><img  src="/_astro/ive-built-spring-vscode-intellisense-yes.CN_8Uk9F_11by3q.webp" alt="vscode intellisense is wworking" width="777" height="134" loading="lazy" decoding="async"></p>
+<p>I’ve expect this to return string:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">package</span><span style="color:#E1E4E8"> com.example.servingwebcontent;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> org.springframework.stereotype.Controller;</span></span>
+<span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> org.springframework.web.bind.annotation.GetMapping;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">@</span><span style="color:#F97583">Controller</span></span>
+<span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> TodoController</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">    @</span><span style="color:#F97583">GetMapping</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"/"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#E1E4E8"> String </span><span style="color:#B392F0">index</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> String</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"dasa"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span></code></pre>
+<p>but it seems it want’s to render the view called <code>dasa</code>. This is the error page:</p>
+<p><img  src="/_astro/ive-built-spring-error-page.DAqdFxrT_2dcu6F.webp" alt="spring error page" width="644" height="307" loading="lazy" decoding="async"></p>
+<p>We have to use <code>@ResponseBody</code>:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#E1E4E8">@</span><span style="color:#F97583">Controller</span></span>
+<span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> TodoController</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">    @</span><span style="color:#F97583">GetMapping</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"/"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">    @</span><span style="color:#F97583">ResponseBody</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#E1E4E8"> String </span><span style="color:#B392F0">index</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> String</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"dasa"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span></code></pre>
+<h4 id="final-words">Final words</h4>
+<p>At this point I am satisfied with what I saw. I will not use this framework also. Seems like traditional MVC framework for which I now know what to expect. Experiencing problems to start right at the beginning is discouraging as well I am pretty much more satisfied with Symfony as a similar framework. Documentation of Spring doesn’t look as approachable as Symfony. I am not also attracted to <a href="https://www.thymeleaf.org/">Thymeleaf</a> template. I like the spring boot <a href="https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-spring-boot-dashboard">dashboard</a> tho! Similar thing has <a href="https://marketplace.visualstudio.com/items?itemName=jripouteau.adonis-vscode-extension">Adonis</a> also.</p>
+<h3 id="aspnet-core-mvc">ASP.Net core MVC</h3>
+<p><a href="https://github.com/tombohub/simple-aspnetcoremvc-todo">Repo</a></p>
+<h4 id="workflow-4">Workflow</h4>
+<p>For this one I will use <a href="https://visualstudio.microsoft.com/">Visual Studio 2022</a> and Vscode, will see how they compare.</p>
+<p>I have experience with ASP.Net core one so It’s gonna be easy. That’s why I left it for last.</p>
+<h4 id="controller-1">Controller</h4>
+<p>Example controller is already created. There is command for generating controller <code>dotnet new mvccontroller</code> , but it creates controller in project root instead of conventional <code>Controllers</code> folder. Why? Is it not based on convention? So I will not use command. There is scaffolding option in Visual Studio.</p>
+<p>Simplest controller:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="csharp"><code><span class="line"><span style="color:#F97583">using</span><span style="color:#B392F0"> Microsoft</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">AspNetCore</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">Mvc</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> TodoController</span><span style="color:#E1E4E8"> : </span><span style="color:#B392F0">Controller</span></span>
+<span class="line"><span style="color:#E1E4E8">{</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> string</span><span style="color:#B392F0"> Index</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">    {</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#9ECBFF"> "dsa"</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span></code></pre>
+<h4 id="view">View</h4>
+<p>Asp net core has some conventions. We need to create view in the same folder as the name of the controller without the <code>Controller</code> part. In my case I have controller <code>TodoController</code> so the views need to be in <code>Views/Todo</code> folder. Controllers Action determines the name of the view file. So if action is called <code>Index</code> like above the view file is <code>Index.cshtml</code>. Full path is <code>Views/Todo/Index.cshtml</code></p>
+<p>I don’t know if there is command. I will create a file.</p>
+<p>File created. With command <code>dotnet watch</code> we get hot reload where we don’t even need to refresh browser. Only Phoenix gets that out of the box.</p>
+<p>This is the content of the view: <code>hello</code>. That’s it, but we still get the layout. No need for {% extend base.html %} like in some other templates. There is <code>_ViewStart.cshtml</code> file which takes care of configuring which layout to use:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="csharp"><code><span class="line"><span style="color:#E1E4E8">@{</span></span>
+<span class="line"><span style="color:#E1E4E8">    Layout </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "_Layout"</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span></code></pre>
+<p>Controller to render the view looks like this:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="csharp"><code><span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> TodoController</span><span style="color:#E1E4E8"> : </span><span style="color:#B392F0">Controller</span></span>
+<span class="line"><span style="color:#E1E4E8">{</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#B392F0"> IActionResult</span><span style="color:#B392F0"> Index</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">    {</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#B392F0"> View</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span></code></pre>
+<p>Very neat, convention like Rails, with static typing.</p>
+<h4 id="model-2">Model</h4>
+<p>Good thing about .NET ecosystem is that libraries are pretty much set. No need to research. In ORM case it’s <a href="https://learn.microsoft.com/en-us/ef/core/">EF core</a>. So let’s just do it. I’ll use sqlite.</p>
+<p>Gotta install some packages. ASP is like Symfony, IoC container where we plugin what we need. Except, I would say, Symfony’s packages are more discoverable.</p>
+<p>One thing I’d like to point out is that there is no out of the box <code>created_at</code> and <code>updated_at</code> fields for EF core model. Microsoft’s behavior is weird in this framework. It’s like some things the made super easy some things like they don’t care and think we should do ourselves. Also some things are missing from the framework what others usually have. The goal is not clear, are they creating web framework or what? Is it still not finished?</p>
+<p>There is some plugging to do around creating a database context and adding it to service container. More work than Symfony Doctrine ORM.
+This is the line to ass service:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="csharp"><code><span class="line"><span style="color:#E1E4E8">builder.Services.</span><span style="color:#B392F0">AddDbContext</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">TodoDbContext</span><span style="color:#E1E4E8">>(</span><span style="color:#B392F0">options</span><span style="color:#F97583"> =></span></span>
+<span class="line"><span style="color:#E1E4E8">options.</span><span style="color:#B392F0">UseSqlite</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"Data Source=db.sqlite"</span><span style="color:#E1E4E8">));</span></span>
+<span class="line"></span></code></pre>
+<p>Notice the <code>Data Source=db.sqlite</code>. Another special case.</p>
+<p>Trying to make migrations while app is running was giving errors. I have to stop the app.</p>
+<p>Migration worked.</p>
+<h4 id="form-1">Form</h4>
+<p>There is not intellisense in vscode for razor templates:
+<img  src="/_astro/ive-built-aspmvc-vscode-razor-intellisense-no.BL9FMJ7Y_ACO0S.webp" alt="razor no intellisens" width="411" height="123" loading="lazy" decoding="async"></p>
+<p>I will switch to Visual Studio. Vscode is just tryout. Still work in progress.</p>
+<p>In <a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/views/razor?view=aspnetcore-8.0">Razor templates</a> we can declare view model type:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="razor"><code><span class="line"><span style="color:#F97583">@model</span><span style="color:#B392F0"> IEnumerable</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">TodoModel</span><span style="color:#E1E4E8">></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">&#x3C;</span><span style="color:#85E89D">form</span><span style="color:#B392F0"> asp-action</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"Create"</span><span style="color:#B392F0"> method</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"post"</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;</span><span style="color:#85E89D">input</span><span style="color:#B392F0"> asp-for</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"Title"</span><span style="color:#E1E4E8"> /></span></span>
+<span class="line"><span style="color:#E1E4E8">&#x3C;/</span><span style="color:#85E89D">form</span><span style="color:#E1E4E8">></span></span>
+<span class="line"></span></code></pre>
+<p>which is good for type safety in templates, but it requires little bit more of a code because we cannot simply pass array like in Symfony:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="php"><code><span class="line"><span style="color:#F97583">return</span><span style="color:#79B8FF"> $this</span><span style="color:#F97583">-></span><span style="color:#B392F0">render</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'index.html.twig'</span><span style="color:#E1E4E8">, [</span></span>
+<span class="line"><span style="color:#9ECBFF">            'form'</span><span style="color:#F97583"> =></span><span style="color:#E1E4E8"> $form,</span></span>
+<span class="line"><span style="color:#9ECBFF">            'todos'</span><span style="color:#F97583"> =></span><span style="color:#E1E4E8"> $todos</span></span>
+<span class="line"><span style="color:#E1E4E8">        ]);</span></span>
+<span class="line"></span></code></pre>
+<p>and deal with single todo, list of todos and anything we assign into the array. Because we can only have one <code>@model</code> directive we have to create a class to design view model for this particular view. So that’s what I am gonna do.</p>
+<p>Good thing about Visual Studio it has free AI intellisense:</p>
+<p><img  src="/_astro/ive-built-aspnetmvc-ai-intellisense.C12ozOo0_1PTaSv.webp" alt="ai intellisense" width="613" height="205" loading="lazy" decoding="async"></p>
+<p>It’s really smart, like knows exactly what I need:</p>
+<p><img  src="/_astro/ive-built-aspnetmvc-ai-intellisense-smart.pi4k-xxq_8gWAx.webp" alt="smart intellisense" width="519" height="190" loading="lazy" decoding="async"></p>
+<p>Now we can see here price for fully static typing. Because I have designed EF core model with <code>required</code> modifier, meaning it cannot be null, now I have to initialize it every time I create instance:</p>
+<p><img  src="/_astro/ive-built-aspnetmvc-required-property-error.CUj6OW8Z_21GdNn.webp" alt="required property error" width="966" height="245" loading="lazy" decoding="async">
+<sub>I’ve renamed view model to TodoIndexViewModel</sub></p>
+<p>It’s not like in Symfony Doctrine where this doesn’t cause error:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="php"><code><span class="line"><span style="color:#E1E4E8"> $todo </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#79B8FF"> Todo</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"></span></code></pre>
+<p>We would have to create another class without required properties and then map to the EF core model with required properties after form submission. Yes, price of static typing. I can use Attributes to make the field required, but I am not sure if it would result in database column <code>NOT NULL</code> after migration. This is what I did, not there is no error:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="csharp"><code><span class="line"><span style="color:#F97583">using</span><span style="color:#B392F0"> System</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">ComponentModel</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">DataAnnotations</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">namespace</span><span style="color:#B392F0"> simple_aspnetcoremvc_todo</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">Models</span></span>
+<span class="line"><span style="color:#E1E4E8">{</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">   public</span><span style="color:#F97583"> enum</span><span style="color:#B392F0"> TodoStatus</span></span>
+<span class="line"><span style="color:#E1E4E8">   {</span></span>
+<span class="line"><span style="color:#B392F0">       Done</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#B392F0">       NotDone</span></span>
+<span class="line"><span style="color:#E1E4E8">   }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">   public</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> TodoModel</span></span>
+<span class="line"><span style="color:#E1E4E8">   {</span></span>
+<span class="line"><span style="color:#F97583">       public</span><span style="color:#F97583"> int</span><span style="color:#B392F0"> Id</span><span style="color:#E1E4E8"> { </span><span style="color:#F97583">get</span><span style="color:#E1E4E8">; </span><span style="color:#F97583">set</span><span style="color:#E1E4E8">; }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">       [</span><span style="color:#B392F0">Required</span><span style="color:#E1E4E8">]</span></span>
+<span class="line"><span style="color:#F97583">       public</span><span style="color:#F97583"> string</span><span style="color:#E1E4E8">? </span><span style="color:#B392F0">Title</span><span style="color:#E1E4E8"> { </span><span style="color:#F97583">get</span><span style="color:#E1E4E8">; </span><span style="color:#F97583">set</span><span style="color:#E1E4E8">; }</span></span>
+<span class="line"><span style="color:#E1E4E8">       [</span><span style="color:#B392F0">Required</span><span style="color:#E1E4E8">]</span></span>
+<span class="line"><span style="color:#F97583">       public</span><span style="color:#B392F0"> TodoStatus</span><span style="color:#B392F0"> Status</span><span style="color:#E1E4E8"> { </span><span style="color:#F97583">get</span><span style="color:#E1E4E8">; </span><span style="color:#F97583">set</span><span style="color:#E1E4E8">; } </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> TodoStatus.NotDone;</span></span>
+<span class="line"><span style="color:#E1E4E8">   }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span></code></pre>
+<p>And after migrations they are still <code>NOT NULL</code>, beautiful!</p>
+<p>Now I can use that View model inside the template:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="razor"><code><span class="line"><span style="color:#F97583">@model</span><span style="color:#B392F0"> TodoIndexViewModel</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">&#x3C;</span><span style="color:#85E89D">form</span><span style="color:#B392F0"> asp-action</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"Create"</span><span style="color:#B392F0"> method</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"post"</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;</span><span style="color:#85E89D">input</span><span style="color:#B392F0">  asp-for</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"</span><span style="color:#F97583">@</span><span style="color:#E1E4E8">Model</span><span style="color:#9ECBFF">.</span><span style="color:#E1E4E8">NewTodo</span><span style="color:#9ECBFF">.</span><span style="color:#E1E4E8">Title</span><span style="color:#9ECBFF">"</span><span style="color:#E1E4E8">/></span></span>
+<span class="line"><span style="color:#E1E4E8">&#x3C;/</span><span style="color:#85E89D">form</span><span style="color:#E1E4E8">></span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    @foreach</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">var</span><span style="color:#B392F0"> todo</span><span style="color:#F97583"> in</span><span style="color:#E1E4E8"> Model.Todos)</span></span>
+<span class="line"><span style="color:#E1E4E8">    {</span></span>
+<span class="line"><span style="color:#E1E4E8">        &#x3C;</span><span style="color:#85E89D">div</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">            &#x3C;</span><span style="color:#85E89D">h3</span><span style="color:#E1E4E8">></span><span style="color:#F97583">@</span><span style="color:#E1E4E8">todo.Title&#x3C;/</span><span style="color:#85E89D">h3</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">        &#x3C;/</span><span style="color:#85E89D">div</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span></code></pre>
+<p>Asp net core is using <a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/views/tag-helpers/intro?view=aspnetcore-8.0">tag helpers</a> like <code>asp-for</code> to bind input value to the model property. Something like Rails I guess? But typed of course.</p>
+<p>Let’s run and oops there is an error page:</p>
+<p><img  src="/_astro/ive-built-aspnetmvc-error-page.CTcDY7N1_Z2wUj1V.webp" alt="asp net mvc error page" width="1000" height="649" loading="lazy" decoding="async"></p>
+<p>Man it’s ugly. This is what I mean, it looks unfinished.</p>
+<p>Compare it to Symfony error page:</p>
+<p><img  src="/_astro/ive-built-aspnetmvc-symfony-error-page.DIytWp0O_No0vz.webp" alt="symfony error page" width="1022" height="914" loading="lazy" decoding="async"></p>
+<p>Looks like a professional. Even has a debug toolbar at the bottom.</p>
+<p>The reason for error is that I declared one type in the view template:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="razor"><code><span class="line"><span style="color:#F97583">@model</span><span style="color:#B392F0"> TodoIndexViewModel</span></span>
+<span class="line"></span></code></pre>
+<p>but passed another type in the controller:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="csharp"><code><span class="line"><span style="color:#F97583">public</span><span style="color:#B392F0"> IActionResult</span><span style="color:#B392F0"> Index</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">{</span></span>
+<span class="line"><span style="color:#F97583">    var</span><span style="color:#B392F0"> ViewModel</span><span style="color:#F97583"> =</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> TodoIndexViewModel</span></span>
+<span class="line"><span style="color:#E1E4E8">    {</span></span>
+<span class="line"><span style="color:#E1E4E8">        Todos </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> _context.Todos.</span><span style="color:#B392F0">ToList</span><span style="color:#E1E4E8">(),</span></span>
+<span class="line"><span style="color:#E1E4E8">        NewTodo </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> TodoModel</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">    };</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    var</span><span style="color:#B392F0"> todos</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> _context.Todos.</span><span style="color:#B392F0">ToList</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#B392F0"> View</span><span style="color:#E1E4E8">(todos);</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span></code></pre>
+<p>Have to pass the view model I created:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="csharp"><code><span class="line"><span style="color:#F97583">        public</span><span style="color:#B392F0"> IActionResult</span><span style="color:#B392F0"> Index</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">        {</span></span>
+<span class="line"><span style="color:#F97583">            var</span><span style="color:#B392F0"> ViewModel</span><span style="color:#F97583"> =</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> TodoIndexViewModel</span></span>
+<span class="line"><span style="color:#E1E4E8">            {</span></span>
+<span class="line"><span style="color:#E1E4E8">                Todos </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> _context.Todos.</span><span style="color:#B392F0">ToList</span><span style="color:#E1E4E8">(),</span></span>
+<span class="line"><span style="color:#E1E4E8">                NewTodo </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> TodoModel</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">            };</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">            return</span><span style="color:#B392F0"> View</span><span style="color:#E1E4E8">(ViewModel);</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span></code></pre>
+<p>It’s working now.</p>
+<p>So Asp net static typing gives me error right away while Symfony dynamic PHP gives error when trying to access the non existing property.</p>
+<p>Static typing in templates also means we need to recreate the view model in other controller action if we want to render Index template:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="csharp"><code><span class="line"><span style="color:#F97583">        public</span><span style="color:#B392F0"> IActionResult</span><span style="color:#B392F0"> Create</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">TodoIndexViewModel</span><span style="color:#B392F0"> viewModel</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">        {</span></span>
+<span class="line"><span style="color:#F97583">            if</span><span style="color:#E1E4E8"> (ModelState.IsValid)</span></span>
+<span class="line"><span style="color:#E1E4E8">            {</span></span>
+<span class="line"><span style="color:#E1E4E8">                _context.Todos.</span><span style="color:#B392F0">Add</span><span style="color:#E1E4E8">(viewModel.NewTodo);</span></span>
+<span class="line"><span style="color:#E1E4E8">                _context.</span><span style="color:#B392F0">SaveChanges</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">                return</span><span style="color:#B392F0"> RedirectToAction</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"Index"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#E1E4E8">            viewModel.Todos </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> _context.Todos.</span><span style="color:#B392F0">ToList</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">            return</span><span style="color:#B392F0"> View</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"Index"</span><span style="color:#E1E4E8">, viewModel);</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span></code></pre>
+<p>In <code>Create(TodoIndexViewModel viewModel)</code> viewModel instance is passed to <code>Create</code> action after form submission. We don’t need to get payload from <code>Request</code>. Asp net core does binding behind the scene. Very nice.</p>
+<p>Move on. After form submission i got the error</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>AmbiguousMatchException: The request matched multiple endpoints. Matches:</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>simple_aspnetcoremvc_todo.Controllers.TodoController.Create (simple-aspnetcoremvc-todo)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>simple_aspnetcoremvc_todo.Controllers.TodoController.Create (simple-aspnetcoremvc-todo)</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>I only have one <code>Create</code> action. I presume I need to rebuild and restart the app. I was correct. Perks of compiled language. Form submission doesn’t work. There is no error message. I remember Asp net core is doing client side validation using jquery validation so I will put place for error message adding <code>span</code> tag and <code>asp-validation-for</code> tag helper:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="razor"><code><span class="line"><span style="color:#E1E4E8">&#x3C;</span><span style="color:#85E89D">form</span><span style="color:#B392F0"> asp-action</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"Create"</span><span style="color:#B392F0"> method</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"post"</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;</span><span style="color:#85E89D">input</span><span style="color:#B392F0">  asp-for</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"</span><span style="color:#F97583">@</span><span style="color:#E1E4E8">Model</span><span style="color:#9ECBFF">.</span><span style="color:#E1E4E8">NewTodo</span><span style="color:#9ECBFF">.</span><span style="color:#E1E4E8">Title</span><span style="color:#9ECBFF">"</span><span style="color:#E1E4E8">/></span></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;</span><span style="color:#85E89D">span</span><span style="color:#B392F0"> asp-validation-for</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"NewTodo.Title"</span><span style="color:#E1E4E8">>&#x3C;/</span><span style="color:#85E89D">span</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;</span><span style="color:#85E89D">span</span><span style="color:#B392F0"> asp-validation-for</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"NewTodo.Status"</span><span style="color:#E1E4E8">>&#x3C;/</span><span style="color:#85E89D">span</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;</span><span style="color:#85E89D">button</span><span style="color:#B392F0"> type</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"submit"</span><span style="color:#E1E4E8">>Add&#x3C;/</span><span style="color:#85E89D">button</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">&#x3C;/</span><span style="color:#85E89D">form</span><span style="color:#E1E4E8">></span></span>
+<span class="line"></span></code></pre>
+<p>Still nothing. Ok, framework should tell where are the errors. Let me debug this a little bit…</p>
+<p>With the help of GPT I found out that the issue was in <code>TodoIndexViewModel</code>. Previously I had</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="csharp"><code><span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> TodoIndexViewModel</span></span>
+<span class="line"><span style="color:#E1E4E8">    {</span></span>
+<span class="line"><span style="color:#F97583">        public</span><span style="color:#F97583"> required</span><span style="color:#B392F0"> IEnumerable</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">TodoModel</span><span style="color:#E1E4E8">> </span><span style="color:#B392F0">Todos</span><span style="color:#E1E4E8"> { </span><span style="color:#F97583">get</span><span style="color:#E1E4E8">; </span><span style="color:#F97583">set</span><span style="color:#E1E4E8">; }</span></span>
+<span class="line"><span style="color:#F97583">        public</span><span style="color:#F97583"> required</span><span style="color:#B392F0"> TodoModel</span><span style="color:#B392F0"> NewTodo</span><span style="color:#E1E4E8"> { </span><span style="color:#F97583">get</span><span style="color:#E1E4E8">; </span><span style="color:#F97583">set</span><span style="color:#E1E4E8">; }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span></code></pre>
+<p>but after submission <code>Todos</code> was null so the <code>ModelState.IsValid</code> was false. I changed the view model to:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="csharp"><code><span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> TodoIndexViewModel</span></span>
+<span class="line"><span style="color:#E1E4E8">    {</span></span>
+<span class="line"><span style="color:#F97583">        public</span><span style="color:#B392F0"> IEnumerable</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">TodoModel</span><span style="color:#E1E4E8">>? </span><span style="color:#B392F0">Todos</span><span style="color:#E1E4E8"> { </span><span style="color:#F97583">get</span><span style="color:#E1E4E8">; </span><span style="color:#F97583">set</span><span style="color:#E1E4E8">; }</span></span>
+<span class="line"><span style="color:#F97583">        public</span><span style="color:#B392F0"> TodoModel</span><span style="color:#E1E4E8">? </span><span style="color:#B392F0">NewTodo</span><span style="color:#E1E4E8"> { </span><span style="color:#F97583">get</span><span style="color:#E1E4E8">; </span><span style="color:#F97583">set</span><span style="color:#E1E4E8">; }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span></code></pre>
+<p>and now I can create new todos. It’s little bit unconventional because I am passing back to the <code>Index</code> from <code>Create</code> and now have to be careful how to model views. Stick to the asp net core mvs convention in this case. Render form in <code>Create</code> view.</p>
+<h4 id="final-word-3">Final Word</h4>
+<p>It’s pretty good framework. It’s more of a container than a full on frameworks because many things are missing for the developer convenience, for example <a href="https://learn.microsoft.com/en-us/aspnet/core/data/ef-mvc/sort-filter-page?view=aspnetcore-8.0#add-paging-to-students-index">pagination</a>. I don’t know if it’s expected of us developers to create those things or the framework is not finished. Are they focusing more on performance and let us create all the plugins? It’s targeted for enterprise where they have money and man power? How come Symfony has all those things of convenience.</p>
+<p>It’s a mix of convention and explicitness. Something like Rails, but still decoupled and architecturally expandable. It’s on a very good path. I still think it needs some developer tools and better error reports, admin, toolbar, plugins. C# is a beautiful language, needs a little bit of extra code, but once it works you know it works and it’s just keep getting better. Soon enough they even might have <a href="https://github.com/dotnet/csharplang/blob/18a527bcc1f0bdaf542d8b9a189c50068615b439/proposals/TypeUnions.md">Discriminated Unions</a>.</p>
+<p>Asp.net core has something no other framework has - typed templates. With Blazor components it almost becomes like TSX. I resisted htmx because I don’t like stringly typing, but with Razor template we could have typed htmx with intellisense.</p>
+<h3 id="final-final-word">Final Final Word</h3>
+<p>This was an ordeal to test all these frameworks. Some gave me lot of work like <a href="https://www.phoenixframework.org/">Phoenix</a>, some gave me headache like <a href="https://nestjs.com/">Nestjs</a>.</p>
+<p>The goal was to evaluate which framework I will use for my personal long term project. Think of 10 years and more.</p>
+<p>Biggest discovery was Symfony, I’ve never really considered it, and now it’s top one. Also how PHP is actually good. It has typed function signatures and rest of it can be type hinted with comments. Not my favorite, but I’ll take what I can get.</p>
+<p>Regarding language, my opinion after this is that best language for solo dev is the progressive typing one and honestly, after this test, I think that can be PHP.
+Python has more types and type hinting is better, but there was always something off. Python has other issues like imports and packaging and other small things. To this day I don’t know how to import sibling package.
+Typescript has issues around configuration and bunch of tooling. <a href="https://vitejs.dev/">Vite</a> solves that for the web, but for nodejs it’s still a mess. We can use Vite, but it’s primarily designed for web.
+That leaves us with PHP here. We can even simulate discriminated union and pattern matching with enums. Enums, unlike C# can hold other <a href="https://stitcher.io/blog/php-enums">values</a> than integer. I think that’s amazing. So for solo dev I recommend progressive typed languages. For many people something like Java and C# I am guessing is most popular.
+I always avoid fully dynamic because it doesn’t help me at all. Every time waste time coming back to the project after few months. That’s why I am not using Ruby even tho I like the language.</p>
+<p>So, I will further evaluate 2 frameworks: Symfony and Asp.net core. That will be the next post.</p>  <footer></footer> </body></html>
