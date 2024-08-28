@@ -507,7 +507,7 @@ class TodoController extends AbstractController
 
 I actually prefer this literal configuration because I am learning strictly code and not some convention/surprises. As you can also see, routes are defined inside the PHP class annotation. No extra `routes.php`. Maybe there is option, but this is the default.
 
-I am trying to run server, but Copilot give command `php bin/console server:run` which doesn't work. Correct command to start server is `symfony server:start` using symfony cli tool. I don't like this commands switching thing. Give me one tool and that's it, another mental load.
+I am trying to run server, but Copilot give command `php bin/console server:run` which doesn't work. Correct command to start server is `symfony server:start` using symfony cli tool. All the `php bin/console` commands we can run with `symfony console`.
 
 Documentation is really nice and readable. I managed to create form and submission wen smoothly, no errors on the first run.
 
@@ -1088,6 +1088,7 @@ Have to pass the view model I created:
 It's working now.
 
 So Asp net static typing gives me error right away while Symfony dynamic PHP gives error when trying to access the non existing property.
+You can pass anonymous object into the Razor view and declare model as `@model dynamic`, but then you guessed it, lose on static typing and intellisense.
 
 Static typing in templates also means we need to recreate the view model in other controller action if we want to render Index template:
 
@@ -1155,6 +1156,8 @@ and now I can create new todos. It's little bit unconventional because I am pass
 #### Final Word
 
 It's pretty good framework. It's more of a container than a full on frameworks because many things are missing for the developer convenience, for example [pagination](https://learn.microsoft.com/en-us/aspnet/core/data/ef-mvc/sort-filter-page?view=aspnetcore-8.0#add-paging-to-students-index). I don't know if it's expected of us developers to create those things or the framework is not finished. Are they focusing more on performance and let us create all the plugins? It's targeted for enterprise where they have money and man power? How come Symfony has all those things of convenience.
+
+There is framework built on top of the ASP.NET Core called [ABP framework](https://abp.io/) which I tried to use, but it couldn't create a project or I didn't know how. It's very opinionated framework with DDD architecture and it has all the things missing in bare bones ASP.NET Core, like [Mailer](https://abp.io/docs/latest/framework/infrastructure/emailing), [Scheduler](https://abp.io/docs/latest/framework/infrastructure/background-jobs) and many more.
 
 It's a mix of convention and explicitness. Some conventions like Rails, even more - we don't need to even declare routes, they are generated from controller and action names, but still decoupled and architecturally expandable. It's on a very good path. I still think it needs some developer tools and better error reports, admin, toolbar, plugins. C# is a beautiful language, needs a little bit of extra code, but once it works you know it works and it's just keep getting better. Soon enough they even might have [Discriminated Unions](https://github.com/dotnet/csharplang/blob/18a527bcc1f0bdaf542d8b9a189c50068615b439/proposals/TypeUnions.md).
 
