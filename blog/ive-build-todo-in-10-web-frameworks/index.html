@@ -714,7 +714,8 @@ This is the line to ass service:</p>
 <span class="line"><span style="color:#E1E4E8">        }</span></span>
 <span class="line"></span></code></pre>
 <p>It’s working now.</p>
-<p>So Asp net static typing gives me error right away while Symfony dynamic PHP gives error when trying to access the non existing property.</p>
+<p>So Asp net static typing gives me error right away while Symfony dynamic PHP gives error when trying to access the non existing property.
+You can pass anonymous object into the Razor view and declare model as <code>@model dynamic</code>, but then you guessed it, lose on static typing and intellisense.</p>
 <p>Static typing in templates also means we need to recreate the view model in other controller action if we want to render Index template:</p>
 <pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="csharp"><code><span class="line"><span style="color:#F97583">        public</span><span style="color:#B392F0"> IActionResult</span><span style="color:#B392F0"> Create</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">TodoIndexViewModel</span><span style="color:#B392F0"> viewModel</span><span style="color:#E1E4E8">)</span></span>
 <span class="line"><span style="color:#E1E4E8">        {</span></span>
