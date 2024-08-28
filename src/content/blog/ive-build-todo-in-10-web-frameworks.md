@@ -507,7 +507,7 @@ class TodoController extends AbstractController
 
 I actually prefer this literal configuration because I am learning strictly code and not some convention/surprises. As you can also see, routes are defined inside the PHP class annotation. No extra `routes.php`. Maybe there is option, but this is the default.
 
-I am trying to run server, but Copilot give command `php bin/console server:run` which doesn't work. Correct command to start server is `symfony server:start` using symfony cli tool. All the `php bin/console` commands we can run with `symfony console`.
+I am trying to run server, but Copilot give command `php bin/console server:run` which doesn't work. Correct command to start server is `symfony serve` using symfony cli tool. All the `php bin/console` commands we can run with `symfony console`.
 
 Documentation is really nice and readable. I managed to create form and submission wen smoothly, no errors on the first run.
 
