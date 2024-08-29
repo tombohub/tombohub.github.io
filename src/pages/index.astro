@@ -6,7 +6,7 @@ const blogPosts = await getCollection("blog");
 
 const filteredPosts = blogPosts
   .filter(post => post.data.status == "published")
-  .toSorted((a, b) => a.data.postNumber - b.data.postNumber);
+  .toSorted((a, b) => b.data.postNumber - a.data.postNumber);
 
 const postCount = filteredPosts.length;
 const pageTitle = "Home";

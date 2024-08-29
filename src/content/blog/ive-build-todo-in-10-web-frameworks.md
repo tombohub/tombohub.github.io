@@ -1,6 +1,6 @@
 ---
 title: I've build todo in 10 web frameworks
-date: 2024-08-23
+date: 2024-08-27
 status: published
 postNumber: 10
 tags: [web, framework, django, rails, laravel]

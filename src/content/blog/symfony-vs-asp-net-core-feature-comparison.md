@@ -1,8 +1,8 @@
 ---
-title: I've build todo in 10 web frameworks
+title: Symfony vs ASP.NET Core feature comparison
 date: 2024-08-27
 status: published
-postNumber: 10
+postNumber: 11
 tags: [web, framework, django, rails, laravel]
 ---
 
