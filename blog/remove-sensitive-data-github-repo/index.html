@@ -1,0 +1,110 @@
+<!DOCTYPE html><html lang="en" data-theme="vader"> <head><meta charset="UTF-8"><meta name="description" content="Astro description"><meta name="viewport" content="width=device-width"><meta name="generator" content="Astro v4.14.3"><!-- <link rel="stylesheet" href="https://unpkg.com/boltcss/bolt.min.css" /> --><!-- <link rel="stylesheet" href="https://classless.de/classless.css" />
+    <link rel="stylesheet" href="https://classless.de/addons/themes.css" /> --><!-- <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/holiday.css@0.11.2"
+    /> --><!-- <link rel="stylesheet" href="https://unpkg.com/mvp.css" /> --><!-- <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
+    /> --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sakura.css/css/sakura-radical.css" type="text/css"><!-- <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css" /> --><!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/spcss@0.9.0" /> --><!-- <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/yegor256/tacit@gh-pages/tacit-css.min.css"
+    /> --><!-- <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/tiny.css@0/dist/tiny.css"
+    /> --><!-- <link
+      rel="stylesheet"
+      href="https://www.w3.org/StyleSheets/Core/Traditional"
+      type="text/css"
+    /> --><!-- <link
+      rel="stylesheet"
+      href="https://www.w3.org/StyleSheets/Core/Steely"
+      type="text/css"
+    /> --><!-- <link
+      rel="stylesheet"
+      href="https://www.w3.org/StyleSheets/Core/Oldstyle"
+      type="text/css"
+    /> --><!-- <link
+      rel="stylesheet"
+      href="https://www.w3.org/StyleSheets/Core/Ultramarine"
+      type="text/css"
+    /> --><!-- <link rel="stylesheet" href="//writ.cmcenroe.me/1.0.4/writ.min.css" /> --><!-- <link rel="stylesheet" href="https://unpkg.com/missing.css@1.1.2" /> --><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="sitemap" href="/sitemap-index.xml"><meta name="google-site-verification" content="v-bk1pawOow2Be4T46sqQG2YNDa84WSjgOUgykNr4_M"><title>How to remove sensitive data in github repository</title></head> <body> <header class="header"> <nav> <a href="/">Home</a> |
+<a href="/projects/">Projects</a> |
+<a href="/about/">About</a> -
+<a href="https://www.github.com/tombohub">github</a> </nav> </header> <main>  <h2>How to remove sensitive data in github repository</h2> <article> <h3 id="intro">Intro</h3>
+<p>Did you commit and push passwords and stuff out there to github land?</p>
+<p>This is how to remove sensitive data.</p>
+<h3 id="steps">Steps</h3>
+<ol>
+<li>
+<p>Commit and push the original repo and all the branches and it’s in clean state</p>
+</li>
+<li>
+<p>Clone your repo with command (replace link with link to your repo):</p>
+</li>
+</ol>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="console"><code><span class="line"><span style="color:#79B8FF">git clone https://github.com/me/myrepo.git</span></span>
+<span class="line"></span></code></pre>
+<ol start="3">
+<li>Install <a href="https://github.com/newren/git-filter-repo">git-filter-repo</a> with command:</li>
+</ol>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="console"><code><span class="line"><span style="color:#79B8FF">pip install git-filter-repo</span></span>
+<span class="line"></span></code></pre>
+<ol start="4">
+<li>Go into the cloned repo folder with command:</li>
+</ol>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>cd myrepo.git</span></span>
+<span class="line"><span></span></span></code></pre>
+<ol start="5">
+<li>Create a text file with your secrets you want to remove, one for each line and save it inside the repo folder. (DO NOT COMMIT! - Add to <code>.gitignore</code>) For example <code>passwords.txt</code>:</li>
+</ol>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="txt"><code><span class="line"><span>12345password</span></span>
+<span class="line"><span>mybestusername</span></span>
+<span class="line"><span></span></span></code></pre>
+<ol start="6">
+<li>Inside the project folder run command which will replace sensitive text with default text <code>***REMOVED***</code>:</li>
+</ol>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="console"><code><span class="line"><span style="color:#79B8FF">git-filter-repo --replace-text password.txt</span></span>
+<span class="line"></span></code></pre>
+<p>Use <code>--force</code> tag if it tells you your clone is not fresh.</p>
+<p>If you want to replace with some other text or use regex this is from the <a href="https://htmlpreview.github.io/?https://github.com/newren/git-filter-repo/blob/docs/html/git-filter-repo.html">documentation</a>:</p>
+<blockquote>
+<p>—replace-text &#x3C;expressions_file>
+A file with expressions that, if found, will be replaced. By default, each expression is treated as literal text, but regex: and glob: prefixes are supported. You can end the line with ==> and some replacement text to choose a replacement choice other than the default of ***REMOVED***.</p>
+</blockquote>
+<ol start="7">
+<li>Delete the original github repository and create a new one. Don’t initialize with <code>readme.md</code> or <code>.gitignore</code>. The reason for this is because if not there will be error later when pushing the new changes:</li>
+</ol>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>git push -u origin master</span></span>
+<span class="line"><span>To https://github.com/me/myrepo.git</span></span>
+<span class="line"><span> ! [rejected]        master -> master (fetch first)</span></span>
+<span class="line"><span>error: failed to push some refs to 'https://github.com/me/myrepo.git'</span></span>
+<span class="line"><span>hint: Updates were rejected because the remote contains work that you do not</span></span>
+<span class="line"><span>hint: have locally. This is usually caused by another repository pushing to</span></span>
+<span class="line"><span>hint: the same ref. If you want to integrate the remote changes, use</span></span>
+<span class="line"><span>hint: 'git pull' before pushing again.</span></span>
+<span class="line"><span>hint: See the 'Note about fast-forwards' in 'git push --help' for details.</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>I couldn’t make it work. If you know how let me know. I decided that creating new github repository is easiest way, git history is preserved anyway.</p>
+<ol start="8">
+<li>Add origin running command inside the repo folder:</li>
+</ol>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>git remote add origin https://github.com/me/myrepo.git</span></span>
+<span class="line"><span></span></span></code></pre>
+<ol start="9">
+<li>Push the git history to the new github repository and set <code>master</code> as origin:</li>
+</ol>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>git push -u origin master</span></span>
+<span class="line"><span></span></span></code></pre>
+<ol start="10">
+<li>
+<p>Now go to your repository <a href="https://github.com/me/myrepo.git">https://github.com/me/myrepo.git</a> and you should see all the commit history is there with the secrets replaced with <code>***REMOVED***</code></p>
+</li>
+<li>
+<p>Clone the new repository, be careful not to overwrite the original project folder if the name is the same, and copy untracked files from the original project folder into the cloned repository.</p>
+</li>
+<li>
+<p>Start working in new cloned repo folder and decide what do you wanna do with the old one</p>
+</li>
+</ol>
+<h3 id="final-word">Final word</h3>
+<p>Go on and commit secrets no more</p> </article>  </main> <footer></footer> <script src="https://dohliam.github.io/dropin-minimal-css/switcher.js" type="text/javascript"></script> </body> </html>
