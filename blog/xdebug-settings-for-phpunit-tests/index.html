@@ -1,0 +1,39 @@
+<!DOCTYPE html><html lang="en" data-theme="vader"> <head><meta charset="UTF-8"><meta name="description" content="Astro description"><meta name="viewport" content="width=device-width"><meta name="generator" content="Astro v4.14.3"><!-- <link rel="stylesheet" href="https://unpkg.com/boltcss/bolt.min.css" /> --><!-- <link rel="stylesheet" href="https://classless.de/classless.css" />
+    <link rel="stylesheet" href="https://classless.de/addons/themes.css" /> --><!-- <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/holiday.css@0.11.2"
+    /> --><!-- <link rel="stylesheet" href="https://unpkg.com/mvp.css" /> --><!-- <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
+    /> --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sakura.css/css/sakura-radical.css" type="text/css"><!-- <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css" /> --><!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/spcss@0.9.0" /> --><!-- <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/yegor256/tacit@gh-pages/tacit-css.min.css"
+    /> --><!-- <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/tiny.css@0/dist/tiny.css"
+    /> --><!-- <link
+      rel="stylesheet"
+      href="https://www.w3.org/StyleSheets/Core/Traditional"
+      type="text/css"
+    /> --><!-- <link
+      rel="stylesheet"
+      href="https://www.w3.org/StyleSheets/Core/Steely"
+      type="text/css"
+    /> --><!-- <link
+      rel="stylesheet"
+      href="https://www.w3.org/StyleSheets/Core/Oldstyle"
+      type="text/css"
+    /> --><!-- <link
+      rel="stylesheet"
+      href="https://www.w3.org/StyleSheets/Core/Ultramarine"
+      type="text/css"
+    /> --><!-- <link rel="stylesheet" href="//writ.cmcenroe.me/1.0.4/writ.min.css" /> --><!-- <link rel="stylesheet" href="https://unpkg.com/missing.css@1.1.2" /> --><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="sitemap" href="/sitemap-index.xml"><meta name="google-site-verification" content="v-bk1pawOow2Be4T46sqQG2YNDa84WSjgOUgykNr4_M"><title>Xdebug settings for phpunit tests</title></head> <body> <header class="header"> <nav> <a href="/">Home</a> |
+<a href="/projects/">Projects</a> |
+<a href="/about/">About</a> -
+<a href="https://www.github.com/tombohub">github</a> </nav> </header> <main>  <h2>Xdebug settings for phpunit tests</h2> <article> <p>I presume you have installed xdebug and extension for you IDE of choice.</p>
+<p>In <code>php.ini</code>:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="ini"><code><span class="line"><span style="color:#B392F0">[xdebug]</span></span>
+<span class="line"><span style="color:#F97583">xdebug.mode</span><span style="color:#E1E4E8">=debug</span></span>
+<span class="line"><span style="color:#F97583">xdebug.start_with_request</span><span style="color:#E1E4E8">=yes</span></span>
+<span class="line"></span></code></pre>
+<p>Start the xdebug listener and run the tests.</p> </article>  </main> <footer></footer> <script src="https://dohliam.github.io/dropin-minimal-css/switcher.js" type="text/javascript"></script> </body> </html>

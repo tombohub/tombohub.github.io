@@ -1,0 +1,175 @@
+<!DOCTYPE html><html lang="en" data-theme="vader"> <head><meta charset="UTF-8"><meta name="description" content="Astro description"><meta name="viewport" content="width=device-width"><meta name="generator" content="Astro v4.14.3"><!-- <link rel="stylesheet" href="https://unpkg.com/boltcss/bolt.min.css" /> --><!-- <link rel="stylesheet" href="https://classless.de/classless.css" />
+    <link rel="stylesheet" href="https://classless.de/addons/themes.css" /> --><!-- <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/holiday.css@0.11.2"
+    /> --><!-- <link rel="stylesheet" href="https://unpkg.com/mvp.css" /> --><!-- <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
+    /> --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sakura.css/css/sakura-radical.css" type="text/css"><!-- <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css" /> --><!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/spcss@0.9.0" /> --><!-- <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/yegor256/tacit@gh-pages/tacit-css.min.css"
+    /> --><!-- <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/tiny.css@0/dist/tiny.css"
+    /> --><!-- <link
+      rel="stylesheet"
+      href="https://www.w3.org/StyleSheets/Core/Traditional"
+      type="text/css"
+    /> --><!-- <link
+      rel="stylesheet"
+      href="https://www.w3.org/StyleSheets/Core/Steely"
+      type="text/css"
+    /> --><!-- <link
+      rel="stylesheet"
+      href="https://www.w3.org/StyleSheets/Core/Oldstyle"
+      type="text/css"
+    /> --><!-- <link
+      rel="stylesheet"
+      href="https://www.w3.org/StyleSheets/Core/Ultramarine"
+      type="text/css"
+    /> --><!-- <link rel="stylesheet" href="//writ.cmcenroe.me/1.0.4/writ.min.css" /> --><!-- <link rel="stylesheet" href="https://unpkg.com/missing.css@1.1.2" /> --><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="sitemap" href="/sitemap-index.xml"><meta name="google-site-verification" content="v-bk1pawOow2Be4T46sqQG2YNDa84WSjgOUgykNr4_M"><title>Interface implementation based on env variable in Symfony</title></head> <body> <header class="header"> <nav> <a href="/">Home</a> |
+<a href="/projects/">Projects</a> |
+<a href="/about/">About</a> -
+<a href="https://www.github.com/tombohub">github</a> </nav> </header> <main>  <h2>Interface implementation based on env variable in Symfony</h2> <article> <h3 id="setup">Setup</h3>
+<p>We have interface:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="php"><code><span class="line"></span>
+<span class="line"><span style="color:#F97583">&#x3C;?</span><span style="color:#79B8FF">php</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">namespace</span><span style="color:#B392F0"> App\Payment</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">interface</span><span style="color:#B392F0"> PaymentProcessorInterface</span></span>
+<span class="line"><span style="color:#E1E4E8">{</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> function</span><span style="color:#B392F0"> processPayment</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">float</span><span style="color:#E1E4E8"> $amount, </span><span style="color:#F97583">string</span><span style="color:#E1E4E8"> $currency)</span><span style="color:#F97583">:</span><span style="color:#F97583"> bool</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"></span></code></pre>
+<p>Implementation 1:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="php"><code><span class="line"><span style="color:#F97583">&#x3C;?</span><span style="color:#79B8FF">php</span></span>
+<span class="line"><span style="color:#6A737D">// src/Payment/PaypalPaymentProcessor.php</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">namespace</span><span style="color:#B392F0"> App\Payment</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> PaypalPaymentProcessor</span><span style="color:#F97583"> implements</span><span style="color:#B392F0"> PaymentProcessorInterface</span></span>
+<span class="line"><span style="color:#E1E4E8">{</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> function</span><span style="color:#B392F0"> processPayment</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">float</span><span style="color:#E1E4E8"> $amount, </span><span style="color:#F97583">string</span><span style="color:#E1E4E8"> $currency)</span><span style="color:#F97583">:</span><span style="color:#F97583"> bool</span></span>
+<span class="line"><span style="color:#E1E4E8">    {</span></span>
+<span class="line"><span style="color:#79B8FF">        echo</span><span style="color:#9ECBFF"> "Processing </span><span style="color:#79B8FF">\$</span><span style="color:#9ECBFF">{</span><span style="color:#E1E4E8">$amount</span><span style="color:#9ECBFF">} {</span><span style="color:#E1E4E8">$currency</span><span style="color:#9ECBFF">} payment through PayPal.</span><span style="color:#79B8FF">\n</span><span style="color:#9ECBFF">"</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#79B8FF"> true</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span></code></pre>
+<p>Implementation 2:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="php"><code><span class="line"><span style="color:#F97583">&#x3C;?</span><span style="color:#79B8FF">php</span></span>
+<span class="line"><span style="color:#6A737D">// src/Payment/StripePaymentProcessor.php</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">namespace</span><span style="color:#B392F0"> App\Payment</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> StripePaymentProcessor</span><span style="color:#F97583"> implements</span><span style="color:#B392F0"> PaymentProcessorInterface</span></span>
+<span class="line"><span style="color:#E1E4E8">{</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> function</span><span style="color:#B392F0"> processPayment</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">float</span><span style="color:#E1E4E8"> $amount, </span><span style="color:#F97583">string</span><span style="color:#E1E4E8"> $currency)</span><span style="color:#F97583">:</span><span style="color:#F97583"> bool</span></span>
+<span class="line"><span style="color:#E1E4E8">    {</span></span>
+<span class="line"><span style="color:#79B8FF">        echo</span><span style="color:#9ECBFF"> "Processing </span><span style="color:#79B8FF">\$</span><span style="color:#9ECBFF">{</span><span style="color:#E1E4E8">$amount</span><span style="color:#9ECBFF">} {</span><span style="color:#E1E4E8">$currency</span><span style="color:#9ECBFF">} payment through Stripe.</span><span style="color:#79B8FF">\n</span><span style="color:#9ECBFF">"</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#79B8FF"> true</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span></code></pre>
+<p>Factory:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="php"><code><span class="line"><span style="color:#F97583">&#x3C;?</span><span style="color:#79B8FF">php</span></span>
+<span class="line"><span style="color:#6A737D">// src/Payment/PaymentProcessorFactory.php</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">namespace</span><span style="color:#B392F0"> App\Payment</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">use</span><span style="color:#79B8FF"> InvalidArgumentException</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> PaymentProcessorFactory</span></span>
+<span class="line"><span style="color:#E1E4E8">{</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> function</span><span style="color:#79B8FF"> __construct</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#F97583">       private</span><span style="color:#79B8FF"> PaypalPaymentProcessor</span><span style="color:#E1E4E8"> $paypalProcessor,</span></span>
+<span class="line"><span style="color:#F97583">        private</span><span style="color:#79B8FF"> StripePaymentProcessor</span><span style="color:#E1E4E8"> $stripeProcessor</span></span>
+<span class="line"><span style="color:#E1E4E8">    ) {</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> function</span><span style="color:#B392F0"> create</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">string</span><span style="color:#E1E4E8"> $paymentType)</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> PaymentProcessorInterface</span></span>
+<span class="line"><span style="color:#E1E4E8">    {</span></span>
+<span class="line"><span style="color:#F97583">        switch</span><span style="color:#E1E4E8"> ($paymentType) {</span></span>
+<span class="line"><span style="color:#F97583">            case</span><span style="color:#9ECBFF"> 'paypal'</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#F97583">                return</span><span style="color:#79B8FF"> $this</span><span style="color:#F97583">-></span><span style="color:#E1E4E8">paypalProcessor;</span></span>
+<span class="line"><span style="color:#F97583">            case</span><span style="color:#9ECBFF"> 'stripe'</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#F97583">                return</span><span style="color:#79B8FF"> $this</span><span style="color:#F97583">-></span><span style="color:#E1E4E8">stripeProcessor;</span></span>
+<span class="line"><span style="color:#F97583">            default</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#F97583">                throw</span><span style="color:#F97583"> new</span><span style="color:#79B8FF"> InvalidArgumentException</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"Invalid payment processor type: {</span><span style="color:#E1E4E8">$paymentType</span><span style="color:#9ECBFF">}"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span></code></pre>
+<p>In <code>.env</code> we have the variable for the default payment type.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>PAYMENT_TYPE=stripe</span></span>
+<span class="line"><span></span></span></code></pre>
+<h3 id="solution">Solution</h3>
+<p>Wire this in <code>services.yaml</code> like this (presuming you are using default autowire: true, autoconfigure: true):</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="yaml"><code><span class="line"><span style="color:#85E89D">App\Payment\PaymentProcessorInterface</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">  factory</span><span style="color:#E1E4E8">: [</span><span style="color:#9ECBFF">'@App\PaymentProcessorFactory'</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"create"</span><span style="color:#E1E4E8">]</span></span>
+<span class="line"><span style="color:#85E89D">  arguments</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">    $dataProviderType</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"%env(PAYMENT_TYPE)%"</span></span>
+<span class="line"></span></code></pre>
+<ol>
+<li>
+<p>First we create a service id for configuring interface object creation. We are using fully qualified class name.</p>
+</li>
+<li>
+<p>Because interface doesn’t have constructor we need to tell symfony how to create an object. For that there is <a href="https://symfony.com/doc/current/service_container/factories.html#non-static-factories"><code>factory</code></a> definition key which tells what specific class and method is used to create object, in this case interface.</p>
+</li>
+<li>
+<p>Fill out factory parameters: <code>[$service, $method]</code>.</p>
+<ul>
+<li>
+<p>Because we are using non static factory we need to use registered service instead of class. And because we have autowiring true our factory is already registered as service and we can refer to it with <code>@</code> like this: <code>@App\PaymentProcessorFactory</code>. If the factory is using static method we would only need to write: <code>App\PaymentProcessorFactory</code>.</p>
+</li>
+<li>
+<p>for <code>$method</code> we use our method <code>create</code></p>
+</li>
+</ul>
+</li>
+<li>
+<p>To pass arguments to the factory method we use <code>arguments</code> key and then explicitly define variable name and value which is used in factory method which is <code>$paymentType</code>.</p>
+</li>
+<li>
+<p>Payment type we get from environment variable <code>PAYMENT_TYPE</code> which we can use using symfony yaml syntax <code>%env(PAYMENT_TYPE)%</code>.</p>
+</li>
+</ol>
+<p>Complete <code>service.yaml</code> now looks like this:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="yaml"><code><span class="line"><span style="color:#6A737D"># This file is the entry point to configure your own services.</span></span>
+<span class="line"><span style="color:#6A737D"># Files in the packages/ subdirectory configure your dependencies.</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># Put parameters here that don't need to change on each machine where the app is deployed</span></span>
+<span class="line"><span style="color:#6A737D"># https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration</span></span>
+<span class="line"><span style="color:#85E89D">parameters</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#85E89D">services</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#6A737D">  # default configuration for services in *this* file</span></span>
+<span class="line"><span style="color:#85E89D">  _defaults</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">    autowire</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">true</span><span style="color:#6A737D"> # Automatically injects dependencies in your services.</span></span>
+<span class="line"><span style="color:#85E89D">    autoconfigure</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">true</span><span style="color:#6A737D"> # Automatically registers your services as commands, event subscribers, etc.</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">  # makes classes in src/ available to be used as services</span></span>
+<span class="line"><span style="color:#6A737D">  # this creates a service per class whose id is the fully-qualified class name</span></span>
+<span class="line"><span style="color:#85E89D">  App\</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">    resource</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"../src/"</span></span>
+<span class="line"><span style="color:#85E89D">    exclude</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#E1E4E8">      - </span><span style="color:#9ECBFF">"../src/DependencyInjection/"</span></span>
+<span class="line"><span style="color:#E1E4E8">      - </span><span style="color:#9ECBFF">"../src/Entity/"</span></span>
+<span class="line"><span style="color:#E1E4E8">      - </span><span style="color:#9ECBFF">"../src/Kernel.php"</span></span>
+<span class="line"><span style="color:#6A737D">  # add more service definitions when explicit configuration is needed</span></span>
+<span class="line"><span style="color:#6A737D">  # please note that last definitions always *replace* previous ones</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#85E89D">  App\Payment\PaymentProcessorInterface</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">    factory</span><span style="color:#E1E4E8">: [</span><span style="color:#9ECBFF">'@App\PaymentProcessorFactory'</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"create"</span><span style="color:#E1E4E8">]</span></span>
+<span class="line"><span style="color:#85E89D">    arguments</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">      $dataProviderType</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"%env(PAYMENT_TYPE)%"</span></span>
+<span class="line"></span></code></pre>
+<h3 id="reference">Reference</h3>
+<ul>
+<li><a href="https://symfony.com/doc/current/service_container.html">https://symfony.com/doc/current/service_container.html</a></li>
+<li><a href="https://symfony.com/doc/current/service_container/factories.html">https://symfony.com/doc/current/service_container/factories.html</a></li>
+<li><a href="https://symfony.com/doc/current/configuration/env_var_processors.html">https://symfony.com/doc/current/configuration/env_var_processors.html</a></li>
+</ul> </article>  </main> <footer></footer> <script src="https://dohliam.github.io/dropin-minimal-css/switcher.js" type="text/javascript"></script> </body> </html>
